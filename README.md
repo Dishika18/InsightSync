@@ -13,6 +13,20 @@ InsightSync aims to harmonize knowledge and curiosity by providing a user-friend
 - **Community Discussions:** Connect with other users, share insights, and participate in discussions.
 - **Free Access:** All features and content are available for free, promoting inclusive learning.
 
+### Screenshots
+
+Here are some screenshots of the InsightSync platform in action:
+
+*Home Page*
+![Screenshot 1](images/Screenshot1.png)
+
+*Browse Topics*
+![Screenshot 2](images/Screenshot2.png)
+
+*Contact*
+![Screenshot 3](images/Screenshot3.png)
+
+
 ### Getting Started
 
 To get started with InsightSync:
