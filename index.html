@@ -848,6 +848,18 @@
     <script src="js/jquery.sticky.js"></script>
     <script src="js/click-scroll.js"></script>
     <script src="js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script>
+        window.onload = async(event) => {
+            // console.log("page is fully loaded");
+            axios.get("http://localhost:3000/api/v1/insight/getallinsight")
+            .then((resp)=>{console.log(resp.data.data)})
+            .catch((err)=>{console.log(err)})
+        };
+
+
+
+    </script>
 
 </body>
 

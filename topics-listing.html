@@ -24,6 +24,15 @@
 
     <link href="css/style.css" rel="stylesheet">
 
+    <style>
+        #parentCont {
+        display: flex;
+        gap: 42px;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        }
+    </style>
+
 </head>
 
 <body class="topics-listing-page" id="top">
@@ -117,7 +126,7 @@
                         <h3 class="mb-4">Popular Topics</h3>
                     </div>
 
-                    <div class="col-lg-8 col-12 mt-3 mx-auto">
+                    <!-- <div class="col-lg-8 col-12 mt-3 mx-auto">
                         <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
                             <div class="d-flex">
                                 <img src="images/topics/undraw_Remote_design_team_re_urdx.png"
@@ -180,9 +189,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
-                    <div class="col-lg-12 col-12">
+                    <!-- <div class="col-lg-12 col-12">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center mb-0">
                                 <li class="page-item">
@@ -218,6 +227,13 @@
                                 </li>
                             </ul>
                         </nav>
+                    </div> -->
+
+                    <div  class="col-lg-8 col-12 mt-3 mx-auto padding-45" >
+                        <div id="parentCont" class="" >
+                            <!-- <img id="parentimg" src="images/topics/undraw_Podcast_audience_re_4i5q.png"
+                            class="custom-block-image img-fluid" alt=""> -->
+                        </div>
                     </div>
 
                 </div>
@@ -378,6 +394,55 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script>
+        let datas = []
+        window.onload = async(event) => {
+            // console.log("page is fully loaded");
+            axios.get("http://localhost:3000/api/v1/insight/getallinsight")
+            .then((resp)=>{
+                let parent = document.getElementById("parentCont")
+                resp.data.data.map((data)=>{datas.push(data)})
+                resp.data.data.forEach(item => {
+                const cardDiv = document.createElement("div");
+                cardDiv.classList.add("card");
+                cardDiv.style.padding = "20px"
+        
+                if (item.Image) {
+                  const cardImage = document.createElement("img");
+                  cardImage.classList.add("card-image");
+                  cardImage.src = item.Image;
+                  cardImage.alt = item.title; // Add alt text for accessibility
+                  cardImage.style.width = "200px";
+                  cardImage.style.height = "150px";
+                //   cardImage.style.objectFit = "cover";
+                  cardDiv.appendChild(cardImage);
+                }
+        
+                const cardTitle = document.createElement("h2");
+                cardTitle.classList.add("card-title");
+                cardTitle.textContent = item.title;
+                cardDiv.appendChild(cardTitle);
+        
+                const cardContent = document.createElement("p");
+                cardContent.textContent = item.content;
+                cardDiv.appendChild(cardContent);
+        
+                const cardTopic = document.createElement("p");
+                cardTopic.textContent = `Topic: ${item.topic}`;
+                cardDiv.appendChild(cardTopic);
+                console.log
+                parent.appendChild(cardDiv);
+              });
+            })
+            .catch((err)=>{console.log(err)})
+        };
+        console.log(datas)
+
+        
+
+
+    </script>
 
 </body>
 
