@@ -101,7 +101,7 @@
                             </ol>
                         </nav>
 
-                        <h2 class="text-white">Introduction to <br> Web Design 101</h2>
+                        <h2 class= "topic-header text-white"></h2>
 
                         <div class="d-flex align-items-center mt-5">
                             <a href="#topics-detail" class="btn custom-btn custom-border-btn smoothscroll me-4">Read
@@ -114,7 +114,7 @@
                     <div class="col-lg-5 col-12">
                         <div class="topics-detail-block bg-white shadow-lg">
                             <img src="images/topics/undraw_Remote_design_team_re_urdx.png"
-                                class="topics-detail-block-image img-fluid">
+                                 id="topic-image-id"  class="topics-detail-block-image img-fluid">
                         </div>
                     </div>
 
@@ -128,20 +128,16 @@
                 <div class="row">
 
                     <div class="col-lg-8 col-12 m-auto">
-                        <h3 class="mb-4">Introduction to Web Design</h3>
+                        <h3 class="topic-header mb-4">Introduction to Web Design</h3>
+                        <p id="topic-content">
 
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam necessitatibus voluptatum
-                            aliquam dolore, quo cum doloribus, vitae molestias voluptas autem sequi veritatis quibusdam
-                            odio nesciunt numquam mollitia similique fuga quae inventore eligendi.</p>
+                        </p>
 
-                        <p><strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt numquam architecto
-                                cumque tempora autem. Atque ab autem nesciunt qui doloremque voluptatem quod.</p>
-
-                        <blockquote>
+                        <!-- <blockquote>
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        </blockquote>
+                        </blockquote> -->
 
-                        <div class="row my-4">
+                        <!-- <div class="row my-4">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <img src="images/businesswoman-using-tablet-analysis.jpg"
                                     class="topics-detail-block-image img-fluid">
@@ -151,11 +147,11 @@
                                 <img src="images/colleagues-working-cozy-office-medium-shot.jpg"
                                     class="topics-detail-block-image img-fluid">
                             </div>
-                        </div>
-
+                        </div> -->
+<!-- 
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum totam dolorem adipisci
                             magni, explicabo, deleniti nobis, repellendus voluptatem saepe vel sunt eum. Minus, id odio!
-                        </p>
+                        </p> -->
                     </div>
 
                 </div>
@@ -266,6 +262,45 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+    <script>
+window.onload = async () => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    console.log("Insight ID:", id);
+
+    // Fetch data for the specific ID or perform any other logic
+    axios.post("https://insight-sync-xi.vercel.app/api/v1/insight/getinsightbyid", {
+        id
+    })
+    .then(({ data }) => {
+        console.log(data);
+
+        // Set image source
+        const img = document.getElementById("topic-image-id");
+        if (img) {
+            img.src = data.data.Image;
+        }
+
+        // Set heading text
+        const headings = document.querySelectorAll(".topic-header");
+        console.log(headings)
+        headings.forEach(heading => {
+            heading.innerHTML = data.data.title
+        });
+
+        // Set topic content
+        const contentClass = document.getElementById("topic-content")
+        contentClass.innerHTML = data.data.content
+
+    })
+    .catch((err) => {
+        console.error("Error fetching insight data:", err);
+    });
+};
+
+    </script>
 
 </body>
 

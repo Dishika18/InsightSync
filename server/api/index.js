@@ -4,10 +4,10 @@ import { dbConnect } from './dbconnect.js';
 import { app } from './app.js';
 
 dotenv.config({
-    path: 'server/.env'
+    path:"server/api/.env"
 })
 
-console.log(process.env.MONGO_URL)
+console.log("this is index.js",process.env.MONGO_URI)
 
 dbConnect()
 .then(()=>{

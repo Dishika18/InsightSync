@@ -852,7 +852,7 @@
     <script>
         window.onload = async(event) => {
             // console.log("page is fully loaded");
-            axios.get("http://localhost:3000/api/v1/insight/getallinsight")
+            axios.get("https://insight-sync-xi.vercel.app/api/v1/insight/getallinsight")
             .then((resp)=>{console.log(resp.data.data)})
             .catch((err)=>{console.log(err)})
         };
