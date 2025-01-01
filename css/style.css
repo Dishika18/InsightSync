@@ -237,25 +237,25 @@ strong {
 
 /* Style for the "Already have an account?" and "Don't have an account?" sections */
 .modal-body .text-center p {
-  color: #ffffff; /* Light text color for better contrast */
+  color: #ffffff; 
 }
 
 .modal-body .text-center a {
-  color: #007bff; /* Bright blue link color */
+  color: #007bff; 
   font-weight: bold;
 }
 
 .modal-body .text-center a:hover {
-  color: #0056b3; /* Darker blue when hovered */
+  color: #0056b3; 
 }
 
-/* Ensure the modal content is responsive */
+
 .modal-content {
   max-width: 500px;
   width: 100%;
 }
 
-/* Make sure the form elements are responsive */
+
 .form-control {
   width: 100%;
   padding: 10px;
