@@ -1030,6 +1030,133 @@ blockquote {
 }
 
 
+
+
+
+/* Newsletter Section Styles */
+
+.newsletter {
+  background-color: #dbfcf9;
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.newsletter-container {
+  max-width: 600px;
+  text-align: center;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Header and Description */
+.newsletter h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: transform 0.3s ease;
+}
+
+.newsletter p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+  line-height: 1.5;
+  transition: opacity 0.3s ease;
+}
+
+/* Newsletter Form */
+.newsletter form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+/* Input Field */
+.newsletter input[type="email"] {
+  width: 80%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.newsletter input[type="email"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+}
+
+/* Submit Button */
+.newsletter button {
+  width: 80%;
+  padding: 12px;
+  background: linear-gradient(135deg, #ff9800, #00bcd4, #4caf50); /* Black, Yellow, Aqua, Green Gradient */
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.newsletter button:hover {
+  background: linear-gradient(135deg, #ff5722, #009688, #4caf50); /* Darker Gradient on Hover */
+  transform: scale(1.05); /* Slightly zoom effect on hover */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.newsletter button:active {
+  transform: translateY(2px); /* Slight press effect */
+}
+
+/* Animation for Form */
+@keyframes fadeInUp {
+  0% {
+      opacity: 0;
+      transform: translateY(10px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .newsletter-container {
+      padding: 30px;
+  }
+
+  .newsletter h2 {
+      font-size: 1.5rem;
+  }
+
+  .newsletter p {
+      font-size: 0.9rem;
+  }
+
+  .newsletter input[type="email"], .newsletter button {
+      width: 100%;
+  }
+}
+
+
 /*---------------------------------------
   RESPONSIVE STYLES               
 -----------------------------------------*/
