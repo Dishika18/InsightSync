@@ -60,6 +60,77 @@
 
     return valid;
 }
+function validateSignupForm() {
+    const username = document.getElementById('signupUsername');
+    const email = document.getElementById('signupEmail');
+    const password = document.getElementById('signupPassword');
+    const confirmPassword = document.getElementById('signupConfirmPassword');
+    let valid = true;
+
+    // Username validation (must be at least 3 characters)
+    if (username.value.length < 3) {
+        username.classList.add('is-invalid');
+        valid = false;
+    } else {
+        username.classList.remove('is-invalid');
+    }
+
+    // Email validation (checks format)
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(email.value)) {
+        email.classList.add('is-invalid');
+        valid = false;
+    } else {
+        email.classList.remove('is-invalid');
+    }
+
+    // Password validation (at least 6 characters and includes a number)
+    const passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/;
+    if (!passwordPattern.test(password.value)) {
+        password.classList.add('is-invalid');
+        valid = false;
+    } else {
+        password.classList.remove('is-invalid');
+    }
+
+    // Confirm password validation (must match the password)
+    if (password.value !== confirmPassword.value) {
+        confirmPassword.classList.add('is-invalid');
+        valid = false;
+    } else {
+        confirmPassword.classList.remove('is-invalid');
+    }
+
+    return valid;
+}
+
+function toggleSignupPasswordVisibility() {
+    const passwordInput = document.getElementById('signupPassword');
+    const togglePasswordIcon = document.getElementById('toggleSignupPasswordIcon');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePasswordIcon.classList.remove('bi-eye');
+        togglePasswordIcon.classList.add('bi-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        togglePasswordIcon.classList.remove('bi-eye-slash');
+        togglePasswordIcon.classList.add('bi-eye');
+    }
+}
+
+function toggleSignupConfirmPasswordVisibility() {
+    const confirmPasswordInput = document.getElementById('signupConfirmPassword');
+    const toggleConfirmPasswordIcon = document.getElementById('toggleSignupConfirmPasswordIcon');
+    if (confirmPasswordInput.type === 'password') {
+        confirmPasswordInput.type = 'text';
+        toggleConfirmPasswordIcon.classList.remove('bi-eye');
+        toggleConfirmPasswordIcon.classList.add('bi-eye-slash');
+    } else {
+        confirmPasswordInput.type = 'password';
+        toggleConfirmPasswordIcon.classList.remove('bi-eye-slash');
+        toggleConfirmPasswordIcon.classList.add('bi-eye');
+    }
+}
 
     </script>
 
@@ -126,7 +197,7 @@
                                 <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Login</a></li>
     
-                                    <li><a class="dropdown-item" href="contact.html">Sign Up</a></li>
+                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal" style="cursor: pointer;">Sign Up</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -134,6 +205,48 @@
                 </div>
             </div>
         </nav>
+        <!-- Signup Modal -->
+        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content glass-effect">
+                    <div class="modal-header justify-content-center">
+                        <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000"/>
+                    </div>
+                    <div class="modal-body">
+                        <form id="signupForm" action="your-server-endpoint" method="post" onsubmit="return validateSignupForm()">
+                            <div class="mb-3">
+                                <label for="signupUsername" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="signupUsername" placeholder="Enter username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="signupEmail" placeholder="Enter email">
+                            </div>
+                            <div class="mb-3 position-relative">
+                                <label for="signupPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="signupPassword" placeholder="Enter password">
+                                <span class="eye-icon" onclick="toggleSignupPasswordVisibility()">
+                                    <i class="bi bi-eye" id="toggleSignupPasswordIcon"></i>
+                                </span>
+                            </div>
+                            <div class="mb-3 position-relative">
+                                <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm password">
+                                <span class="eye-icon" onclick="toggleSignupConfirmPasswordVisibility()">
+                                    <i class="bi bi-eye" id="toggleSignupConfirmPasswordIcon"></i>
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                            </div>
+                            <div class="mt-3 text-center">
+                                <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" aria-label="Close">Login</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         
     <nav>
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -161,6 +274,9 @@
                             </div>
                             <div class="d-flex justify-content-center">
                             <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                        <div class="mt-3 text-center">
+                            <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" aria-label="Close">Sign Up</a></p>
                         </div>
                     </div>
                     </form>
