@@ -285,6 +285,7 @@ strong {
   z-index: 9;
 }
 
+
 .navbar-brand,
 .navbar-brand:hover {
   font-size: var(--h3-font-size);
@@ -374,17 +375,17 @@ strong {
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  vertical-align: -.125em;
+  vertical-align:-.125em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
-  left: 2px;
   border: 0;
 }
 
 @media screen and (min-width: 992px) {
   .navbar .dropdown:hover .dropdown-menu {
     opacity: 1;
+    margin-left: 0;
     margin-top: 0;
     pointer-events: auto;
   }
@@ -472,6 +473,7 @@ strong {
 .navbar-toggler .navbar-toggler-icon::after {
   top: 8px;
 }
+
 
 
 /*---------------------------------------
@@ -1270,5 +1272,97 @@ blockquote {
   h5 {
     font-size: 20px;
   }
+}
+
+/*---------------------------------------
+  LOGIN FORM               
+-----------------------------------------*/
+
+.modal-content {
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+}
+
+.modal-header {
+  background-color: rgba(255, 255, 255, 0.2) ;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+
+}
+.position-relative {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 75%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color:#007bff;
+  font-size: 1.3rem;
+}
+
+.modal-title {
+  font-weight: bold;
+  width: 100%;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.form-label {
+  font-weight: bold;
+  
+}
+
+.form-control1 {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.2) ;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+}
+.form-control1:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  color: white;
+}
+.link-primary {
+  color: black !important;
+  font-weight: bold;
+}
+
+.link-primary:hover {
+  color: #333 !important;
+}
+
+.btn-primary {
+  background-color: #00c3ff;
+  border-color: #007bff;
+  border-radius: 5px;
+  padding: 0.5rem 1.5rem;
+  font-weight: bold;
+  color: black;
+}
+
+.btn-primary:hover {
+  background-color: #00b389;
+  border-color: #00b3a7;
+  color: black;
 }
 
