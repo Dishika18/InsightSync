@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="en">
+ <!-- last script is the main script for connecting with backend
 
+ after deploying in vercel change the axios.get url to your deployed URLSearchParams
+ 
+ 
+ -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +28,64 @@
     <link href="css/bootstrap-icons.css" rel="stylesheet">
 
     <link href="css/style.css" rel="stylesheet">
+  <!-- this is style section -->
+    <style>
+        #parentCont {
+            display: flex;
+            gap: 42px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
 
+        .card {
+            width: 250px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 15px 0;
+            color: #333;
+        }
+
+        .card-content {
+            font-size: 14px;
+            color: #666;
+            margin: 0 10px 10px;
+            height: 80px;
+            overflow-y: auto;
+        }
+
+        .card p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+    </style>
+
+<!-- this is script part -->
     <script>
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('loginPassword');
@@ -316,188 +378,16 @@ function toggleSignupConfirmPasswordVisibility() {
                         <h3 class="mb-4">Popular Topics</h3>
                     </div>
 
-                    <div class="col-lg-8 col-12 mt-3 mx-auto">
-                        <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
-                            <div class="d-flex">
-                                <img src="images/topics/undraw_Remote_design_team_re_urdx.png"
-                                    class="custom-block-image img-fluid" alt="">
-
-                                <div class="custom-block-topics-listing-info d-flex">
-                                    <div>
-                                        <h5 class="mb-2">Web Design</h5>
-
-                                        <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                            Ducimus vel beatae ratione obcaecati voluptatibus repellendus dolorem quae?
-                                            Tempora est repudiandae fugit optio. Pariatur, nobis delectus.</p>
-
-                                        <a href="topics-detail.html" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
-                                    </div>
-
-                                    <span class="badge bg-design rounded-pill ms-auto">14</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
-                            <div class="d-flex">
-                                <img src="images/topics/undraw_online_ad_re_ol62.png"
-                                    class="custom-block-image img-fluid" alt="">
-
-                                <div class="custom-block-topics-listing-info d-flex">
-                                    <div>
-                                        <h5 class="mb-2">Advertising</h5>
-
-                                        <p class="mb-0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint
-                                            delectus, eos distinctio corrupti dolor possimus, numquam ad expedita
-                                            quisquam, adipisci quasi ab alias ratione. Maiores perspiciatis vel non eius
-                                            delectus iste suscipit.</p>
-
-                                        <a href="topics-detail.html" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
-                                    </div>
-
-                                    <span class="badge bg-advertising rounded-pill ms-auto">30</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
-                            <div class="d-flex">
-                                <img src="images/topics/undraw_Podcast_audience_re_4i5q.png"
-                                    class="custom-block-image img-fluid" alt="">
-
-                                <div class="custom-block-topics-listing-info d-flex">
-                                    <div>
-                                        <h5 class="mb-2">Podcast</h5>
-
-                                        <p class="mb-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit animi
-                                            necessitatibus</p>
-
-                                        <a href="topics-detail.html" class="btn custom-btn mt-3 mt-lg-4">Learn More</a>
-                                    </div>
-
-                                    <span class="badge bg-music rounded-pill ms-auto">20</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12 col-12">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center mb-0">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">Prev</span>
-                                    </a>
-                                </li>
-
-                                <li class="page-item active" aria-current="page">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-
-                                <li class="page-item">
-                                    <a class="page-link" href="#">2</a>
-                                </li>
-
-                                <li class="page-item">
-                                    <a class="page-link" href="#">3</a>
-                                </li>
-
-                                <li class="page-item">
-                                    <a class="page-link" href="#">4</a>
-                                </li>
-
-                                <li class="page-item">
-                                    <a class="page-link" href="#">5</a>
-                                </li>
-
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-
-        <section class="section-padding section-bg">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-12 col-12">
-                        <h3 class="mb-4">Trending Topics</h3>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-12 mt-3 mb-4 mb-lg-0">
-                        <div class="custom-block bg-white shadow-lg">
-                            <a href="topics-detail.html">
-                                <div class="d-flex">
-                                    <div>
-                                        <h5 class="mb-2">Investment</h5>
-
-                                        <p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
-                                    </div>
-
-                                    <span class="badge bg-finance rounded-pill ms-auto">30</span>
-                                </div>
-
-                                <img src="images/topics/undraw_Finance_re_gnv2.png" class="custom-block-image img-fluid"
-                                    alt="">
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-12 mt-lg-3">
-                        <div class="custom-block custom-block-overlay">
-                            <div class="d-flex flex-column h-100">
-                                <img src="images/businesswoman-using-tablet-analysis.jpg"
-                                    class="custom-block-image img-fluid" alt="">
-
-                                <div class="custom-block-overlay-text d-flex">
-                                    <div>
-                                        <h5 class="text-white mb-2">Finance</h5>
-
-                                        <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                                            Sint animi necessitatibus aperiam repudiandae nam omnis</p>
-
-                                        <a href="topics-detail.html" class="btn custom-btn mt-2 mt-lg-3">Learn More</a>
-                                    </div>
-
-                                    <span class="badge bg-finance rounded-pill ms-auto">25</span>
-                                </div>
-
-                                <div class="social-share d-flex">
-                                    <p class="text-white me-4">Share:</p>
-
-                                    <ul class="social-icon">
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-twitter"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-facebook"></a>
-                                        </li>
-
-                                        <li class="social-icon-item">
-                                            <a href="#" class="social-icon-link bi-pinterest"></a>
-                                        </li>
-                                    </ul>
-
-                                    <a href="#" class="custom-icon bi-bookmark ms-auto"></a>
-                                </div>
-
-                                <div class="section-overlay"></div>
-                            </div>
+                    <div class="col-lg-8 col-12 mt-3 mx-auto padding-45">
+                        <div id="parentCont" class="">
                         </div>
                     </div>
 
                 </div>
             </div>
         </section>
+
+
     </main>
 
     <footer class="site-footer section-padding">
@@ -572,11 +462,63 @@ function toggleSignupConfirmPasswordVisibility() {
         </div>
     </footer>
 
+
+
     <!-- JAVASCRIPT FILES -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+    <!-- script for fetching the insights from db -->
+
+    <script>
+        let datas = []
+        window.onload = async (event) => {
+            axios.get("https://insight-sync-xi.vercel.app/api/v1/insight/getallinsight")
+                .then((resp) => {
+                    let parent = document.getElementById("parentCont");
+                    resp.data.data.map((data) => { datas.push(data) });
+                    console.log(datas)
+                    resp.data.data.forEach(item => {
+                        const cardDiv = document.createElement("div");
+                        cardDiv.classList.add("card");
+
+                        // Make card clickable
+                        cardDiv.onclick = () => {
+                            window.location.href = `topics-detail.html?id=${item._id}`;
+                        };
+
+                        if (item.Image) {
+                            const cardImage = document.createElement("img");
+                            cardImage.classList.add("card-image");
+                            cardImage.src = item.Image;
+                            cardImage.alt = item.title;
+                            cardDiv.appendChild(cardImage);
+                        }
+
+                        const cardTitle = document.createElement("h2");
+                        cardTitle.classList.add("card-title");
+                        cardTitle.textContent = item.title;
+                        cardDiv.appendChild(cardTitle);
+
+                        const cardContent = document.createElement("p");
+                        cardContent.textContent = item.content;
+                        cardContent.classList.add("card-content");
+                        cardDiv.appendChild(cardContent);
+
+                        const cardTopic = document.createElement("p");
+                        cardTopic.textContent = `Topic: ${item.topic}`;
+                        cardDiv.appendChild(cardTopic);
+
+                        parent.appendChild(cardDiv);
+                    });
+
+                })
+                .catch((err) => { console.log(err) });
+        };
+    </script>
 
 </body>
 
