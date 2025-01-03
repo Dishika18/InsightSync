@@ -1,42 +1,49 @@
 import mongoose from "mongoose";
 import { Insight } from "../models/insight.model.js";
 import { upload_on_cloudinary } from "../utils/cloudinary.utils.js";
+// import {uploadToCloudinary} from '../utils/cloudinary.utils.js'
 
-
-const addInsight = async (req,res) => {
-    const {title, topic, content, submittedby} = req.body
-    const imagefile = req.file
+const addInsight = async (req, res) => {
+    const { title, topic, content, submittedby } = req.body;
+    const filebuffer = req.file ? req.file.buffer : null; // Assuming file is available in req.file.buffer
 
     if (!title || !topic || !content || !submittedby) {
-        res.status(400).send({error:"title topic content submitted by not receivng from req.body"})
+        return res.status(400).json({ error: "title, topic, content, or submittedby not provided in req.body" });
     }
 
-    if(!imagefile.path){
-        res.status(400).send({error:"error receuving mimage"})
+    if (!filebuffer) {
+        return res.status(400).json({ error: "Error receiving image" });
     }
 
-    const upload_image_url = await upload_on_cloudinary(imagefile.path)
-    if (!upload_image_url) {
-        res.status(400).send({error:"error while uploading on cloudinary"})
-    }
+    try {
+        // Upload image to Cloudinary
+        const upload_image_url = await upload_on_cloudinary(filebuffer);
+        
+        if (!upload_image_url) {
+            return res.status(400).json({ error: "Error while uploading image to Cloudinary" });
+        }
 
-    const createdModel = Insight.create(
-        {
+        // Create new insight entry
+        const createdInsight = await Insight.create({
             title,
             topic,
             content,
             submittedby,
-            Image:upload_image_url.url
+            Image: upload_image_url, // Assuming upload_on_cloudinary returns the URL directly
+        });
+
+        if (!createdInsight) {
+            return res.status(400).json({ error: "Error while creating the Insight model" });
         }
-    )
 
+        // Return success response
+        res.status(200).json({ success: "Insight created successfully", insight: createdInsight });
 
-    if (!createdModel) {
-        res.status(400).send("error while creating model")
+    } catch (error) {
+        console.error("Error in addInsight controller:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
-
-    res.status(200).send({succes:"insight created successfully"})
-}
+};
 
 
 const getallInsight = async (req, res) => {
