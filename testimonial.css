@@ -187,11 +187,17 @@ body{
 }
 
 .section_card img {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+    display: block; /* Ensures the image is a block-level element */
+    margin: auto; /* Centers the image horizontally */
+    border-radius: 50%; /* Keeps the circular shape */
+    width: 100px; /* Ensures consistent size */
+    height: 100px; /* Ensures consistent size */
+    object-fit: fill; /* Stretches the image to fill the circular frame */
+    object-position: center; /* Centers the content within the frame */
+    border: 2px solid var(--secondary-color); /* Adds a border */
+    transition: border-color 0.3s ease;
 }
+
 
 /* Mobile and tablet styles */
 @media (max-width: 768px) {
