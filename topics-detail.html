@@ -1,6 +1,11 @@
 <!doctype html>
 <html lang="en">
+ <!-- last script is the main script for connecting with backend
 
+ after deploying in vercel change the axios.post url to your deployed URLSearchParams
+ 
+ 
+ -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +28,115 @@
     <link href="css/bootstrap-icons.css" rel="stylesheet">
 
     <link href="css/style.css" rel="stylesheet">
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('loginPassword');
+            const togglePasswordIcon = document.getElementById('togglePasswordIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePasswordIcon.classList.remove('bi-eye');
+                togglePasswordIcon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                togglePasswordIcon.classList.remove('bi-eye-slash');
+                togglePasswordIcon.classList.add('bi-eye');
+            }
+        }
+    
+    function validateForm() {
+    const email = document.getElementById('loginEmail');
+    const password = document.getElementById('loginPassword');
+    let valid = true;
+
+    if (!email.value) {
+        email.classList.add('is-invalid');
+        valid = false;
+    } else {
+        email.classList.remove('is-invalid');
+    }
+
+    if (!password.value) {
+        password.classList.add('is-invalid');
+        valid = false;
+    } else {
+        password.classList.remove('is-invalid');
+    }
+
+    return valid;
+}
+function validateSignupForm() {
+    const username = document.getElementById('signupUsername');
+    const email = document.getElementById('signupEmail');
+    const password = document.getElementById('signupPassword');
+    const confirmPassword = document.getElementById('signupConfirmPassword');
+    let valid = true;
+
+    // Username validation (must be at least 3 characters)
+    if (username.value.length < 3) {
+        username.classList.add('is-invalid');
+        valid = false;
+    } else {
+        username.classList.remove('is-invalid');
+    }
+
+    // Email validation (checks format)
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(email.value)) {
+        email.classList.add('is-invalid');
+        valid = false;
+    } else {
+        email.classList.remove('is-invalid');
+    }
+
+    // Password validation (at least 6 characters and includes a number)
+    const passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/;
+    if (!passwordPattern.test(password.value)) {
+        password.classList.add('is-invalid');
+        valid = false;
+    } else {
+        password.classList.remove('is-invalid');
+    }
+
+    // Confirm password validation (must match the password)
+    if (password.value !== confirmPassword.value) {
+        confirmPassword.classList.add('is-invalid');
+        valid = false;
+    } else {
+        confirmPassword.classList.remove('is-invalid');
+    }
+
+    return valid;
+}
+
+function toggleSignupPasswordVisibility() {
+    const passwordInput = document.getElementById('signupPassword');
+    const togglePasswordIcon = document.getElementById('toggleSignupPasswordIcon');
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePasswordIcon.classList.remove('bi-eye');
+        togglePasswordIcon.classList.add('bi-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        togglePasswordIcon.classList.remove('bi-eye-slash');
+        togglePasswordIcon.classList.add('bi-eye');
+    }
+}
+
+function toggleSignupConfirmPasswordVisibility() {
+    const confirmPasswordInput = document.getElementById('signupConfirmPassword');
+    const toggleConfirmPasswordIcon = document.getElementById('toggleSignupConfirmPasswordIcon');
+    if (confirmPasswordInput.type === 'password') {
+        confirmPasswordInput.type = 'text';
+        toggleConfirmPasswordIcon.classList.remove('bi-eye');
+        toggleConfirmPasswordIcon.classList.add('bi-eye-slash');
+    } else {
+        confirmPasswordInput.type = 'password';
+        toggleConfirmPasswordIcon.classList.remove('bi-eye-slash');
+        toggleConfirmPasswordIcon.classList.add('bi-eye');
+    }
+}
+
+    </script>
 
 </head>
 
@@ -81,11 +195,101 @@
                     </ul>
 
                     <div class="d-none d-lg-block">
-                        <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+                        <div class="d-none d-lg-block">
+                            <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="navbar-icon bi-person smoothscroll" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="true" id="navbarLightDropdownMenuLink" ></a>
+                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Login</a></li>
+    
+                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal" style="cursor: pointer;">Sign Up</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </nav>
+        <!-- Signup Modal -->
+        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content glass-effect">
+                    <div class="modal-header justify-content-center">
+                        <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000"/>
+                    </div>
+                    <div class="modal-body">
+                        <form id="signupForm" action="your-server-endpoint" method="post" onsubmit="return validateSignupForm()">
+                            <div class="mb-3">
+                                <label for="signupUsername" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="signupUsername" placeholder="Enter username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="signupEmail" placeholder="Enter email">
+                            </div>
+                            <div class="mb-3 position-relative">
+                                <label for="signupPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="signupPassword" placeholder="Enter password">
+                                <span class="eye-icon" onclick="toggleSignupPasswordVisibility()">
+                                    <i class="bi bi-eye" id="toggleSignupPasswordIcon"></i>
+                                </span>
+                            </div>
+                            <div class="mb-3 position-relative">
+                                <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm password">
+                                <span class="eye-icon" onclick="toggleSignupConfirmPasswordVisibility()">
+                                    <i class="bi bi-eye" id="toggleSignupConfirmPasswordIcon"></i>
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                            </div>
+                            <div class="mt-3 text-center">
+                                <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" aria-label="Close">Login</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+     <nav>
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content glass-effect">
+                    
+                    <div class="modal-header justify-content-center">
+                        <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Login☺️;&color=000000"/>
+                    </div >
+                    <div class="modal-body">
+                        <form action="your-server-endpoint" method="post" onsubmit="return validateForm()">
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3 position-relative">
+                                <label for="loginPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="loginPassword">
+                                <span class="eye-icon" onclick="togglePasswordVisibility()">
+                                    <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                                </span>
+                            </div>
+                            <div class="mb-3 text-end">
+                                <a href="#" class="link-primary">Forgot Password?</a>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                        <div class="mt-3 text-center">
+                            <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" aria-label="Close">Sign Up</a></p>
+                        </div>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
         <header class="site-header d-flex flex-column justify-content-center align-items-center">
@@ -101,7 +305,7 @@
                             </ol>
                         </nav>
 
-                        <h2 class="text-white">Introduction to <br> Web Design 101</h2>
+                        <h2 class= "topic-header text-white"></h2>
 
                         <div class="d-flex align-items-center mt-5">
                             <a href="#topics-detail" class="btn custom-btn custom-border-btn smoothscroll me-4">Read
@@ -114,7 +318,7 @@
                     <div class="col-lg-5 col-12">
                         <div class="topics-detail-block bg-white shadow-lg">
                             <img src="images/topics/undraw_Remote_design_team_re_urdx.png"
-                                class="topics-detail-block-image img-fluid">
+                                 id="topic-image-id"  class="topics-detail-block-image img-fluid">
                         </div>
                     </div>
 
@@ -128,19 +332,21 @@
                 <div class="row">
 
                     <div class="col-lg-8 col-12 m-auto">
-                        <h3 class="mb-4">Introduction to Web Design</h3>
+                        <h3 class="topic-header mb-4">Introduction to Web Design</h3>
+                        <p id="topic-content">
 
-                        <p>Our web design services focus on creating visually stunning and user-friendly websites tailored to your unique needs. We specialize in responsive design, ensuring seamless functionality across all devices, from desktops to smartphones. With an emphasis on modern aesthetics and optimal user experience, our designs captivate audiences and drive engagement. Whether you're building a brand-new site or revamping an existing one, we bring your vision to life with clean layouts, intuitive navigation, and powerful performance. Trust us to craft a web presence that not only looks exceptional but also aligns with your business goals and enhances your online impact..</p>
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam necessitatibus voluptatum
+                            aliquam dolore, quo cum doloribus, vitae molestias voluptas autem sequi veritatis quibusdam
+                            odio nesciunt numquam mollitia similique fuga quae inventore eligendi.</p>
 
-                        <p><strong>We create stunning, responsive websites tailored to your needs. With a focus on user experience and modern design, our sites look great and function seamlessly on all devices. Let us help you make a lasting impression online.
-
-                        </p>
+                        <p><strong>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt numquam architecto
+                                cumque tempora autem. Atque ab autem nesciunt qui doloremque voluptatem quod.</p>
 
                         <blockquote>
-                            Stunning, responsive websites that combine style and functionality effortlessly.
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                         </blockquote>
 
-                        <div class="row my-4">
+                        <!-- <div class="row my-4">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <img src="images/businesswoman-using-tablet-analysis.jpg"
                                     class="topics-detail-block-image img-fluid">
@@ -152,7 +358,8 @@
                             </div>
                         </div>
 
-                        <p>Elevate your online presence with cutting-edge web design that seamlessly blends creativity and functionality. Our expertly crafted, responsive websites deliver exceptional user experiences on any device. From sleek visuals to intuitive navigation, we ensure your brand stands out and engages your audience. Let us transform your vision into a dynamic, impactful digital experience that drives results
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum totam dolorem adipisci
+                            magni, explicabo, deleniti nobis, repellendus voluptatem saepe vel sunt eum. Minus, id odio!
                         </p>
                     </div>
 
@@ -264,6 +471,45 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+    <script>
+window.onload = async () => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    console.log("Insight ID:", id);
+
+    // Fetch data for the specific ID or perform any other logic
+    axios.post("https://insight-sync-u1bq.vercel.app/api/v1/insight/getinsightbyid", {
+        id
+    })
+    .then(({ data }) => {
+        console.log(data);
+
+        // Set image source
+        const img = document.getElementById("topic-image-id");
+        if (img) {
+            img.src = data.data.Image;
+        }
+
+        // Set heading text
+        const headings = document.querySelectorAll(".topic-header");
+        console.log(headings)
+        headings.forEach(heading => {
+            heading.innerHTML = data.data.title
+        });
+
+        // Set topic content
+        const contentClass = document.getElementById("topic-content")
+        contentClass.innerHTML = data.data.content
+
+    })
+    .catch((err) => {
+        console.error("Error fetching insight data:", err);
+    });
+};
+
+    </script>
 
 </body>
 
