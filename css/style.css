@@ -1440,3 +1440,12 @@ blockquote {
 #scrollToTopBtn:hover {
     background-color: #333;
 }
+
+ /* footer */
+ #social-links:hover{
+  color: black;
+
+}
+#social-links{
+  color: #63E6BE;
+}
