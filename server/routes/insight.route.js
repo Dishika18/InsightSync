@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { addInsight, getallInsight, getinsightbyid, getinsightbytopic  } from "../controller/insight.controller.js";
 import multer from 'multer'
-
+import { upload_on_cloudinary } from "../utils/cloudinary.utils.js";
 
 // Multer Storage Configuration
 const storage = multer.diskStorage({
@@ -14,10 +14,21 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({storage:storage}); 
+// const upload = multer({storage:storage}); 
+const upload = multer({ storage: multer.memoryStorage() });
 const router = Router()
 
 router.route('/addinsight').post( upload.single('imagefile'), addInsight)
+// router.post("/addinsight", upload.single("imagefile"), async (req, res) => {
+//     try {
+//       const fileBuffer = req.file.buffer; // Get file buffer from Multer
+//       const imageUrl = await upload_on_cloudinary(fileBuffer); // Upload image
+//       res.status(200).json({ success: true, imageUrl: imageUrl });
+//     } catch (error) {
+//       console.error("Upload error:", error);
+//       res.status(500).json({ success: false, error: "Image upload failed" });
+//     }
+//   });
 router.route('/getallinsight').get(getallInsight)
 router.route("/getinsightbytopic").post(getinsightbytopic)
 router.route("/getinsightbyid").post(getinsightbyid)
