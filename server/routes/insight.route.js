@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ dest: "/tmp" }); 
+const upload = multer(storage); 
 const router = Router()
 
 router.route('/addinsight').post( upload.single('imagefile'), addInsight)

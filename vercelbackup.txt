@@ -1,1 +1,2 @@
 MONGODB_URI="mongodb+srv://vercel-admin-user:PHHVez8bb1yhfly3@cluster0.le67o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+MONGODB_URI="mongodb+srv://arkabasak62:1234@cluster0.le67o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
