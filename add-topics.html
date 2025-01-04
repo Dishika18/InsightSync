@@ -12,7 +12,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
         rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -26,10 +25,6 @@
                 <i class="bi-back"></i>
                 <span>InsightSync</span>
             </a>
-
-            <div class="d-lg-none ms-auto me-4">
-                <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
-            </div>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,13 +46,8 @@
                         <a class="nav-link click-scroll" href="index.html#section_4">FAQs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link click-scroll" href="index.html#section_5">Testimonials</a>
+                        <a class="nav-link click-scroll" href="index.html#section_5">Contact</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link click-scroll" href="index.html#section_6">Contact</a>
-                    </li>
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#section_5" id="navbarLightDropdownMenuLink"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
@@ -69,17 +59,24 @@
                     </li>
                 </ul>
 
+
                 <div class="d-none d-lg-block">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="navbar-icon bi-person smoothscroll" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="true" id="navbarLightDropdownMenuLink"></a>
+                            <a class="navbar-icon bi-person smoothscroll" class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown" role="button" aria-expanded="true"
+                                id="navbarLightDropdownMenuLink"></a>
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Login</a></li>
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal" style="cursor: pointer;">Sign Up</a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                        style="cursor: pointer;">Login</a></li>
+
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                        style="cursor: pointer;">Sign Up</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </nav>
@@ -89,10 +86,12 @@
         <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content glass-effect">
                 <div class="modal-header justify-content-center">
-                    <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000"/>
+                    <img
+                        src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000" />
                 </div>
                 <div class="modal-body">
-                    <form id="signupForm" action="your-server-endpoint" method="post" onsubmit="return validateSignupForm()">
+                    <form id="signupForm" action="your-server-endpoint" method="post"
+                        onsubmit="return validateSignupForm()">
                         <div class="mb-3">
                             <label for="signupUsername" class="form-label">Username</label>
                             <input type="text" class="form-control" id="signupUsername" placeholder="Enter username">
@@ -103,14 +102,16 @@
                         </div>
                         <div class="mb-3 position-relative">
                             <label for="signupPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="signupPassword" placeholder="Enter password">
+                            <input type="password" class="form-control" id="signupPassword"
+                                placeholder="Enter password">
                             <span class="eye-icon" onclick="toggleSignupPasswordVisibility()">
                                 <i class="bi bi-eye" id="toggleSignupPasswordIcon"></i>
                             </span>
                         </div>
                         <div class="mb-3 position-relative">
                             <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm password">
+                            <input type="password" class="form-control" id="signupConfirmPassword"
+                                placeholder="Confirm password">
                             <span class="eye-icon" onclick="toggleSignupConfirmPasswordVisibility()">
                                 <i class="bi bi-eye" id="toggleSignupConfirmPasswordIcon"></i>
                             </span>
@@ -119,7 +120,8 @@
                             <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
                         </div>
                         <div class="mt-3 text-center">
-                            <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" aria-label="Close">Login</a></p>
+                            <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                    data-bs-dismiss="modal" aria-label="Close">Login</a></p>
                         </div>
                     </form>
                 </div>
@@ -127,40 +129,47 @@
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content glass-effect">
-                <div class="modal-header justify-content-center">
-                    <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Login☺️;&color=000000"/>
-                </div>
-                <div class="modal-body">
-                    <form action="your-server-endpoint" method="post" onsubmit="return validateForm()">
-                        <div class="mb-3">
-                            <label for="loginEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3 position-relative">
-                            <label for="loginPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPassword">
-                            <span class="eye-icon" onclick="togglePasswordVisibility()">
-                                <i class="bi bi-eye" id="togglePasswordIcon"></i>
-                            </span>
-                        </div>
-                        <div class="mb-3 text-end">
-                            <a href="#" class="link-primary">Forgot Password?</a>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
-                        </div>
-                        <div class="mt-3 text-center">
-                            <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" aria-label="Close">Sign Up</a></p>
-                        </div>
+    <!-- Login Page -->
+    <nav>
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content glass-effect">
+
+                    <div class="modal-header justify-content-center">
+                        <img
+                            src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Login☺️;&color=000000" />
+                    </div>
+                    <div class="modal-body">
+                        <form action="your-server-endpoint" method="post" onsubmit="return validateForm()">
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3 position-relative">
+                                <label for="loginPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="loginPassword">
+                                <span class="eye-icon" onclick="togglePasswordVisibility()">
+                                    <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                                </span>
+                            </div>
+                            <div class="mb-3 text-end">
+                                <a href="#" class="link-primary">Forgot Password?</a>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            </div>
+                            <div class="mt-3 text-center">
+                                <p>Don't have an account? <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#signupModal" data-bs-dismiss="modal" aria-label="Close">Sign
+                                        Up</a></p>
+                            </div>
+                    </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+    </nav>
 
     <header class="site-header d-flex flex-column justify-content-center align-items-center">
         <div class="container">
@@ -181,39 +190,48 @@
     <section class="add-topic-section section-padding">
         <div class="container mt-4">
             <div class="row">
-            <div class="col-lg-8 col-12 mx-auto">
-                <form action="your-server-endpoint" method="post" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="topicTitle" class="form-label fw-bold" style="font-size: 1.2rem;">Topic Title</label>
-                    <input type="text" class="form-control" id="topicTitle" name="title" required>
+                <div class="col-lg-8 col-12 mx-auto">
+                    <form action="your-server-endpoint" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="topicTitle" class="form-label fw-bold" style="font-size: 1.2rem;">Topic
+                                Title</label>
+                            <input type="text" class="form-control" id="topicTitle" name="title" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="topicImage" class="form-label fw-bold" style="font-size: 1.2rem;">Image</label>
+                            <input type="file" class="form-control" id="topicImage" name="image" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="topicContent" class="form-label fw-bold"
+                                style="font-size: 1.2rem;">Description</label>
+                            <textarea class="form-control" id="topicContent" name="content" rows="5"
+                                required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="topicSubmittedBy" class="form-label fw-bold"
+                                style="font-size: 1.2rem;">Submitted By:</label>
+                            <input type="text" class="form-control" id="topicSubmittedBy" name="submittedBy" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="topicCategory" class="form-label fw-bold"
+                                style="font-size: 1.2rem;">Category</label>
+                            <select class="form-select" id="topicCategory" name="category" required>
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="Technology">Design</option>
+                                <option value="Science">Marketing</option>
+                                <option value="Health">Finance</option>
+                                <option value="Education">Education</option>
+                                <option value="Business">Music</option>
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button id="submitBtn" type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="topicImage" class="form-label fw-bold" style="font-size: 1.2rem;">Image</label>
-                    <input type="file" class="form-control" id="topicImage" name="image" required>
-                </div>
-                <div class="mb-3">
-                    <label for="topicContent" class="form-label fw-bold" style="font-size: 1.2rem;">Description</label>
-                    <textarea class="form-control" id="topicContent" name="content" rows="5" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="topicCategory" class="form-label fw-bold" style="font-size: 1.2rem;">Category</label>
-                    <select class="form-select" id="topicCategory" name="category" required>
-                    <option value="" disabled selected>Select a category</option>
-                    <option value="Technology">Technology</option>
-                    <option value="Science">Science</option>
-                    <option value="Health">Health</option>
-                    <option value="Education">Education</option>
-                    <option value="Business">Business</option>
-                    </select>
-                </div>
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                </div>
-                </form>
-            </div>
             </div>
         </div>
-        </section>
+ </section>
 <!--footer section-->
 <footer class="site-footer section-padding">
     <div class="container">
@@ -313,6 +331,62 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/custom.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
+    <script type="module">
+        // Button event listener
+        import { link } from "./Baselink.js"
+        console.log(link)
+        const btn = document.getElementById("submitBtn");
+        btn.addEventListener("click", async (event) => {
+            event.preventDefault(); // Prevent default form submission behavior
+
+            // Get the form fields
+            const title = document.getElementById("topicTitle").value;
+            const content = document.getElementById("topicContent").value;
+            const submittedBy = document.getElementById("topicSubmittedBy").value; // Corrected ID
+            const category = document.getElementById("topicCategory").value;
+            const imageFile = document.getElementById("topicImage").files[0]; // Use `.files[0]` for file input
+
+            // Validate required fields
+            if (!title || !content || !submittedBy || !category || !imageFile) {
+                alert("Please fill in all fields and select an image.");
+                return;
+            }
+
+            // Create FormData object
+            const formData = new FormData();
+            formData.append("title", title);
+            formData.append("topic", category);
+            formData.append("content", content);
+            formData.append("submittedby", submittedBy);
+            formData.append("imagefile", imageFile); // Append the file directly
+
+            try {
+                // Send POST request
+                console.log(formData)
+                const response = await axios.post(
+                    `${link}/api/v1/insight/addinsight`,
+                    formData,
+                    {
+                        headers: {
+                            "Content-Type": "multipart/form-data", // Important for file upload
+                        },
+                    }
+                );
+
+                // Handle successful response
+                console.log("Success:", response.data);
+                alert("Topic submitted successfully!");
+            } catch (error) {
+                // Handle error response
+                console.error("Error:", error);
+                alert("There was an error submitting your topic. Please try again.");
+            }
+        });
+    </script>
+
 </body>
 
 </html>
