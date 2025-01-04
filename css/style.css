@@ -1745,7 +1745,9 @@ body.dark-mode.newsletter-container{
   body.dark-mode .site-header {
     background-image: linear-gradient(to right, var(--tw-gradient-stops));
   }  
-  
+  .dark-mode #scrollToTopBtn{
+    background-color:  #4caf50;
+  }
   
   
   
