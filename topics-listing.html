@@ -250,6 +250,7 @@ function toggleSignupConfirmPasswordVisibility() {
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                                 <li><a class="dropdown-item active" href="topics-listing.html">Topics Listing</a></li>
+                                <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
 
                                 <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
                             </ul>
@@ -264,7 +265,7 @@ function toggleSignupConfirmPasswordVisibility() {
                                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal" style="cursor: pointer;">Login</a></li>
     
                                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal" style="cursor: pointer;">Sign Up</a></li>
-                                    <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
+                                    <!-- <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li> -->
                     
                                 </ul>
                             </li>
@@ -482,10 +483,13 @@ function toggleSignupConfirmPasswordVisibility() {
 
     <!-- script for fetching the insights from db -->
 
-    <script>
+    <script type="module" >
+        import {link} from "./Baselink.js"
+        console.log(link)
+
         let datas = []
         window.onload = async (event) => {
-            axios.get("https://insight-sync-u1bq.vercel.app/api/v1/insight/getallinsight")
+            axios.get(`${link}/api/v1/insight/getallinsight`)
                 .then((resp) => {
                     let parent = document.getElementById("parentCont");
                     resp.data.data.map((data) => { datas.push(data) });
