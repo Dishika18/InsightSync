@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     const formData = { email, password };
   
-    fetch('http://insight-sync-u1bq.vercel.app/api/auth/login', {
+    fetch('https://insight-sync-u1bq.vercel.app/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
