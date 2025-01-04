@@ -254,7 +254,11 @@ function toggleSignupConfirmPasswordVisibility() {
                                 <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
                             </ul>
                         </li>
+                           <!-- dark mode -->
+                           <input type="checkbox" id="dark-mode-toggle"/>
+                           <label for="dark-mode-toggle" ></label>
                     </ul>
+                     
 
                     <div class="d-none d-lg-block">
                         <ul class="navbar-nav">
@@ -528,6 +532,12 @@ function toggleSignupConfirmPasswordVisibility() {
                 .catch((err) => { console.log(err) });
         };
     </script>
+     <!-- Dark mode Javascript -->
+     <script> const darkModeToggle = document.getElementById('dark-mode-toggle'); 
+        darkModeToggle.addEventListener('change', () => {
+             document.body.classList.toggle('dark-mode', darkModeToggle.checked);
+              }); 
+              </script>
 
 </body>
 

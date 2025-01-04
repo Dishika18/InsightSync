@@ -28,6 +28,16 @@ body{
     animation: fadeIn 1s ease-in-out;
 }
 
+.dark-mode .section_container{
+    background-color:rgb(33 33 33 /1) ;
+   
+}
+.dark-mode .section_card::before {
+    background-color: #4caf50;
+}
+.dark-mode.section_container h1 {
+    color:#ffc107 ;
+}
 .section_container h2{
     font-size: 1.5rem;
     font-weight: 600;
@@ -42,6 +52,9 @@ body{
     font-weight: 600;
     color: black;
     animation: fadeIn 2s ease-in-out;
+}
+.dark-mode .section_container h1 {
+    color:#ffc107 ;
 }
 
 .section_container h1::after{
@@ -73,6 +86,10 @@ body{
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     animation: float 3s ease-in-out infinite;
+}
+.dark-mode .section_card{
+    background-color:  rgb(55 65 81/1);
+    color:#ffffff
 }
 
 .section_card::before{
