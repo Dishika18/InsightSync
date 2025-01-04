@@ -1,16 +1,20 @@
-import express from 'express'
-import dotenv from "dotenv"
+import dotenv from 'dotenv';
 import { dbConnect } from './dbconnect.js';
 import { app } from './app.js';
 
-dotenv.config({
-    path:"server/api/.env"
-})
+// Load environment variables
+dotenv.config();
 
-console.log("this is index.js",process.env.MONGO_URI)
+console.log('Starting app. MONGO_URI:', process.env.MONGO_URI);
 
+// Connect to the database and start the server
 dbConnect()
-.then(()=>{
-    app.listen(3000,()=>{console.log('app is running and db connected')})
-})
-.catch((err)=>{console.log(err)})
+  .then(() => {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`App is running on port ${PORT} and DB connected`);
+    });
+  })
+  .catch((err) => {
+    console.error('Database connection failed:', err);
+  });
