@@ -30,7 +30,7 @@ function handleSignupSubmit(event) {
       if (data.token) {
         alert('Signup successful! You are now logged in.');
         localStorage.setItem('authToken', data.token);
-        window.location.href = '/';
+        window.location.href = '/InsightSync/';
       } else {
         alert('Signup failed: ' + data.message);
       }

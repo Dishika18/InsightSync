@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data.token) {
           alert('Login successful!');
           localStorage.setItem('authToken', data.token);
-          window.location.href = '/';
+          window.location.href = '/InsightSync/';
         } else {
           alert('Login failed: ' + data.message);
         }
