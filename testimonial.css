@@ -81,7 +81,7 @@ body{
     top: 0;
     left: 0;
     transform: translate(-50%, -50%);
-    width: 75%;
+    width: 55%;
     aspect-ratio: 1;
     border-radius: 100%;
     background-color: var(--secondary-color);
@@ -187,10 +187,15 @@ body{
 }
 
 .section_card img {
+    display: block;
+    margin: auto;
     border-radius: 50%;
     width: 100px;
     height: 100px;
-    object-fit: cover;
+    object-fit: fill;
+    object-position: center;
+    border: 2px solid var(--secondary-color);
+    transition: border-color 0.3s ease;
 }
 
 /* Mobile and tablet styles */
