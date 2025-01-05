@@ -238,3 +238,23 @@ body{
     }
 }
 
+/*Dark Mode */
+
+.dark-mode .section_container{
+    background-color:rgb(33 33 33 /1) ;
+   
+}
+.dark-mode .section_card::before {
+    background-color: #4caf50;
+}
+.dark-mode.section_container h1 {
+    color:#ffc107 ;
+}
+.dark-mode .section_container h1 {
+    color:#ffc107 ;
+}
+
+.dark-mode .section_card{
+    background-color:  rgb(55 65 81/1);
+    color:#ffffff
+}

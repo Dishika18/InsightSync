@@ -212,8 +212,12 @@
                                             style="cursor: pointer;">Sign Up</a></li>
                                 </ul>
                             </li>
+                              <!-- dark mode -->
+                        <input type="checkbox" id="dark-mode-toggle"/>
+                        <label for="dark-mode-toggle" >
+                        </label>
                         </ul>
-
+                      
 
                     </div>
                 </div>
@@ -1118,6 +1122,15 @@
     <!-- Scroll to Top Button -->
     <button onclick="topFunction()" id="scrollToTopBtn" title="Go to top"></button>
 
+
+    <!-- Dark mode button -->
+    <script>
+        const toggle = document.getElementById('dark-mode-toggle');
+
+        toggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode', toggle.checked);
+        });
+    </script>
 
     <!-- JAVASCRIPT FILES -->
     <script src="js/jquery.min.js"></script>
