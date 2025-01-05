@@ -20,7 +20,7 @@ function handleSignupSubmit(event) {
 
   const formData = { username, email, password };
 
-  fetch('http://localhost:3000/api/auth/signup', {
+  fetch('https://insight-sync-u1bq.vercel.app/api/auth/signup', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
@@ -30,7 +30,7 @@ function handleSignupSubmit(event) {
       if (data.token) {
         alert('Signup successful! You are now logged in.');
         localStorage.setItem('authToken', data.token);
-        window.location.href = '/InsightSync/';
+        window.location.href = '/';
       } else {
         alert('Signup failed: ' + data.message);
       }

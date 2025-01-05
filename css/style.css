@@ -1,6 +1,6 @@
 /*---------------------------------------
   CUSTOM PROPERTIES ( VARIABLES )             
------------------------------------------*/
+-----------------------------------------*/ 
 :root {
   --white-color:                  #ffffff;
   --primary-color:                #13547a;
@@ -1040,8 +1040,18 @@ blockquote {
 
 .copyright-text {
   font-size: var(--copyright-font-size);
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  color: white;
+  padding: 2rem;
 }
 
+.copyright-box{
+  background-color: var(--secondary-color);
+  margin-bottom: -10rem;
+  z-index: 2;
+}
 
 /*---------------------------------------
   SOCIAL ICON               

@@ -190,9 +190,9 @@
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                                 <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
-
-                                <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
                                 <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
+                                <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
+
 
                             </ul>
                         </li>
@@ -226,28 +226,33 @@
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content glass-effect">
                     <div class="modal-header justify-content-center">
-                        <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000"/>
+                        <img
+                            src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000" />
                     </div>
                     <div class="modal-body">
                         <form id="signupForm" method="post" onsubmit="return validateSignupForm()">
                             <div class="mb-3">
                                 <label for="signupUsername" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="signupUsername" name="username" placeholder="Enter username" required>
+                                <input type="text" class="form-control" id="signupUsername" name="username"
+                                    placeholder="Enter username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="signupEmail" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="signupEmail" name="email" placeholder="Enter email" required>
+                                <input type="email" class="form-control" id="signupEmail" name="email"
+                                    placeholder="Enter email" required>
                             </div>
                             <div class="mb-3 position-relative">
                                 <label for="signupPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="signupPassword" name="password" placeholder="Enter password" required>
+                                <input type="password" class="form-control" id="signupPassword" name="password"
+                                    placeholder="Enter password" required>
                                 <span class="eye-icon" onclick="toggleSignupPasswordVisibility()">
                                     <i class="bi bi-eye" id="toggleSignupPasswordIcon"></i>
                                 </span>
                             </div>
                             <div class="mb-3 position-relative">
                                 <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="signupConfirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+                                <input type="password" class="form-control" id="signupConfirmPassword"
+                                    name="confirmPassword" placeholder="Confirm password" required>
                                 <span class="eye-icon" onclick="toggleSignupConfirmPasswordVisibility()">
                                     <i class="bi bi-eye" id="toggleSignupConfirmPasswordIcon"></i>
                                 </span>
@@ -256,53 +261,59 @@
                                 <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
                             </div>
                             <div class="mt-3 text-center">
-                                <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" aria-label="Close">Login</a></p>
+                                <p>Already have an account? <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#loginModal" data-bs-dismiss="modal"
+                                        aria-label="Close">Login</a></p>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        
+
 
         <!-- Login Page -->
         <nav>
-           <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered modal-md">
-               <div class="modal-content glass-effect">
-        <div class="modal-header justify-content-center">
-          <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Login☺️;&color=000000"/>
-        </div>
-        <div class="modal-body">
-          <form id="loginForm"  method="post"  >
-            <div class="mb-3">
-              <label for="loginEmail" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp">
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-md">
+                    <div class="modal-content glass-effect">
+                        <div class="modal-header justify-content-center">
+                            <img
+                                src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Login☺️;&color=000000" />
+                        </div>
+                        <div class="modal-body">
+                            <form id="loginForm" method="post">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="loginEmail" name="email"
+                                        aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-3 position-relative">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="loginPassword" name="password">
+                                    <span class="eye-icon" onclick="togglePasswordVisibility()">
+                                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                                    </span>
+                                </div>
+                                <div class="mb-3 text-end">
+                                    <a href="#" class="link-primary">Forgot Password?</a>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                </div>
+                                <div class="mt-3 text-center">
+                                    <p>Don't have an account? <a href="#" data-bs-toggle="modal"
+                                            data-bs-target="#signupModal" data-bs-dismiss="modal"
+                                            aria-label="Close">Sign Up</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3 position-relative">
-              <label for="loginPassword" class="form-label">Password</label>
-              <input type="password" class="form-control" id="loginPassword" name="password">
-              <span class="eye-icon" onclick="togglePasswordVisibility()">
-                <i class="bi bi-eye" id="togglePasswordIcon"></i>
-              </span>
-            </div>
-            <div class="mb-3 text-end">
-              <a href="#" class="link-primary">Forgot Password?</a>
-            </div>
-            <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary btn-block">Login</button>
-            </div>
-            <div class="mt-3 text-center">
-              <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" aria-label="Close">Sign Up</a></p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+
         </nav>
-    
+
 
         <!-- Home Page -->
 
@@ -922,9 +933,10 @@
                     <span><i class="ri-double-quotes-l"></i></span>
                     <h4>Love the Simplicity</h4>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab recusandae fugiat earum sunt ipsa.
-                        Consectetur corrupti ipsam aut eveniet? Ad enim dolores delectus labore rerum ex ratione eos
-                        suscipit facilis!
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos iure natus, ipsa nobis,
+                        magnam debitis eveniet esse itaque blanditiis eius aliquam animi obcaecati doloribus, incidunt
+                        sunt eaque dolorum. Id optio repudiandae debitis laborum nisi explicabo eius hic vero porro
+                        accusantium!
                     </p>
                     <img src="./images/OIP (8).jpeg " alt="user">
                     <h5>Allan Collins</h5>
@@ -934,9 +946,9 @@
                     <span><i class="ri-double-quotes-l"></i></span>
                     <h4>Excellent</h4>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil eos cum autem sequi, natus
-                        labore, iusto laboriosam asperiores porro, voluptatibus eligendi quasi et ad mollitia numquam
-                        adipisci laborum libero molestiae.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi porro et neque sed totam pariatur
+                        tenetur nulla aliquam at necessitatibus laboriosam beatae nihil eaque, cumque in quas similique
+                        vero quis nesciunt. Accusamus at quam perferendis sit totam! Pariatur, deserunt? Debitis!
                     </p>
                     <img src="./images/OIP (7).jpeg" alt="user">
                     <h5>Lucas Rodriguez</h5>
@@ -946,10 +958,10 @@
                     <span><i class="ri-double-quotes-l"></i></span>
                     <h4>Efficient and reliable</h4>
                     <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis sunt adipisci repellendus, laboriosam consequuntur sit culpa? Exercitationem est sapiente expedita et obcaecati fugiat itaque! Dolore illum quasi corporis
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis sunt adipisci repellendus,
-                        laboriosam consequuntur sit culpa? Incidunt consequatur, exercitationem est sapiente expedita et
-                        obcaecati fugiat itaque! Dolore illum quasi corporis?
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea incidunt possimus excepturi id
+                        architecto magni magnam voluptatum similique nam sunt eaque deleniti quas obcaecati delectus
+                        pariatur ratione recusandae a, et dicta repudiandae, veritatis consequatur soluta consectetur.
+                        Nam aperiam numquam quos.
                     </p>
                     <img src="./images/OIP (5).jpeg" alt="user">
                     <h5>Isabella Nguyen</h5>
@@ -1121,8 +1133,6 @@
                         </ul>
                     </div>
 
-                    
-
                 </div>
                
 
@@ -1130,7 +1140,12 @@
                 
                 </div>
         </div>
+        <div class="copyright-box">
+            <p class="copyright-text mt-lg-5 mt-4">Copyright © 2024 InsightSync. All rights reserved.
+            </p>
+        </div>
     </footer>
+
 
 
     <!-- Scroll to Top Button -->

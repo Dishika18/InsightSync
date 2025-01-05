@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     const formData = { email, password };
   
-    fetch('http://localhost:3000/api/auth/login', {
+    fetch('https://insight-sync-u1bq.vercel.app/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (data.token) {
           alert('Login successful!');
           localStorage.setItem('authToken', data.token);
-          window.location.href = '/InsightSync/';
+          window.location.href = '/';
         } else {
           alert('Login failed: ' + data.message);
         }
