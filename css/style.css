@@ -1758,6 +1758,17 @@ body.dark-mode .faq-section .accordion-item {
 .dark-mode #scrollToTopBtn{
   background: var(--primary-color);
 }
+.dark-mode .hero-section .input-group{
+  background: white;
+}
+.dark-mode
+  .bi-search::before {
+    
+    color: black;
+}
+.dark-mode .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback){
+  color: black;
+}
 
 
 
