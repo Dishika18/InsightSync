@@ -11,7 +11,7 @@ Welcome to the repository! We're excited to have you contribute. Please follow t
    - Wait for the issue to be reviewed and assigned by the maintainers.
 
 2. **Looking for Issues to Work On:**
-   - Check out the issues labeled with **`help needed`**. These are open for contributors.
+   - Check out the issues labeled with **`help wanted`**. These are open for contributors.
    - Make sure to comment on the issue you'd like to work on before starting, so it can be assigned to you.
 
 3. **Submitting Pull Requests (PRs):**
