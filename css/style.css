@@ -1256,7 +1256,7 @@ blockquote {
     left: 10px;
     opacity: 1;
     pointer-events: auto;
-    max-width: 155px;
+    max-width: 190px;
     margin-top: 10px;
     margin-bottom: 15px;
   }
@@ -1449,4 +1449,12 @@ blockquote {
 
 #scrollToTopBtn:hover {
     background-color: #333;
+}
+
+/* icons hover effect */
+#social-links {
+   color: #63E6BE;
+}
+#social-links :hover{
+  color:#000000;
 }
