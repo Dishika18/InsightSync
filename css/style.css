@@ -1450,3 +1450,11 @@ blockquote {
 #scrollToTopBtn:hover {
     background-color: #333;
 }
+
+/* icons hover effect */
+#social-links {
+   color: #63E6BE;
+}
+#social-links :hover{
+  color:#000000;
+}
