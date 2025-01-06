@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import { Insight } from "../models/insight.model.js";
 import { upload_on_cloudinary } from "../utils/cloudinary.utils.js";
-// import {uploadToCloudinary} from '../utils/cloudinary.utils.js'
 
 const addInsight = async (req, res) => {
     const { title, topic, content, submittedby } = req.body;

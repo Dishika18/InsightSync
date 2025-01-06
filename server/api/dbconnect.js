@@ -1,5 +1,9 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv'
 
+dotenv.config({
+  path:'server/api/.env'
+})
 // Database connection
 export const dbConnect = async () => {
   const url = process.env.MONGO_URI;
