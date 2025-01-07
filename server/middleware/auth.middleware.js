@@ -17,7 +17,7 @@ const authUser = async (req, res, next) => {
         }
 
         // Verify the token
-        const decoded = jwt.verify(token, "THSI_IS_A_JWT_SECRET"); // Replace with your secret key
+        const decoded = jwt.verify(token, "THIS_IS_A_JWT_SECRET"); // Replace with your secret key
 
         // Add user data to request for downstream handlers
         req.user = decoded;
