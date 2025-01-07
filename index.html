@@ -206,7 +206,7 @@
                                 <a class="navbar-icon bi-person smoothscroll" class="nav-link dropdown-toggle"
                                     data-bs-toggle="dropdown" role="button" aria-expanded="true"
                                     id="navbarLightDropdownMenuLink"></a>
-                                <ul class="dropdown-menu dropdown-menu-light"
+                                <ul class="dropdown-menu authcomp dropdown-menu-light"
                                     aria-labelledby="navbarLightDropdownMenuLink">
                                     <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
                                             style="cursor: pointer;">Login</a></li>
@@ -1136,6 +1136,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="js/signup.js"></script>
     <script src="js/login.js"></script>
+
+    <script>
+        // Check if the user is logged in by verifying the presence of an auth token in localStorage
+        if (localStorage.getItem("authToken")) {
+            console.log("User logged in");
+    
+            // Select all elements with the class 'authcomp'
+            const authElements = document.getElementsByClassName("authcomp");
+    
+            // Loop through the elements and change their opacity
+            Array.from(authElements).forEach(element => {
+                element.style.opacity = 0; // Set opacity to 0 (hidden)
+                element.style.pointerEvents = "none"; // Prevent interaction
+            });
+        } else {
+            console.log("User not logged in");
+        }
+    </script>
+    
+
 </body>
 
 </html>
