@@ -15,8 +15,10 @@ const insightSchema = new Schema(
             type:String,
             required: true
         },
-        submittedby:{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-        submittedbyName:{type:String},
+        submittedby:{
+            type:String,
+            required:true
+        },
         Image:{
             type:String
         }
