@@ -33,123 +33,62 @@
     <!--icons cdn link-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-  <style>
-    /* Container for all cards */
-    #parentCont {
-        display: flex;
-        flex-direction: column; /* Stack cards vertically */
-        gap: 20px; /* Space between cards */
-        height: 70vh;
-        overflow-y: scroll;
-    }
+    <!-- this is style section -->
+    <style>
+        #parentCont {
+            display: flex;
+            gap: 42px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
 
-    /* Individual card */
-    .card {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px;
-        width: 100%; /* Full width of the container */
-        border: none;
-        border-radius: 12px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: box-shadow 0.3s ease, transform 0.3s ease;
-        cursor: pointer;
-    }
+        .card {
+            width: 250px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
 
-    .card:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        transform: translateY(-5px);
-    }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
 
-    /* Card image container */
-    .card-image-container {
-        flex-shrink: 0;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        overflow: hidden;
-        background-color: #f0f0f0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .card-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+        }
 
-    /* Card image */
-    .card-image {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-    }
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 15px 0;
+            color: #333;
+        }
 
-    /* Card content */
-    .card-body {
-        flex-grow: 1;
-        margin-left: 20px;
-    }
+        .card-content {
+            font-size: 14px;
+            color: #666;
+            margin: 0 10px 10px;
+            height: 80px;
+            overflow-y: auto;
+        }
 
-    .card-title {
-        font-size: 18px;
-        font-weight: bold;
-        margin: 0 0 10px;
-        color: #333;
-    }
-
-    .card-content {
-        font-size: 14px;
-        color: #555;
-        line-height: 1.5;
-        margin: 0 0 15px;
-    }
-
-    .card-topic {
-        display: inline-block;
-        font-size: 12px;
-        color: #fff;
-        background-color: #007BFF;
-        padding: 5px 10px;
-        border-radius: 20px;
-    }
-
-    /* Button style */
-    .card-button {
-        margin-top: 15px;
-        display: inline-block;
-        padding: 8px 16px;
-        font-size: 14px;
-        color: #fff;
-        background-color: #00c4cc;
-        border: none;
-        border-radius: 8px;
-        text-align: center;
-        text-decoration: none;
-        transition: background-color 0.3s ease;
-    }
-
-    .card-button:hover {
-        background-color: #00a2aa;
-    }
-
-    /* Badge style */
-    .card-badge {
-        flex-shrink: 0;
-        background-color: #007BFF;
-        color: #fff;
-        font-size: 12px;
-        font-weight: bold;
-        border-radius: 50%;
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
-
-
-    
+        .card p {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+    </style>
 
     <!-- this is script part -->
     <script>
@@ -580,69 +519,54 @@
     <!-- script for fetching the insights from db -->
 
     <script type="module">
-        import { link } from "./Baselink.js";
-    
-        window.onload = async () => {
+        import { link } from "./Baselink.js"
+        console.log(link)
+
+        let datas = []
+        window.onload = async (event) => {
             axios.get(`${link}/api/v1/insight/getallinsight`)
                 .then((resp) => {
-                    const parent = document.getElementById("parentCont");
-                    resp.data.data.forEach((item) => {
+                    let parent = document.getElementById("parentCont");
+                    resp.data.data.map((data) => { datas.push(data) });
+                    console.log(datas)
+                    resp.data.data.forEach(item => {
                         const cardDiv = document.createElement("div");
                         cardDiv.classList.add("card");
-    
+
                         // Make card clickable
                         cardDiv.onclick = () => {
                             window.location.href = `topics-detail.html?id=${item._id}`;
                         };
-    
-                        // Image container
-                        const imageContainer = document.createElement("div");
-                        imageContainer.classList.add("card-image-container");
-                        const cardImage = document.createElement("img");
-                        cardImage.classList.add("card-image");
-                        cardImage.src = item.Image || "default-image.png"; // Default image if none provided
-                        cardImage.alt = item.title;
-                        imageContainer.appendChild(cardImage);
-    
-                        // Card body
-                        const cardBody = document.createElement("div");
-                        cardBody.classList.add("card-body");
-    
+
+                        if (item.Image) {
+                            const cardImage = document.createElement("img");
+                            cardImage.classList.add("card-image");
+                            cardImage.src = item.Image;
+                            cardImage.alt = item.title;
+                            cardDiv.appendChild(cardImage);
+                        }
+
                         const cardTitle = document.createElement("h2");
                         cardTitle.classList.add("card-title");
                         cardTitle.textContent = item.title;
-                        cardBody.appendChild(cardTitle);
-    
+                        cardDiv.appendChild(cardTitle);
+
                         const cardContent = document.createElement("p");
+                        cardContent.textContent = item.content;
                         cardContent.classList.add("card-content");
-                        cardContent.textContent = item.content.length > 100
-                            ? `${item.content.substring(0, 100)}...`
-                            : item.content;
-                        cardBody.appendChild(cardContent);
-    
-                        const cardButton = document.createElement("a");
-                        cardButton.href = `topics-detail.html?id=${item._id}`;
-                        cardButton.classList.add("card-button");
-                        cardButton.textContent = "Learn More";
-                        cardBody.appendChild(cardButton);
-    
-                        // Badge
-                        const badge = document.createElement("div");
-                        badge.classList.add("card-badge");
-                        badge.textContent = "14"; // Replace with dynamic value if needed
-    
-                        // Append elements
-                        cardDiv.appendChild(imageContainer);
-                        cardDiv.appendChild(cardBody);
-                        cardDiv.appendChild(badge);
+                        cardDiv.appendChild(cardContent);
+
+                        const cardTopic = document.createElement("p");
+                        cardTopic.textContent = `Topic: ${item.topic}`;
+                        cardDiv.appendChild(cardTopic);
+
                         parent.appendChild(cardDiv);
                     });
+
                 })
-                .catch((err) => console.log(err));
+                .catch((err) => { console.log(err) });
         };
     </script>
-    
-    
 
 <script>
     // Check if the user is logged in by verifying the presence of an auth token in localStorage

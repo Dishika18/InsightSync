@@ -56,6 +56,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  inSightsCount:{
+    type:Number,
+    default:0
+  }
 });
 
 // Hash password before saving

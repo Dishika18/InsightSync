@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .profile-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        .profile-item {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .profile-item span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1 class="profile-title">Profile Information</h1>
+        <div id="profile-info">
+            <!-- Profile details will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Fetch the profile data
+        async function fetchProfile() {
+            const profileUrl = "http://localhost:3000/api/v1/profile/getprofile";
+            const authToken = localStorage.getItem("authToken");
+
+            if (!authToken) {
+                alert("Authorization token not found. Please log in.");
+                return;
+            }
+
+            try {
+                const response = await fetch(profileUrl, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${authToken}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch profile: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                displayProfile(data.user);
+            } catch (error) {
+                console.error("Error fetching profile:", error.message);
+                alert("Error loading profile. Please try again later.");
+            }
+        }
+
+        // Display the profile data
+        function displayProfile(user) {
+            const profileInfoDiv = document.getElementById("profile-info");
+
+            profileInfoDiv.innerHTML = `
+                <p class="profile-item"><span>Username:</span> ${user.username}</p>
+                <p class="profile-item"><span>Email:</span> ${user.email}</p>
+                <p class="profile-item"><span>Articles Published:</span> ${user.articlesPublished}</p>
+                <p class="profile-item"><span>Insights Count:</span> ${user.inSightsCount}</p>
+                <p class="profile-item"><span>Account Created:</span> ${new Date(user.accountCreated).toLocaleDateString()}</p>
+            `;
+        }
+
+        // Call the fetchProfile function when the page loads
+        window.onload = fetchProfile;
+    </script>
+</body>
+</html>
