@@ -88,6 +88,11 @@
             font-size: 14px;
             margin: 5px 0;
         }
+        /* Remove the default dropdown arrow */
+.navbar-icon.bi-person.smoothscroll.nav-link.dropdown-toggle::after {
+  display: none;
+}
+
     </style>
 
     <!-- this is script part -->
@@ -218,7 +223,7 @@
                     <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
                 </div>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                <button class="navbar-toggler"type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -257,29 +262,33 @@
                                 <li><a class="dropdown-item active" href="topics-listing.html">Topics Listing</a></li>
                                 <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
                                 <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
+                                
                             </ul>
                         </li>
                     </ul>
 
                     <div class="d-none d-lg-block">
                         <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="navbar-icon bi-person smoothscroll" class="nav-link dropdown-toggle"
-                                    data-bs-toggle="dropdown" role="button" aria-expanded="true"
-                                    id="navbarLightDropdownMenuLink"></a>
-                                <ul class="dropdown-menu authcomp dropdown-menu-light"
-                                    aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
-                                            style="cursor: pointer;">Login</a></li>
-
-                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
-                                            style="cursor: pointer;">Sign Up</a></li>
-                                    <!-- <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li> -->
-
-                                </ul>
-                            </li>
+                          <li class="nav-item dropdown">
+                            <a class="navbar-icon bi-person smoothscroll nav-link dropdown-toggle" 
+                               href="profile.html" 
+                               role="button" 
+                               aria-expanded="true" 
+                               id="navbarLightDropdownMenuLink">
+                            </a>
+                            <ul class="dropdown-menu authcomp dropdown-menu-light" 
+                                aria-labelledby="navbarLightDropdownMenuLink">
+                              <li><a class="dropdown-item authcomp" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                     style="cursor: pointer;">Login</a></li>
+                      
+                              <li><a class="dropdown-item authcomp" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                     style="cursor: pointer;">Sign Up</a></li>
+                              <!-- <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li> -->
+                            </ul>
+                          </li>
                         </ul>
-                    </div>
+                      </div>
+                      
                 </div>
             </div>
         </nav>

@@ -17,7 +17,11 @@
     <!--icons cdn link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
-
+    <style>
+        .navbar-icon.bi-person.smoothscroll.nav-link.dropdown-toggle::after {
+  display: none;
+}
+    </style>
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container">
@@ -65,20 +69,25 @@
 
                 <div class="d-none d-lg-block">
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="navbar-icon bi-person smoothscroll" class="nav-link dropdown-toggle"
-                                data-bs-toggle="dropdown" role="button" aria-expanded="true"
-                                id="navbarLightDropdownMenuLink"></a>
-                            <ul class="dropdown-menu authcomp dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
-                                        style="cursor: pointer;">Login</a></li>
-
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
-                                        style="cursor: pointer;">Sign Up</a></li>
-                            </ul>
-                        </li>
+                      <li class="nav-item dropdown">
+                        <a class="navbar-icon bi-person smoothscroll nav-link dropdown-toggle" 
+                           href="profile.html" 
+                           role="button" 
+                           aria-expanded="true" 
+                           id="navbarLightDropdownMenuLink">
+                        </a>
+                        <ul class="dropdown-menu authcomp dropdown-menu-light" 
+                            aria-labelledby="navbarLightDropdownMenuLink">
+                          <li><a class="dropdown-item authcomp" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                 style="cursor: pointer;">Login</a></li>
+                  
+                          <li><a class="dropdown-item authcomp" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                 style="cursor: pointer;">Sign Up</a></li>
+                          <!-- <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li> -->
+                        </ul>
+                      </li>
                     </ul>
-                </div>
+                  </div>
 
             </div>
         </div>
