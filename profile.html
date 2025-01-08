@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,7 +43,7 @@
     </div>
 
     <script>
-        // Fetch the profile data
+        // Fetch the profile data using Axios
         async function fetchProfile() {
             const profileUrl = "http://localhost:3000/api/v1/profile/getprofile";
             const authToken = localStorage.getItem("authToken");
@@ -53,20 +54,14 @@
             }
 
             try {
-                const response = await fetch(profileUrl, {
-                    method: "POST",
+                const response = await axios.post(profileUrl, {}, {
                     headers: {
                         "Authorization": `Bearer ${authToken}`,
                         "Content-Type": "application/json"
                     }
                 });
-
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch profile: ${response.status} ${response.statusText}`);
-                }
-
-                const data = await response.json();
-                displayProfile(data.user);
+                console.log(response.data.user)
+                displayProfile(response.data.user);
             } catch (error) {
                 console.error("Error fetching profile:", error.message);
                 alert("Error loading profile. Please try again later.");
@@ -80,9 +75,7 @@
             profileInfoDiv.innerHTML = `
                 <p class="profile-item"><span>Username:</span> ${user.username}</p>
                 <p class="profile-item"><span>Email:</span> ${user.email}</p>
-                <p class="profile-item"><span>Articles Published:</span> ${user.articlesPublished}</p>
                 <p class="profile-item"><span>Insights Count:</span> ${user.inSightsCount}</p>
-                <p class="profile-item"><span>Account Created:</span> ${new Date(user.accountCreated).toLocaleDateString()}</p>
             `;
         }
 
