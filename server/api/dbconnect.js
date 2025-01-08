@@ -1,24 +1,24 @@
-import dotenv from "dotenv"
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
+import dotenv from 'dotenv'
 
-dotenv.config({
-    path:"server/api/.env"
-})
+dotenv.config()
+// Database connection
+export const dbConnect = async () => {
+  const url = process.env.MONGO_URI;
 
+  if (!url) {
+    console.error('No URL received from env. Check .env file path.');
+    process.exit(1);
+  }
 
-const url = process.env.MONGO_URI
-console.log(url)
-if(!url){
-    console.error("now url received from env, chek path of env file")
-    process.exit()
-}
-
-export const dbConnect =async() =>{
-    mongoose.connect(url)
-    .then(()=>{
-        console.log("database connected")
-    })
-    .catch((err)=>{
-        console.error(err)
-    })
-}
+  try {
+    await mongoose.connect(url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB connected');
+  } catch (err) {
+    console.error('Database connection error:', err);
+    process.exit(1); // Exit process with failure
+  }
+};

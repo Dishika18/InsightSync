@@ -29,6 +29,10 @@
     <link href="css/bootstrap-icons.css" rel="stylesheet">
 
     <link href="css/style.css" rel="stylesheet">
+
+     <!--icons cdn link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
     <script>
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('loginPassword');
@@ -193,10 +197,8 @@
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                                 <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
-
-                                <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
                                 <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
-
+                                <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -208,7 +210,7 @@
                                     <a class="navbar-icon bi-person smoothscroll" class="nav-link dropdown-toggle"
                                         data-bs-toggle="dropdown" role="button" aria-expanded="true"
                                         id="navbarLightDropdownMenuLink"></a>
-                                    <ul class="dropdown-menu dropdown-menu-light"
+                                    <ul class="dropdown-menu authcomp dropdown-menu-light"
                                         aria-labelledby="navbarLightDropdownMenuLink">
                                         <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
                                                 style="cursor: pointer;">Login</a></li>
@@ -233,21 +235,21 @@
                             src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000" />
                     </div>
                     <div class="modal-body">
-                        <form id="signupForm" action="your-server-endpoint" method="post"
-                            onsubmit="return validateSignupForm()">
+                        <form id="signupForm" method="post" onsubmit="return validateSignupForm()">
                             <div class="mb-3">
                                 <label for="signupUsername" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="signupUsername"
-                                    placeholder="Enter username">
+                                <input type="text" class="form-control" id="signupUsername" name="username"
+                                    placeholder="Enter username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="signupEmail" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="signupEmail" placeholder="Enter email">
+                                <input type="email" class="form-control" id="signupEmail" name="email"
+                                    placeholder="Enter email" required>
                             </div>
                             <div class="mb-3 position-relative">
                                 <label for="signupPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="signupPassword"
-                                    placeholder="Enter password">
+                                <input type="password" class="form-control" id="signupPassword" name="password"
+                                    placeholder="Enter password" required>
                                 <span class="eye-icon" onclick="toggleSignupPasswordVisibility()">
                                     <i class="bi bi-eye" id="toggleSignupPasswordIcon"></i>
                                 </span>
@@ -255,7 +257,7 @@
                             <div class="mb-3 position-relative">
                                 <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
                                 <input type="password" class="form-control" id="signupConfirmPassword"
-                                    placeholder="Confirm password">
+                                    name="confirmPassword" placeholder="Confirm password" required>
                                 <span class="eye-icon" onclick="toggleSignupConfirmPasswordVisibility()">
                                     <i class="bi bi-eye" id="toggleSignupConfirmPasswordIcon"></i>
                                 </span>
@@ -274,25 +276,26 @@
             </div>
         </div>
 
+
+        <!-- Login Page -->
         <nav>
             <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-md">
                     <div class="modal-content glass-effect">
-
                         <div class="modal-header justify-content-center">
                             <img
                                 src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Login☺️;&color=000000" />
                         </div>
                         <div class="modal-body">
-                            <form action="your-server-endpoint" method="post" onsubmit="return validateForm()">
+                            <form id="loginForm" method="post">
                                 <div class="mb-3">
                                     <label for="loginEmail" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="loginEmail"
+                                    <input type="email" class="form-control" id="loginEmail" name="email"
                                         aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3 position-relative">
                                     <label for="loginPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="loginPassword">
+                                    <input type="password" class="form-control" id="loginPassword" name="password">
                                     <span class="eye-icon" onclick="togglePasswordVisibility()">
                                         <i class="bi bi-eye" id="togglePasswordIcon"></i>
                                     </span>
@@ -308,65 +311,66 @@
                                             data-bs-target="#signupModal" data-bs-dismiss="modal"
                                             aria-label="Close">Sign Up</a></p>
                                 </div>
+                            </form>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
-            </div>
+
+        </nav>
 
 
 
-            <header class="site-header d-flex flex-column justify-content-center align-items-center">
-                <div class="container">
-                    <div class="row justify-content-center align-items-center">
+        <header class="site-header d-flex flex-column justify-content-center align-items-center">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
 
-                        <div class="col-lg-5 col-12 mb-5">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="index.html">Homepage</a></li>
+                    <div class="col-lg-5 col-12 mb-5">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Homepage</a></li>
 
-                                    <li class="breadcrumb-item active" aria-current="page">Web Design</li>
-                                </ol>
-                            </nav>
+                                <li class="breadcrumb-item active" aria-current="page">Web Design</li>
+                            </ol>
+                        </nav>
 
-                            <h2 class="topic-header text-white"></h2>
+                        <h2 class="topic-header text-white"></h2>
 
-                            <div class="d-flex align-items-center mt-5">
-                                <a href="#topics-detail" class="btn custom-btn custom-border-btn smoothscroll me-4">Read
-                                    More</a>
+                        <div class="d-flex align-items-center mt-5">
+                            <a href="#topics-detail" class="btn custom-btn custom-border-btn smoothscroll me-4">Read
+                                More</a>
 
-                                <a href="#top" class="custom-icon bi-bookmark smoothscroll"></a>
-                            </div>
+                            <a href="#top" class="custom-icon bi-bookmark smoothscroll"></a>
                         </div>
-
-                        <div class="col-lg-5 col-12">
-                            <div class="topics-detail-block bg-white shadow-lg">
-                                <img src="images/topics/undraw_Remote_design_team_re_urdx.png" id="topic-image-id"
-                                    class="topics-detail-block-image img-fluid">
-                            </div>
-                        </div>
-
                     </div>
+
+                    <div class="col-lg-5 col-12">
+                        <div class="topics-detail-block bg-white shadow-lg">
+                            <img src="images/topics/undraw_Remote_design_team_re_urdx.png" id="topic-image-id"
+                                class="topics-detail-block-image img-fluid">
+                        </div>
+                    </div>
+
                 </div>
-            </header>
+            </div>
+        </header>
 
 
-            <section class="topics-detail-section section-padding" id="topics-detail">
-                <div class="container">
-                    <div class="row">
+        <section class="topics-detail-section section-padding" id="topics-detail">
+            <div class="container">
+                <div class="row">
 
-                        <div class="col-lg-8 col-12 m-auto">
-                            <h3 class="topic-header mb-4">Introduction to Web Design</h3>
-                            <p id="topic-content">
+                    <div class="col-lg-8 col-12 m-auto">
+                        <h3 class="topic-header mb-4">Introduction to Web Design</h3>
+                        <p id="topic-content">
 
-                            </p>
+                        </p>
 
-                            <!-- <blockquote>
+                        <!-- <blockquote>
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                         </blockquote> -->
 
-                            <!-- <div class="row my-4">
+                        <!-- <div class="row my-4">
                             <div class="col-lg-6 col-md-6 col-12">
                                 <img src="images/businesswoman-using-tablet-analysis.jpg"
                                     class="topics-detail-block-image img-fluid">
@@ -377,43 +381,41 @@
                                     class="topics-detail-block-image img-fluid">
                             </div>
                         </div> -->
-                            <!-- 
+                        <!-- 
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum totam dolorem adipisci
                             magni, explicabo, deleniti nobis, repellendus voluptatem saepe vel sunt eum. Minus, id odio!
                         </p> -->
-                        </div>
-
                     </div>
+
                 </div>
-            </section>
+            </div>
+        </section>
 
 
-            <section class="section-padding section-bg">
-                <div class="container">
-                    <div class="row justify-content-center">
+        <section class="section-padding section-bg">
+            <div class="container">
+                <div class="row justify-content-center">
 
-                        <div class="col-lg-5 col-12">
-                            <img src="images/rear-view-young-college-student.jpg" class="newsletter-image img-fluid"
-                                alt="">
-                        </div>
-
-                        <div
-                            class="col-lg-5 col-12 subscribe-form-wrap d-flex justify-content-center align-items-center">
-                            <form class="custom-form subscribe-form" action="#" method="post" role="form">
-                                <h4 class="mb-4 pb-2">Get Newsletter</h4>
-
-                                <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
-                                    class="form-control" placeholder="Email Address" required="">
-
-                                <div class="col-lg-12 col-12">
-                                    <button type="submit" class="form-control">Subscribe</button>
-                                </div>
-                            </form>
-                        </div>
-
+                    <div class="col-lg-5 col-12">
+                        <img src="images/rear-view-young-college-student.jpg" class="newsletter-image img-fluid" alt="">
                     </div>
+
+                    <div class="col-lg-5 col-12 subscribe-form-wrap d-flex justify-content-center align-items-center">
+                        <form class="custom-form subscribe-form" action="#" method="post" role="form">
+                            <h4 class="mb-4 pb-2">Get Newsletter</h4>
+
+                            <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
+                                class="form-control" placeholder="Email Address" required="">
+
+                            <div class="col-lg-12 col-12">
+                                <button type="submit" class="form-control">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
-            </section>
+            </div>
+        </section>
     </main>
 
     <footer class="site-footer section-padding">
@@ -432,19 +434,19 @@
 
                     <ul class="site-footer-links">
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Home</a>
+                            <a href="index.html#section_1" class="site-footer-link">Home</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">How it works</a>
+                            <a href="index.html#section_3" class="site-footer-link">How it works</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">FAQs</a>
+                            <a href="index.html#section_4" class="site-footer-link">FAQs</a>
                         </li>
 
                         <li class="site-footer-link-item">
-                            <a href="#" class="site-footer-link">Contact</a>
+                            <a href="index.html#section_6" class="site-footer-link">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -463,6 +465,15 @@
                             info@company.com
                         </a>
                     </p>
+                    <p class="socialmedia_links">
+            
+                        <a href="https://www.instagram.com/" id="social-links"><i class="fa-brands fa-instagram" ></i></a>
+                        <a href="https://x.com/i/flow/login?lang=en" id="social-links"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://api.linkedin.com/login" id="social-links"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/login" id="social-links"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://canary.discord.com/login" id="social-links"><i  class="fa-brands fa-discord"></i></a>
+                        
+                    </p>
                 </div>
 
                 <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
@@ -480,11 +491,15 @@
                         </ul>
                     </div>
 
-                    <p class="copyright-text mt-lg-5 mt-4">Copyright © 2024 InsightSync. All rights reserved.</p>
+
 
                 </div>
 
             </div>
+        </div>
+        <div class="copyright-box">
+            <p class="copyright-text mt-lg-5 mt-4">Copyright © 2024 InsightSync. All rights reserved.
+            </p>
         </div>
     </footer>
     <!-- Scroll to Top Button -->
@@ -537,7 +552,27 @@
         };
 
     </script>
+    <script src="js/signup.js"></script>
+    <script src="js/login.js"></script>
 
+    <script>
+        // Check if the user is logged in by verifying the presence of an auth token in localStorage
+        if (localStorage.getItem("authToken")) {
+            console.log("User logged in");
+    
+            // Select all elements with the class 'authcomp'
+            const authElements = document.getElementsByClassName("authcomp");
+    
+            // Loop through the elements and change their opacity
+            Array.from(authElements).forEach(element => {
+                element.style.opacity = 0; // Set opacity to 0 (hidden)
+                element.style.pointerEvents = "none"; // Prevent interaction
+            });
+        } else {
+            console.log("User not logged in");
+        }
+    </script>
+    
 </body>
 
 </html>

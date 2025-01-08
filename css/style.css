@@ -1,6 +1,6 @@
 /*---------------------------------------
   CUSTOM PROPERTIES ( VARIABLES )             
------------------------------------------*/
+-----------------------------------------*/ 
 :root {
   --white-color:                  #ffffff;
   --primary-color:                #13547a;
@@ -1040,8 +1040,18 @@ blockquote {
 
 .copyright-text {
   font-size: var(--copyright-font-size);
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  color: white;
+  padding: 2rem;
 }
 
+.copyright-box{
+  background-color: var(--secondary-color);
+  margin-bottom: -10rem;
+  z-index: 2;
+}
 
 /*---------------------------------------
   SOCIAL ICON               
@@ -1246,7 +1256,7 @@ blockquote {
     left: 10px;
     opacity: 1;
     pointer-events: auto;
-    max-width: 155px;
+    max-width: 190px;
     margin-top: 10px;
     margin-bottom: 15px;
   }
@@ -1439,4 +1449,12 @@ blockquote {
 
 #scrollToTopBtn:hover {
     background-color: #333;
+}
+
+/* icons hover effect */
+#social-links {
+   color: #63E6BE;
+}
+#social-links :hover{
+  color:#000000;
 }
