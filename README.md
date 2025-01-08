@@ -56,28 +56,7 @@ To get started with InsightSync:
 7. **Create a Pull Request:**
    Once your changes are pushed, submit a pull request for review.
 
-   Backend Setup
-
-1. **Navigate to server:**
-  ```
-   cd server 
-   ```
-2. **Install Dependencies:**
-   Install all required dependencies for the backend:
-   ```
-   npm install 
-   ```  
-3. **make .env file in backend and in that include following things:**
-   ```
-   MONGO_URI="mongo_db_url"
-   JWT_SECRET="JWT_secret_key" 
-   ```
-4. **Start the server:**
-   Run the backend server:
-   ```
-   node index.js 
-   ```
-
+   
 ### Thank You!
 
 Thank you for your interest in contributing to InsightSync! Your efforts to explore ideas and share insights make a significant impact on our community. Together, we can foster curiosity, expand horizons, and create a platform that empowers learners everywhere. We look forward to your contributions and insights!
