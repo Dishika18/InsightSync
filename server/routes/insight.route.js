@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addInsight, getallInsight, getinsightbyid, getinsightbytopic  } from "../controller/insight.controller.js";
+import { addInsight, getallInsight, getinsightbyid, getinsightbytopic, getinsightbyUser  } from "../controller/insight.controller.js";
 import multer from 'multer'
 import { upload_on_cloudinary } from "../utils/cloudinary.utils.js";
 import { authUser } from "../middleware/auth.middleware.js";
@@ -33,5 +33,6 @@ router.route('/addinsight').post( upload.single('imagefile'), authUser, addInsig
 router.route('/getallinsight').get(getallInsight)
 router.route("/getinsightbytopic").post(getinsightbytopic)
 router.route("/getinsightbyid").post(getinsightbyid)
+router.route("/getinsightbyuser").post(getinsightbyUser)
 
 export default router

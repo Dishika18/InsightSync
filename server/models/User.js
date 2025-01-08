@@ -56,14 +56,26 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  inSightsCount:{
-    type:Number,
-    default:0
-  }
+  inSightsCount: {
+    type: Number,
+    default: 0,
+  },
+  createdOn: {
+    type: Date,
+    default: Date.now, // Automatically set to the current date and time
+  },
+  dob: {
+    type: Date, // Date of Birth field
+    required: false, // Optional field
+  },
+  location: {
+    type: String, // Can store city, state, or country
+    required: false, // Optional field
+  },
 });
 
 // Hash password before saving
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();
   }

@@ -3,33 +3,40 @@ import User from '../models/User.js';
 
 // User Registration
 export const registerUser = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, dob, location } = req.body;
 
+  // Check for required fields
   if (!username || !email || !password) {
-    return res.status(400).send({error:"no data received from req.body"})
+    return res.status(400).send({ error: "Username, email, and password are required." });
   }
 
   try {
+    // Check if the user already exists
     const userExists = await User.findOne({ email });
 
     if (userExists) {
       return res.status(400).send({ message: 'User already exists' });
     }
 
+    // Create a new user
     const user = new User({
       username,
       email,
       password,
+      dob,      // Optional field
+      location, // Optional field
     });
 
     await user.save();
     console.log('User saved successfully');
 
+    // Generate JWT token
     const token = jwt.sign({ id: user._id }, "THIS_IS_A_JWT_SECRET", {
       expiresIn: '1h',
     });
 
-    res.send({
+    // Respond with success message and token
+    res.status(201).send({
       message: 'User created successfully',
       token,
     });
