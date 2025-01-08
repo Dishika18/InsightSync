@@ -158,6 +158,45 @@ strong {
   border-radius: var(--border-radius-medium);
 }
 
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;         /* Position it right below the toggle button */
+  right: 0;           /* Align it to the left of the button */
+  display: none;     /* Initially hidden */
+  background-color: #f1f1f1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 200px;      /* Set a fixed or relative max-width */
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;    /* Show the dropdown on hover */
+}
+
+.dropdown-item {
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-item:hover {
+  background-color: #ddd;
+}
+
+.navbar {
+  /* overflow: hidden; */
+  width: 100%; /* Ensures the navbar takes up full width */
+}
+.navbar-nav {
+  display: flex;
+  flex-wrap: nowrap; /* Prevents wrapping of navbar items */
+}
+.navbar-item {
+  flex: 1 1 auto; /* Adjusts item size based on space available */
+}
+
 .nav-tabs {
   border-bottom: 1px solid #ecf3f2;
   margin-bottom: 40px;
@@ -344,7 +383,7 @@ strong {
 
 .navbar-expand-lg .navbar-nav .nav-link {
   border-radius: var(--border-radius-large);
-  margin: 10px;
+  /* margin: 10px; */
   padding: 10px;
 }
 
