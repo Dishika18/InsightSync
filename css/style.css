@@ -158,6 +158,40 @@ strong {
   border-radius: var(--border-radius-medium);
 }
 
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;         
+  right: 0;           
+  display: none;     
+  background-color: #f1f1f1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 200px;     
+}
+.dropdown:hover .dropdown-menu {
+  display: block;   
+}
+.dropdown-item {
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-item:hover {
+  background-color: #ddd;
+}
+.navbar {
+  width: 100%; 
+}
+.navbar-nav {
+  display: flex;
+  flex-wrap: nowrap; 
+}
+.navbar-item {
+  flex: 1 1 auto; 
+}
+
 .nav-tabs {
   border-bottom: 1px solid #ecf3f2;
   margin-bottom: 40px;
@@ -344,7 +378,7 @@ strong {
 
 .navbar-expand-lg .navbar-nav .nav-link {
   border-radius: var(--border-radius-large);
-  margin: 10px;
+  /* margin: 10px; */
   padding: 10px;
 }
 
