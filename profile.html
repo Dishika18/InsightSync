@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        .profile-container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        .profile-item {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .profile-item span {
+            font-weight: bold;
+        }
+        .insights-container {
+            margin-top: 20px;
+        }
+        .insight-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+        }
+        .insight-card h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .insight-card p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .insight-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1 class="profile-title">Profile Information</h1>
+        <div id="profile-info">
+            <!-- Profile details will be inserted here -->
+        </div>
+        <div class="insights-container" id="insights-container">
+            <!-- User's insights will be displayed here -->
+        </div>
+    </div>
+</body>
+<script type="module">
+    import { link } from "./Baselink.js";
+    console.log("baselink", link);
+
+    // Fetch the profile data using Axios
+    async function fetchProfile() {
+        const profileUrl = `${link}/api/v1/profile/getprofile`;
+        const insightsUrl = `${link}/api/v1/insight/getinsightbyuser`;
+        const authToken = localStorage.getItem("authToken");
+
+        if (!authToken) {
+            alert("Authorization token not found. Please log in.");
+            return;
+        }
+
+        try {
+            // Fetch profile data
+            const profileResponse = await axios.post(profileUrl, {}, {
+                headers: {
+                    "Authorization": `Bearer ${authToken}`,
+                    "Content-Type": "application/json"
+                }
+            });
+            const user = profileResponse.data.user;
+            console.log(user);
+            displayProfile(user);
+
+            // Fetch insights data
+            const insightsResponse = await axios.post(insightsUrl, {}, {
+                headers: {
+                    "Authorization": `Bearer ${authToken}`,
+                    "Content-Type": "application/json"
+                }
+            });
+            const insights = insightsResponse.data.insights;
+            console.log(insights);
+            displayInsights(insights);
+        } catch (error) {
+            console.error("Error fetching data:", error.message);
+            alert("Error loading data. Please try again later.");
+        }
+    }
+
+    // Display the profile data
+    function displayProfile(user) {
+        const profileInfoDiv = document.getElementById("profile-info");
+
+        // Format the date fields
+        const formattedDOB = user.dob ? new Date(user.dob).toLocaleDateString() : "N/A";
+        const formattedCreatedOn = user.createdOn ? new Date(user.createdOn).toLocaleDateString() : "N/A";
+
+        profileInfoDiv.innerHTML = `
+            <p class="profile-item"><span>Username:</span> ${user.username}</p>
+            <p class="profile-item"><span>Email:</span> ${user.email}</p>
+            <p class="profile-item"><span>Insights Count:</span> ${user.inSightsCount}</p>
+            <p class="profile-item"><span>Date of Birth:</span> ${formattedDOB}</p>
+            <p class="profile-item"><span>Location:</span> ${user.location || "N/A"}</p>
+            <p class="profile-item"><span>Account Created On:</span> ${formattedCreatedOn}</p>
+        `;
+    }
+
+    // Display the insights data
+    function displayInsights(insights) {
+        const insightsContainer = document.getElementById("insights-container");
+
+        if (!insights || insights.length === 0) {
+            insightsContainer.innerHTML = `<p>No insights found for this user.</p>`;
+            return;
+        }
+
+        insightsContainer.innerHTML = `<h2>User Insights</h2>`;
+
+        insights.forEach(insight => {
+            const insightCard = document.createElement("div");
+            insightCard.className = "insight-card";
+
+            insightCard.innerHTML = `
+                <h3>${insight.title}</h3>
+                <p><strong>Topic:</strong> ${insight.topic}</p>
+                <p>${insight.content}</p>
+                ${insight.Image ? `<img src="${insight.Image}" alt="${insight.title}">` : ""}
+            `;
+
+            insightsContainer.appendChild(insightCard);
+        });
+    }
+
+    // Call the fetchProfile function when the page loads
+    window.onload = fetchProfile;
+</script>
+<script>
+    if (!localStorage.getItem("authToken")) {
+        window.location.href = "/index.html";
+    }
+</script>
+</html>

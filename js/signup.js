@@ -21,6 +21,8 @@ function handleSignupSubmit(event) {
   const formData = { username, email, password };
 
   fetch('https://insight-sync-u1bq.vercel.app/api/auth/signup', {
+  // fetch('http://localhost:3000/api/v1/auth/signup', {
+
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(formData),
