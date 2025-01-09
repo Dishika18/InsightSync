@@ -404,7 +404,8 @@ strong {
   background: var(--white-color);
   box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
   border: 0;
-  display: inherit;
+  /* display: inherit; */
+  display: none;
   opacity: 0;
   min-width: 9rem;
   margin-top: 20px;
@@ -412,7 +413,11 @@ strong {
   transition: all 0.3s;
   pointer-events: none;
 }
-
+.navbar .dropdown-menu.show {
+  display: block; 
+  opacity: 1;     
+  pointer-events: auto;
+}
 .navbar .dropdown-menu::before {
   content: "";
   width: 0;
