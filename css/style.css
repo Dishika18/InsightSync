@@ -612,7 +612,7 @@ strong {
 
 .custom-block-overlay {
   height: 100%;
-  min-height: 350px;
+  min-height: 440px;
   padding: 0;
 }
 
@@ -642,7 +642,7 @@ strong {
   right: 0;
   left: 0;
   z-index: 2;
-  padding: 0px 35px;
+  padding: 0px 20px;
 }
 
 .social-share .bi-bookmark {
