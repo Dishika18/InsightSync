@@ -56,6 +56,12 @@ To get started with InsightSync:
 7. **Create a Pull Request:**
    Once your changes are pushed, submit a pull request for review.
 
+## Project Contributers: 
+<a href="https://github.com/Dishika18/InsightSync/graphs/contributors">
+<img src="https://contributors-img.web.app/image?repo=Dishika18/InsightSync"/>
+
+---
+
 ### Thank You!
 
 Thank you for your interest in contributing to InsightSync! Your efforts to explore ideas and share insights make a significant impact on our community. Together, we can foster curiosity, expand horizons, and create a platform that empowers learners everywhere. We look forward to your contributions and insights!
