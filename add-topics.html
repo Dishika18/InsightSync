@@ -66,7 +66,7 @@
 
                         <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                             <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
-                            <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
+                            <li><a class="dropdown-item" id="add-topics-menu" href="add-topics.html">Add Topic Details</a></li>
                             <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
 
 
@@ -98,8 +98,28 @@
         </div>
     </nav>
 
+
+    <!-- Prompt Modal -->
+    <div class="modal fade" id="promptModal" data-bs-backdrop="static" data-bs-keyboard="false"  tabindex="-1" aria-labelledby="promptModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+        
+            <div class="modal-body d-flex text-light">
+                <h1 class="modal-title fs-4" id="promptModalLabel">Please Login first to continue</h1>
+
+            </div>
+            <div class="d-flex p-3 justify-content-end gap-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                                    style="cursor: pointer;">Login</button>
+              
+                
+            </div>
+            </div>
+        </div>
+        </div>
+
     <!-- Signup Modal -->
-    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal fade" id="signupModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content glass-effect">
                 <div class="modal-header justify-content-center">
@@ -148,7 +168,7 @@
 
     <!-- Login Page -->
     <nav>
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal fade" id="loginModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-md">
                 <div class="modal-content glass-effect">
 
@@ -403,6 +423,19 @@
     // Check if the user is logged in by verifying the presence of an auth token in localStorage
     if (localStorage.getItem("authToken")) {
         console.log("User logged in");
+        const AddTopicsMenu = document.getElementById("add-topics-menu");
+        if(!AddTopicsMenu.getAttribute("href"))
+        {
+            AddTopicsMenu.setAttribute("href","add-topics.html");
+        }
+        if(AddTopicsMenu.getAttribute("data-bs-toggle"))
+        {
+            AddTopicsMenu.removeAttribute("data-bs-toggle");
+        }
+        if(AddTopicsMenu.getAttribute("data-bs-target"))
+        {
+            AddTopicsMenu.removeAttribute("data-bs-target");
+        }
 
         // Select all elements with the class 'authcomp'
         const authElements = document.getElementsByClassName("authcomp");
@@ -414,7 +447,15 @@
         });
     } else {
         console.log("User not logged in");
-        window.location.href="/"
+            const AddTopicsMenu = document.getElementById("add-topics-menu");
+           
+            AddTopicsMenu.removeAttribute("href");
+            AddTopicsMenu.style.cursor="pointer";
+            AddTopicsMenu.setAttribute("data-bs-toggle","modal");
+            AddTopicsMenu.setAttribute("data-bs-target","#promptModal");
+            AddTopicsMenu.click();
+
+
     }
 </script>
 
