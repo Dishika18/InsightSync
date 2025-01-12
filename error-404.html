@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 - Page Not Found</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background: #a7f1e8;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100vh;
+      }
+      .container {
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+      p {
+        line-height: 1rem;
+      }
+
+      .heading {
+        font-size: 2.2rem;
+        font-weight: 600;
+        margin: 2px 0;
+      }
+      .subheading {
+        font-size: 1.2rem;
+      }
+      a {
+        text-decoration: none;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #007bff;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+      }
+      a:hover {
+        background-color: #0056b3;
+      }
+
+      @media screen and (max-width: 750px) {
+        .illustration {
+          width: 19rem;
+        }
+      }
+      @media screen and (min-width: 751px) {
+        .illustration {
+          width: 30rem;
+        }
+      }
+      .illustration img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="illustration">
+        <img src="./images/robot-state-3.png" alt="error-404-img" />
+      </div>
+      <p class="heading">Oops!</p>
+      <p class="subheading">We couldn't find the page you're looking for.</p>
+
+      <a href="/">Go Home</a>
+    </div>
+  </body>
+</html>
