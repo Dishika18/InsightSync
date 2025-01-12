@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     if (req.method !== 'GET') {
         return res.status(405).json({ error: 'Method Not Allowed' });
     }
-    res.status(404).sendFile(__dirname + "/error-404.html");
+    res.status(404).sendFile(__dirname + "/404.html");
 });
 
 
