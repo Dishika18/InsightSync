@@ -127,7 +127,7 @@
                         src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000" />
                 </div>
                 <div class="modal-body">
-                    <form id="signupForm" action="your-server-endpoint" method="post"
+                    <form id="signupForm" method="post"
                         onsubmit="return validateSignupForm()">
                         <div class="mb-3">
                             <label for="signupUsername" class="form-label">Username</label>
@@ -177,7 +177,7 @@
                             src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Login☺️;&color=000000" />
                     </div>
                     <div class="modal-body">
-                        <form action="your-server-endpoint" method="post" onsubmit="return validateForm()">
+                        <form id="loginForm" method="post" onsubmit="return validateForm()">
                             <div class="mb-3">
                                 <label for="loginEmail" class="form-label">Email address</label>
                                 <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
@@ -364,6 +364,8 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
     <script src="js/custom.js"></script>
+    <script type="module" src="js/signup.js"></script>
+    <script type="module" src="js/login.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
