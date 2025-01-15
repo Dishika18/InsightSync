@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+     <!-- CSS FILES -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ 
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
+         rel="stylesheet">
+ 
+     <link href="css/bootstrap.min.css" rel="stylesheet">
+ 
+     <link href="css/bootstrap-icons.css" rel="stylesheet">
+ 
+     <link href="css/style.css" rel="stylesheet"> 
+     <!--icons cdn link-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,17 +75,100 @@
     </style>
 </head>
 <body>
-    <div class="profile-container">
+    <main>
+        <nav style="background-color: rgb(101, 169, 171);" class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <i class="bi-back"></i>
+                    <span>InsightSync</span>
+                </a>
+
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_1">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_2">Browse Topics</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_3">How it works</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_4">FAQs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_5">Testimonials</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="index.html#section_6">Contact</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#section_5" id="navbarLightDropdownMenuLink"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+
+                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
+                                <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
+                                <li><a class="dropdown-item active" href="contact.html">Contact Form</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="d-none d-lg-block">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="navbar-icon bi-person smoothscroll" onclick="location.href='/profile.html'" class="nav-link dropdown-toggle"
+                                    data-bs-toggle="dropdown" role="button" aria-expanded="true"
+                                    id="navbarLightDropdownMenuLink"></a>
+                                <ul class="dropdown-menu authcomp dropdown-menu-light"
+                                    aria-labelledby="navbarLightDropdownMenuLink">
+                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                            style="cursor: pointer;">Login</a></li>
+
+                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                            style="cursor: pointer;">Sign Up</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </main>
+    <!-- <div class="profile-container">
         <h1 class="profile-title">Profile Information</h1>
-        <div id="profile-info">
+        <div id="profile-info"> -->
             <!-- Profile details will be inserted here -->
-        </div>
-        <div class="insights-container" id="insights-container">
+        <!-- </div>
+        <div class="insights-container" id="insights-container"> -->
             <!-- User's insights will be displayed here -->
-        </div>
-    </div>
+        <!-- </div>
+    </div> -->
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/click-scroll.js"></script>
+        <script src="js/custom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+        <script type="module" src="js/signup.js"></script>
+        <script type="module" src="js/login.js"></script>
 </body>
-<script type="module">
+<!-- <script type="module">
     import { link } from "./Baselink.js";
     console.log("baselink", link);
 
@@ -155,7 +255,7 @@
 
     // Call the fetchProfile function when the page loads
     window.onload = fetchProfile;
-</script>
+</script> -->
 <script>
     if (!localStorage.getItem("authToken")) {
         window.location.href = "/index.html";
