@@ -1,89 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-     <!-- CSS FILES -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
 
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- 
-     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
-         rel="stylesheet">
- 
-     <link href="css/bootstrap.min.css" rel="stylesheet">
- 
-     <link href="css/bootstrap-icons.css" rel="stylesheet">
- 
-     <link href="css/style.css" rel="stylesheet"> 
-     <!--icons cdn link-->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+    <!-- Fonts and Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to bottom right, rgb(101, 169, 171), rgb(200, 230, 231));
+            margin: 0;
+            padding: 0;
         }
+
         .profile-container {
-            max-width: 800px;
-            margin: auto;
+            max-width: 900px;
+            margin: 50px auto;
             background: white;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .profile-title {
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .profile-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-title {
+            font-size: 28px;
+            color: rgb(101, 169, 171);
             margin-bottom: 20px;
-            font-size: 24px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .profile-item {
+            margin: 15px 0;
+            font-size: 18px;
             color: #333;
         }
-        .profile-item {
-            margin: 10px 0;
-            font-size: 18px;
-        }
+
         .profile-item span {
             font-weight: bold;
+            color: rgb(101, 169, 171);
         }
+
         .insights-container {
-            margin-top: 20px;
+            margin-top: 30px;
+            height: 100vh;
+            overflow-y: auto;
         }
+
         .insight-card {
-            border: 1px solid #ddd;
+            background: linear-gradient(to right, rgb(240, 248, 255), rgb(200, 230, 231));
             border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 15px;
-            background-color: #f9f9f9;
+            padding: 15px;
+            margin: 10px auto;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            overflow: auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
         .insight-card h3 {
-            margin: 0;
-            font-size: 20px;
+            font-size: 22px;
+            color: rgb(101, 169, 171);
+            margin-bottom: 10px;
         }
+
         .insight-card p {
-            margin: 5px 0;
             font-size: 16px;
+            color: #555;
         }
+
         .insight-card img {
             max-width: 100%;
             height: auto;
-            border-radius: 4px;
+            border-radius: 8px;
+            margin-top: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .insight-card img:hover {
+            transform: scale(1.05);
+        }
+
+        nav {
+            background: rgb(101, 169, 171);
+        }
+
+        .navbar-brand span {
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: white;
+            margin-right: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .navbar-toggler-icon {
+            background-color: white;
+        }
+
+        .profile-image {
+            height: 200px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image img {
+            object-fit: contain;
+            height: 200px;
+            width: 190px;
+            border: 2px solid rgb(101, 169, 171);
+            border-radius: 1000px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
+
 <body>
     <main>
-        <nav style="background-color: rgb(101, 169, 171);" class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
                     <i class="bi-back"></i>
                     <span>InsightSync</span>
                 </a>
-
-
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,172 +163,144 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-5 me-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_1">Home</a>
+                            <a class="nav-link click-scroll" href="#section_1">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_2">Browse Topics</a>
+                            <a class="nav-link click-scroll" href="#section_2">Browse Topics</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_3">How it works</a>
+                            <a class="nav-link click-scroll" href="#section_3">How it works</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_4">FAQs</a>
+                            <a class="nav-link click-scroll" href="#section_4">FAQs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="#section_5">Testimonials</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_5">Testimonials</a>
+                            <a class="nav-link click-scroll" href="#section_6">Contact</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_6">Contact</a>
-                        </li>
-
+                        
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#section_5" id="navbarLightDropdownMenuLink"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                                 <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
                                 <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
-                                <li><a class="dropdown-item active" href="contact.html">Contact Form</a></li>
+                                <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
+
+
                             </ul>
                         </li>
                     </ul>
 
-                    <div class="d-none d-lg-block">
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="navbar-icon bi-person smoothscroll" onclick="location.href='/profile.html'" class="nav-link dropdown-toggle"
-                                    data-bs-toggle="dropdown" role="button" aria-expanded="true"
-                                    id="navbarLightDropdownMenuLink"></a>
-                                <ul class="dropdown-menu authcomp dropdown-menu-light"
-                                    aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
-                                            style="cursor: pointer;">Login</a></li>
-
-                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
-                                            style="cursor: pointer;">Sign Up</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="navbar-icon bi-person" onclick="location.href='/profile.html'"
+                                class="nav-link dropdown-toggle" role="button"></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
     </main>
-    <!-- <div class="profile-container">
+
+    <div class="profile-container">
         <h1 class="profile-title">Profile Information</h1>
-        <div id="profile-info"> -->
-            <!-- Profile details will be inserted here -->
-        <!-- </div>
-        <div class="insights-container" id="insights-container"> -->
-            <!-- User's insights will be displayed here -->
-        <!-- </div>
-    </div> -->
-        <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.bundle.min.js"></script>
-        <script src="js/jquery.sticky.js"></script>
-        <script src="js/click-scroll.js"></script>
-        <script src="js/custom.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-        <script type="module" src="js/signup.js"></script>
-        <script type="module" src="js/login.js"></script>
-</body>
-<!-- <script type="module">
-    import { link } from "./Baselink.js";
-    console.log("baselink", link);
+        <div id="profile-info">
+            <p>Loading profile details...</p>
+        </div>
 
-    // Fetch the profile data using Axios
-    async function fetchProfile() {
-        const profileUrl = `${link}/api/v1/profile/getprofile`;
-        const insightsUrl = `${link}/api/v1/insight/getinsightbyuser`;
-        const authToken = localStorage.getItem("authToken");
+        <div class="insights-container" id="insights-container">
+            <h2>User Insights</h2>
+            <p>Loading insights...</p>
+        </div>
+    </div>
 
-        if (!authToken) {
-            alert("Authorization token not found. Please log in.");
-            return;
+    <!-- JavaScript Files -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script type="module">
+        import { link } from "./Baselink.js";
+
+        async function fetchProfile() {
+            const profileUrl = `${link}/api/v1/profile/getprofile`;
+            const insightsUrl = `${link}/api/v1/insight/getinsightbyuser`;
+            const authToken = localStorage.getItem("authToken");
+
+            if (!authToken) {
+                alert("Authorization token not found. Please log in.");
+                window.location.href = "/index.html";
+                return;
+            }
+
+            try {
+                const profileResponse = await axios.post(profileUrl, {}, {
+                    headers: {
+                        "Authorization": `Bearer ${authToken}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+                displayProfile(profileResponse.data.user);
+
+                const insightsResponse = await axios.post(insightsUrl, {}, {
+                    headers: {
+                        "Authorization": `Bearer ${authToken}`,
+                        "Content-Type": "application/json"
+                    }
+                });
+                displayInsights(insightsResponse.data.insights);
+
+            } catch (error) {
+                console.error("Error fetching data:", error.message);
+            }
         }
 
-        try {
-            // Fetch profile data
-            const profileResponse = await axios.post(profileUrl, {}, {
-                headers: {
-                    "Authorization": `Bearer ${authToken}`,
-                    "Content-Type": "application/json"
-                }
-            });
-            const user = profileResponse.data.user;
-            console.log(user);
-            displayProfile(user);
-
-            // Fetch insights data
-            const insightsResponse = await axios.post(insightsUrl, {}, {
-                headers: {
-                    "Authorization": `Bearer ${authToken}`,
-                    "Content-Type": "application/json"
-                }
-            });
-            const insights = insightsResponse.data.insights;
-            console.log(insights);
-            displayInsights(insights);
-        } catch (error) {
-            console.error("Error fetching data:", error.message);
-            alert("Error loading data. Please try again later.");
-        }
-    }
-
-    // Display the profile data
-    function displayProfile(user) {
-        const profileInfoDiv = document.getElementById("profile-info");
-
-        // Format the date fields
-        const formattedDOB = user.dob ? new Date(user.dob).toLocaleDateString() : "N/A";
-        const formattedCreatedOn = user.createdOn ? new Date(user.createdOn).toLocaleDateString() : "N/A";
-
-        profileInfoDiv.innerHTML = `
-            <p class="profile-item"><span>Username:</span> ${user.username}</p>
-            <p class="profile-item"><span>Email:</span> ${user.email}</p>
-            <p class="profile-item"><span>Insights Count:</span> ${user.inSightsCount}</p>
-            <p class="profile-item"><span>Account Created On:</span> ${formattedCreatedOn}</p>
-        `;
-    }
-
-    // Display the insights data
-    function displayInsights(insights) {
-        const insightsContainer = document.getElementById("insights-container");
-
-        if (!insights || insights.length === 0) {
-            insightsContainer.innerHTML = `<p>No insights found for this user.</p>`;
-            return;
-        }
-
-        insightsContainer.innerHTML = `<h2>User Insights</h2>`;
-
-        insights.forEach(insight => {
-            const insightCard = document.createElement("div");
-            insightCard.className = "insight-card";
-
-            insightCard.innerHTML = `
-                <h3>${insight.title}</h3>
-                <p><strong>Topic:</strong> ${insight.topic}</p>
-                <p>${insight.content}</p>
-                ${insight.Image ? `<img src="${insight.Image}" alt="${insight.title}">` : ""}
+        function displayProfile(user) {
+            const profileInfoDiv = document.getElementById("profile-info");
+            const formattedCreatedOn = user.createdOn ? new Date(user.createdOn).toLocaleDateString() : "N/A";
+            profileInfoDiv.innerHTML = `
+                <div class="profile-image" >
+                    <img src="./images/faq_graphic.jpg" alt="profile image">
+                </div>
+                <p class="profile-item"><span>Username:</span> ${user.username}</p>
+                <p class="profile-item"><span>Email:</span> ${user.email}</p>
+                <p class="profile-item"><span>Insights Count:</span> ${user.inSightsCount}</p>
+                <p class="profile-item"><span>Account Created On:</span> ${formattedCreatedOn}</p>
             `;
+        }
 
-            insightsContainer.appendChild(insightCard);
-        });
-    }
+        function displayInsights(insights) {
+            const insightsContainer = document.getElementById("insights-container");
+            insightsContainer.innerHTML = `<h2>User Insights</h2>`;
 
-    // Call the fetchProfile function when the page loads
-    window.onload = fetchProfile;
-</script> -->
-<script>
-    if (!localStorage.getItem("authToken")) {
-        window.location.href = "/index.html";
-    }
-</script>
+            if (!insights || insights.length === 0) {
+                insightsContainer.innerHTML += `<p>No insights found.</p>`;
+                return;
+            }
+
+            insights.forEach(insight => {
+                const insightCard = document.createElement("div");
+                insightCard.className = "insight-card";
+                insightCard.innerHTML = `
+                    <h3>${insight.title}</h3>
+                    <p><strong>Topic:</strong> ${insight.topic}</p>
+                    <p>${insight.content}</p>
+                    ${insight.Image ? `<img src="${insight.Image}" alt="${insight.title}">` : ""}
+                `;
+                insightsContainer.appendChild(insightCard);
+            });
+        }
+
+        window.onload = fetchProfile;
+    </script>
+</body>
+
 </html>

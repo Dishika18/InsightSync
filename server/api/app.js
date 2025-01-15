@@ -16,12 +16,12 @@ app.use(express.urlencoded({ extended: true, limit: '16kb' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // Handle 404 errors for all other routes
-app.use((req, res, next) => {
-    if (req.method !== 'GET') {
-        return res.status(405).json({ error: 'Method Not Allowed' });
-    }
-    res.status(404).sendFile(__dirname + "/404.html");
-});
+// app.use((req, res, next) => {
+//     if (req.method !== 'GET') {
+//         return res.status(405).json({ error: 'Method Not Allowed' });
+//     }
+//     res.status(404).sendFile(__dirname + "/404.html");
+// });
 
 
 // Routes
