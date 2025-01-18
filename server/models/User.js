@@ -72,6 +72,9 @@ const userSchema = new mongoose.Schema({
     type: String, // Can store city, state, or country
     required: false, // Optional field
   },
+  image:{
+    type:String
+  }
 });
 
 // Hash password before saving
