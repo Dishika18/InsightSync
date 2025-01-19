@@ -466,8 +466,22 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-12 col-12 text-center">
+                    <div >
                         <h3 class="mb-4">Popular Topics</h3>
+                    </div>
+                    <div style="display: flex; flex-direction: row; justify-content: center ; gap: 23px; align-items: center;" >
+    
+                        <div>
+                            <input id="searchinput" type="text">
+                            <button id="searchbutton" >Search Now</button>
+                        </div>
+    
+                        <div>
+                            <select name="" id="sortbtn">
+                                <option value="new">Sort by recent</option>
+                                <option value="old">Sort by oldest</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="col-lg-8 col-12 mt-3 mx-auto padding-45">
@@ -596,6 +610,7 @@
         window.onload = async () => {
             axios.get(`${link}/api/v1/insight/getallinsight`)
                 .then((resp) => {
+                    console.log(resp.data.data)
                     const parent = document.getElementById("parentCont");
                     resp.data.data.forEach((item) => {
                         const cardDiv = document.createElement("div");
@@ -605,7 +620,9 @@
                         cardDiv.onclick = () => {
                             window.location.href = `topics-detail.html?id=${item._id}`;
                         };
-    
+                        
+                        cardDiv.setAttribute("id", `${item.createdAt ? item.createdAt : ''}`)
+
                         // Image container
                         const imageContainer = document.createElement("div");
                         imageContainer.classList.add("card-image-container");
@@ -653,6 +670,50 @@
         };
     </script>
     
+    <script>
+        const searchbtn = document.getElementById("searchbutton");
+        const searchinput = document.getElementById("searchinput");
+    
+        searchbtn.addEventListener("click", () => {
+            const elements = document.getElementsByClassName("card");
+            const searchtext = searchinput.value.toLowerCase().trim(); // Normalize the search text for case-insensitive comparison
+    
+            Array.from(elements).forEach((element) => {
+                const cardText = element.textContent.toLowerCase(); // Normalize card content for comparison
+                if (cardText.includes(searchtext)) {
+                    element.style.display = "block"; // Show matching cards
+                } else {
+                    element.style.display = "none"; // Hide non-matching cards
+                }
+            });
+        });
+    </script>
+
+<script>
+    const sortbtn = document.getElementById("sortbtn");
+
+    sortbtn.addEventListener("change", () => {
+        const sortOrder = sortbtn.value; // Get selected sort option
+        const parent = document.getElementById("parentCont");
+        const cards = Array.from(parent.getElementsByClassName("card")); // Get all card elements
+
+        // Sort the cards array based on the 'id' attribute (createdAt)
+        cards.sort((a, b) => {
+            const dateA = new Date(a.id || 0); // Convert id to Date object, handle empty id
+            const dateB = new Date(b.id || 0);
+
+            if (sortOrder === "new") {
+                return dateB - dateA; // Recent first
+            } else if (sortOrder === "old") {
+                return dateA - dateB; // Oldest first
+            }
+        });
+
+        // Append the sorted cards back to the parent container
+        cards.forEach((card) => parent.appendChild(card));
+    });
+</script>
+
     
 
 <script>
