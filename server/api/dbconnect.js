@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
-dotenv.config()
+dotenv.config();
+
 // Database connection
 export const dbConnect = async () => {
   const url = process.env.MONGO_URI;
@@ -22,3 +23,8 @@ export const dbConnect = async () => {
     process.exit(1); // Exit process with failure
   }
 };
+
+
+
+
+
