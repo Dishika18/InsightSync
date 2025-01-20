@@ -25,7 +25,7 @@ function handleContactSubmit(event) {
         .then(data => {
             if (data.message) {
                 alert('Form submitted successfully: ' + data.message);
-                document.querySelector('.custom-form.contact-form').reset(); // Clear the form
+                document.querySelector('.custom-form.contact-form').reset(); 
             } else {
                 alert('Failed to submit form: ' + (data.error || 'Unknown error'));
             }
