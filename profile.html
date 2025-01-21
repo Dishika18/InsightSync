@@ -216,19 +216,30 @@
             <p>Loading profile details...</p>
         </div>
 
+        <div>
+            <button id="editbtn" style="background-color: rgb(101, 169, 171) ; padding: 10px; border-radius: 20px;">
+                Edit profile
+            </button>
+        </div>
+
         <div class="insights-container" id="insights-container">
-            <h2>User Insights</h2>
+            <h2>User Insights</h2> 
             <p>Loading insights...</p>
         </div>
     </div>
 
     <!-- JavaScript Files -->
+     <script>
+        const editbtn = document.getElementById("editbtn")
+        editbtn.addEventListener("click",()=> window.location.href="/edit-profile.html")
+     </script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script type="module">
         import { link } from "./Baselink.js";
+        console.log(localStorage)
 
         async function fetchProfile() {
             const profileUrl = `${link}/api/v1/profile/getprofile`;
@@ -242,7 +253,7 @@
             }
 
             try {
-                const profileResponse = await axios.post(profileUrl, {}, {
+                const profileResponse = await axios.get(profileUrl, {
                     headers: {
                         "Authorization": `Bearer ${authToken}`,
                         "Content-Type": "application/json"
@@ -250,7 +261,7 @@
                 });
                 displayProfile(profileResponse.data.user);
 
-                const insightsResponse = await axios.post(insightsUrl, {}, {
+                const insightsResponse = await axios.get(insightsUrl, {
                     headers: {
                         "Authorization": `Bearer ${authToken}`,
                         "Content-Type": "application/json"
@@ -266,9 +277,10 @@
         function displayProfile(user) {
             const profileInfoDiv = document.getElementById("profile-info");
             const formattedCreatedOn = user.createdOn ? new Date(user.createdOn).toLocaleDateString() : "N/A";
+            console.log(user)
             profileInfoDiv.innerHTML = `
                 <div class="profile-image" >
-                    <img src="./images/faq_graphic.jpg" alt="profile image">
+                    <img src=${user.image} alt="profile image">
                 </div>
                 <p class="profile-item"><span>Username:</span> ${user.username}</p>
                 <p class="profile-item"><span>Email:</span> ${user.email}</p>
