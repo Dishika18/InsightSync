@@ -16,7 +16,7 @@ function handleContactSubmit(event) {
 
     const formData = { name, email, subject, message };
 
-    fetch('http://localhost:3000/api/v1/contact', { // Update the URL to match your backend route
+    fetch('http://insight-sync-u1bq.vercel.app', { // Update the URL to match your backend route
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
