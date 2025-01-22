@@ -1006,17 +1006,24 @@
         </section>
     </main>
 
-
     <section class="newsletter">
         <div class="newsletter-container">
             <h2>Subscribe to Our Newsletter</h2>
             <p>Stay updated with our latest news and offers. Enter your email below to subscribe.</p>
-            <form action="#" method="POST">
-                <input type="email" placeholder="Enter your email" required>
+            <form id="subscribeForm">
+                <input 
+                    type="email" 
+                    name="email" 
+                    id="emailInput"
+                    placeholder="Enter your email" 
+                    required 
+                    aria-label="Email address"
+                >
                 <button type="submit">Subscribe</button>
             </form>
         </div>
     </section>
+    
 
 
     <!-- Footer Section -->
@@ -1144,6 +1151,7 @@
             console.log("User not logged in");
         }
     </script>
+    <script type="module"  src="js/subscribe.js"></script>
 
 <script src="//code.tidio.co/oycrplhalpwded6ku4qvy1oammghcsbq.js" async></script>
     
