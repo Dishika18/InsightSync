@@ -321,9 +321,16 @@ strong {
   background: transparent;
   border-bottom: 1px solid rgba(128, 208, 199, 0.35);
   z-index: 9;
+  padding: 10px 0;
+  transition: all 0.3s ease;
 }
 
-.navbar-brand,
+.navbar-brand{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .navbar-brand:hover {
   font-size: var(--h3-font-size);
   font-weight: var(--font-weight-bold);
@@ -351,6 +358,10 @@ strong {
   position: relative;
   padding-top: 15px;
   padding-bottom: 15px;
+}
+
+.navbar-nav .nav-item {
+  margin: 0 5px;
 }
 
 .navbar-nav .nav-link.active,
@@ -419,7 +430,7 @@ strong {
   border: 0;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (min-width: 1100px) {
   .navbar .dropdown:hover .dropdown-menu {
     opacity: 1;
     margin-left: 0;
@@ -512,7 +523,153 @@ strong {
 .navbar-toggler .navbar-toggler-icon::after {
   top: 8px;
 }
+/*---------------------------------------
+  NAVIGATION RESPONSIVENESS             
+-----------------------------------------*/
+@media (max-width: 1100px) {
+  .sticky-wrapper {
+    position: fixed;
+    z-index: 1000;
+  }
 
+  .navbar-collapse {
+    background: var(--secondary-color);
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    transform: translateX(100%);
+  }
+
+  .navbar-collapse.show {
+    transform: translateX(0);
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+  }
+
+  .navbar-nav .nav-item {
+    margin: 10px 0;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 10px 0;
+    display: block;
+    text-align: left;
+  }
+
+  .navbar .dropdown-menu {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    opacity: 1;
+    position: static;
+    display: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+
+  .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .navbar-nav .nav-item.dropdown .dropdown-toggle {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar-nav .nav-item.dropdown.show .dropdown-menu {
+    display: block;
+  }
+
+  .navbar-auth {
+    margin-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+  }
+
+  .d-flex.align-items-center {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .navbar-toggler {
+    z-index: 1001;
+  }
+}
+
+
+
+/* Mobile header adjustments */
+@media (max-width: 991px) {
+  .navbar .container-fluid {
+  justify-content: space-between;
+  }
+  .navbar-brand {
+  margin-right: 1rem;
+  }
+  .d-flex.align-items-center {
+  gap: 1rem;
+  }
+  }
+  /* Custom mobile dropdown */
+  @media (max-width: 991px) {
+  .navbar-nav .nav-item.dropdown .dropdown-menu {
+  display: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  box-shadow: none;
+  padding: 0.5rem 1rem;
+  }
+  .navbar-nav .nav-item.dropdown.show .dropdown-menu {
+  display: block;
+  }
+  .navbar-nav .nav-item.dropdown .dropdown-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5rem 0;
+  position: relative;
+  }
+  .navbar-nav .nav-item.dropdown .dropdown-toggle::after {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  }
+  }
+  /* Consistent mobile styles */
+  @media (max-width: 991px) {
+  .navbar {
+  background-color: var(--secondary-color);
+  }
+  .navbar-nav .nav-link {
+  color: var(--white-color);
+  padding: 0.5rem 0;
+  }
+  .navbar-nav .nav-link.active,
+  .navbar-nav .nav-link:hover {
+  color: var(--primary-color);
+  }
+  .navbar-auth {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+  margin-top: 1rem;
+  }
+  }
 /*---------------------------------------
   HERO        
 -----------------------------------------*/
@@ -1210,7 +1367,7 @@ blockquote {
 /*---------------------------------------
   RESPONSIVE STYLES               
 -----------------------------------------*/
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1100px) {
   h1 {
     font-size: 48px;
   }
