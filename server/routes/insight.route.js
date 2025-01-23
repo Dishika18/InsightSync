@@ -33,6 +33,6 @@ router.route('/addinsight').post( upload.single('imagefile'), authUser, addInsig
 router.route('/getallinsight').get(getallInsight)
 router.route("/getinsightbytopic").post(getinsightbytopic)
 router.route("/getinsightbyid").post(getinsightbyid)
-router.route("/getinsightbyuser").post(getinsightbyUser)
+router.route("/getinsightbyuser").get(getinsightbyUser)
 
 export default router
