@@ -193,8 +193,86 @@ const getinsightbyUser = async (req, res) => {
     }
 };
 
+const editinsight = async(req,res) =>{
+    console.log("edit insight hit!")
+
+    const {id,title, content,topic} = req.body;
+    const filebuffer = req.file ? req.file.buffer : null; // Assuming file is available in req.file.buffer
+    console.log("got the required fields")
+    //first get the use id
+    const header = req.headers.authorization
+    const token = header.split(' ')[1]
+    if (!token) {
+        console.log("no token found")
+        return res.status(400).send({error:"unauthorized access, no token found"})
+    }
+    console.log("githeader")  
+    let decoded
+    try {
+        decoded = jwt.verify(token, "THIS_IS_A_JWT_SECRET");
+    } catch (err) {
+        console.error("Error decoding token:", err.message);
+        return res.status(401).json({ error: "Invalid or expired token." });
+    }
+
+    const userId = decoded.id;
+    console.log("got uid")
+    //user id find succesfull next is finding the details of insight
+    const fetchedInsightDetails = await Insight.findById(id)
+    if (!fetchedInsightDetails) {
+        console.log("no insight found with this id")
+        return res.status(200).send({error:"no insight found with this id"})
+    }
+    console.log("got the insights details")
+    //chek the author
+    if (userId != fetchedInsightDetails.submittedby) {
+        console.log("unauthorized access, the user is not the author of the insight")
+        return res.status(401).send({error:"you are not the author of this insight"})
+    }
+    console.log("got the author")
+    //perform the updation as user is validated successfully
+    if (title) fetchedInsightDetails.title = title
+    if (content) fetchedInsightDetails.content = content
+    if (topic) fetchedInsightDetails.topic = topic
+    console.log("before upoading to clodinary")
+    //updating of thumnail
+    if (filebuffer) {
+        try {
+            const updatedUploadUrl = await upload_on_cloudinary(filebuffer)
+            if (!updatedUploadUrl) {
+                return res.status(400).send({error:"error occured when uploading to cloudinary"})
+            }
+            fetchedInsightDetails.Image = updatedUploadUrl
+        } catch (error) {
+            console.log(error ? error.message : error)
+        }
+    }
+    console.log("cloudinary uploaded")
+    //everyting is updated not saving the updated data
+    await fetchedInsightDetails.save()
+
+    return res.status(200).send({succes:"insight is updated success fully", UpdatedInsight:fetchedInsightDetails})
+
+}
+
+const deleteinsight = async(req,res) =>{
+    const {id} = req.body
+
+    if (!id) {
+        return res.status(400).send({error:"no id received from re.body"})
+    }
+
+    const uid = req.user.id
+    //  user id find succesfull next is finding the details of insight
+    const deleted = await Insight.findByIdAndDelete(id)
+    const fetchedUser = await User.findById(uid)
+
+    fetchedUser.inSightsCount = fetchedUser.inSightsCount-1
+    await fetchedUser.save()
+
+    return res.status(200).send({success: "insight deleted success fully", UpdatedUser: fetchedUser})
+}
 
 
 
-
-export {addInsight, getallInsight, getinsightbyid, getinsightbytopic, getinsightbyUser}
+export {addInsight, getallInsight, getinsightbyid, getinsightbytopic, getinsightbyUser, editinsight, deleteinsight}
