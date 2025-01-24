@@ -184,6 +184,7 @@ const getinsights = async (req, res) => {
 
     // Step 5: Fetch the user using the decoded token's ID
     const user = await User.findById(decoded.id);
+    console.log("this is profile get insight ", user)
     if (!user) {
       // If no user is found, return an error
       console.error(`User not found for token with user ID: ${decoded.id}.`);
@@ -194,7 +195,8 @@ const getinsights = async (req, res) => {
     const totalInsights = user.inSightsCount || 0;
 
     // Step 7: Fetch insights for the user
-    const insights = await Insight.find({ submittedBy: user._id }).lean();
+    const insights = await Insight.find({ submittedby: user._id });
+    console.log(insights)
     if (!insights || insights.length === 0) {
       // If no insights are found, return a message
       console.warn(`No insights found for user ID: ${user._id}.`);
