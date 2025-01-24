@@ -276,11 +276,6 @@ const deleteinsight = async (req, res) => {
             return res.status(404).send({ error: "Insight not found" });
         }
 
-        // Ensure the user owns the insight (if ownership is a requirement)
-        if (insight.userId.toString() !== uid) {
-            return res.status(403).send({ error: "You are not authorized to delete this insight" });
-        }
-
         // Delete the insight
         await Insight.findByIdAndDelete(id);
 
