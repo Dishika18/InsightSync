@@ -255,23 +255,53 @@ const editinsight = async(req,res) =>{
 
 }
 
-const deleteinsight = async(req,res) =>{
-    const {id} = req.body
+const deleteinsight = async (req, res) => {
+    try {
+        const { id } = req.body;
 
-    if (!id) {
-        return res.status(400).send({error:"no id received from re.body"})
+        // Validate ID
+        if (!id) {
+            return res.status(400).send({ error: "No ID received in request body" });
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).send({ error: "Invalid ID format" });
+        }
+
+        const uid = req.user.id;
+
+        // Check if insight exists
+        const insight = await Insight.findById(id);
+        if (!insight) {
+            return res.status(404).send({ error: "Insight not found" });
+        }
+
+        // Ensure the user owns the insight (if ownership is a requirement)
+        if (insight.userId.toString() !== uid) {
+            return res.status(403).send({ error: "You are not authorized to delete this insight" });
+        }
+
+        // Delete the insight
+        await Insight.findByIdAndDelete(id);
+
+        // Fetch and update the user
+        const fetchedUser = await User.findById(uid);
+        if (!fetchedUser) {
+            return res.status(404).send({ error: "User not found" });
+        }
+
+        fetchedUser.inSightsCount = Math.max(fetchedUser.inSightsCount - 1, 0); // Prevent underflow
+        await fetchedUser.save();
+
+        return res.status(200).send({
+            success: "Insight deleted successfully",
+            UpdatedUser: fetchedUser
+        });
+    } catch (error) {
+        console.error("Error while deleting insight:", error);
+        return res.status(500).send({ error: "An error occurred while deleting the insight" });
     }
-
-    const uid = req.user.id
-    //  user id find succesfull next is finding the details of insight
-    const deleted = await Insight.findByIdAndDelete(id)
-    const fetchedUser = await User.findById(uid)
-
-    fetchedUser.inSightsCount = fetchedUser.inSightsCount-1
-    await fetchedUser.save()
-
-    return res.status(200).send({success: "insight deleted success fully", UpdatedUser: fetchedUser})
-}
+};
 
 
 
