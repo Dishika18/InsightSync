@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import authRoutes from '../routes/authRoutes.js';
 import insightRouter from '../routes/insight.route.js';
 import { profileRouter } from '../routes/profile.routes.js';
+import contactRoutes from '../routes/contact.route.js'; 
 
 
 const app = express();
@@ -27,13 +28,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use('/api/v1/auth', authRoutes);       // Authentication routes
 app.use('/api/v1/insight', insightRouter); // Insight routes
-app.use("/api/v1/profile",profileRouter);
+app.use("/api/v1/profile",profileRouter) 
 app.post("/subscribe", (req, res) => {
     const email = req.body.email; // Extract the email from the request body
     console.log("New subscription request for email:", email);
     res.status(200).send("Subscription successful!"); // Respond with success
 });
-  
-
-
+app.use("/api/v1/contact", contactRoutes);//contactform route
 export { app };

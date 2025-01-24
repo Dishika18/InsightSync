@@ -142,6 +142,7 @@ const getinsightbytopic = async (req, res) => {
 
 
 const getinsightbyUser = async (req, res) => {
+    console.log("get insight hit by user")
     const authheader = req.headers.authorization;
     if (!authheader) {
         return res.status(401).send({ error: "Authorization header not received" });

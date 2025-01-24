@@ -72,7 +72,10 @@ const userSchema = new mongoose.Schema({
     type: String, // Can store city, state, or country
     required: false, // Optional field
   },
-});
+  image:{
+    type:String
+  }
+}, {timestamps: true});
 
 // Hash password before saving
 userSchema.pre('save', async function (next) {
