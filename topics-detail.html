@@ -389,6 +389,11 @@
                         </p> -->
                     </div>
 
+                    
+                </div>
+                <div style="width: 100%; ">
+
+                    <button style="background-color: rgb(85, 199, 214); margin-left: 50%; padding: 15px; border: 2px solid aquamarine; border-radius: 100px;" id="editbtn">Edit Insight</button>
                 </div>
             </div>
         </section>
@@ -584,6 +589,15 @@
         } else {
             console.log("User not logged in");
         }
+    </script>
+
+    <script>
+        const editbtn = document.getElementById("editbtn")
+        const params = new URLSearchParams(window.location.search);
+        console.log(params.get('id'))
+        editbtn.addEventListener("click",()=>{
+            window.location.href=`edit-insight.html?id=${params.get('id')}`
+        })
     </script>
     
 </body>
