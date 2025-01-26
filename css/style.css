@@ -253,7 +253,6 @@ strong {
 .form-control {
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
 }
 
 .eye-icon {
@@ -920,7 +919,6 @@ blockquote {
 .custom-form .form-control {
   border-radius: var(--border-radius-large);
   color: var(--p-color);
-  margin-bottom: 24px;
   padding-top: 13px;
   padding-bottom: 13px;
   padding-left: 20px;
