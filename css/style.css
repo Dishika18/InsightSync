@@ -124,6 +124,20 @@ strong {
   font-weight: var(--font-weight-bold);
 }
 
+/* toastify-notification */
+
+.toastify-custom {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.toastify-custom::before {
+  content: '';
+}
+
+
 /*---------------------------------------
   SECTION               
 -----------------------------------------*/
