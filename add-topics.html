@@ -390,7 +390,7 @@
             </div>
         </div>
         <div class="copyright-box">
-            <p class="copyright-text mt-lg-5 mt-4">Copyright © 2025 InsightSync. All rights reserved.
+            <p class="copyright-text mt-lg-5 mt-4">
             </p>
         </div>
     </footer>
@@ -539,6 +539,9 @@ function showNotification(message, type) {
 
 
     }
+    document.querySelector(
+        ".copyright-text"
+      ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
 </script>
 
 </body>

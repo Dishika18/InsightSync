@@ -48,7 +48,7 @@
         overflow-y: scroll;
       }
 
-      .box{
+      .box {
         background-color: #f0f0f0;
         display: flex;
         align-items: center;
@@ -59,7 +59,7 @@
         margin: 0 auto;
       }
 
-      .box input{
+      .box input {
         width: 80%;
         height: 90%;
         outline: none;
@@ -71,18 +71,18 @@
         font-weight: 600;
       }
 
-      .box button{
+      .box button {
         height: 80%;
         outline: none;
         border: none;
-        background-color: #80D0C7;
+        background-color: #80d0c7;
         width: 150px;
-        border-radius: 40px ;
+        border-radius: 40px;
         color: white;
         font-weight: 700;
       }
 
-      select{
+      select {
         width: min-content;
         padding: 8px;
         background-color: #f0f0f0;
@@ -91,10 +91,9 @@
         border: none;
         font-size: 15px;
         color: rgb(90, 90, 90);
-
       }
 
-      .selectbtn{
+      .selectbtn {
         display: flex;
         align-items: center;
         justify-content: end;
@@ -102,10 +101,9 @@
         padding-right: 50px;
       }
 
-      .box button:hover{
-        background-color: #13547A;
+      .box button:hover {
+        background-color: #13547a;
       }
-
 
       /* Individual card */
       .card {
@@ -689,17 +687,21 @@
             </div>
 
             <div class="box">
-                <input type="text" name="search" id="searchinput" placeholder="Search">
-                <button id="searchbutton">Search</button>
+              <input
+                type="text"
+                name="search"
+                id="searchinput"
+                placeholder="Search"
+              />
+              <button id="searchbutton">Search</button>
             </div>
 
-              <div class="selectbtn">
-                <select name="" id="sortbtn">
-                  <option value="new">Sort by recent</option>
-                  <option value="old">Sort by oldest</option>
-                </select>
-              </div>
-            
+            <div class="selectbtn">
+              <select name="" id="sortbtn">
+                <option value="new">Sort by recent</option>
+                <option value="old">Sort by oldest</option>
+              </select>
+            </div>
 
             <div class="col-lg-8 col-12 mt-3 mx-auto padding-45">
               <div id="parentCont" class=""></div>
@@ -825,9 +827,7 @@
         </div>
       </div>
       <div class="copyright-box">
-        <p class="copyright-text mt-lg-5 mt-4">
-          Copyright © 2024 InsightSync. All rights reserved.
-        </p>
+        <p class="copyright-text mt-lg-5 mt-4"></p>
       </div>
     </footer>
     <!-- Scroll to Top Button -->
@@ -978,6 +978,9 @@
       } else {
         console.log("User not logged in");
       }
+      document.querySelector(
+        ".copyright-text"
+      ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
     </script>
   </body>
 </html>
