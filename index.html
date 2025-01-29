@@ -154,74 +154,53 @@
                     <i class="bi-back"></i>
                     <span>InsightSync</span>
                 </a>
-
+        
                 <div class="d-lg-none ms-auto me-4">
                     <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
                 </div>
-
+        
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
+        
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-5 me-lg-auto">
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_1">Home</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_2">Browse Topics</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_3">How it works</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_4">FAQs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_5">Testimonials</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_6">Contact</a>
-                        </li>
-                        
+                        <li class="nav-item"><a class="nav-link click-scroll" href="#section_1">Home</a></li>
+                        <li class="nav-item"><a class="nav-link click-scroll" href="#section_2">Browse Topics</a></li>
+                        <li class="nav-item"><a class="nav-link click-scroll" href="#section_3">How it works</a></li>
+                        <li class="nav-item"><a class="nav-link click-scroll" href="#section_4">FAQs</a></li>
+                        <li class="nav-item"><a class="nav-link click-scroll" href="#section_5">Testimonials</a></li>
+                        <li class="nav-item"><a class="nav-link click-scroll" href="#section_6">Contact</a></li>
+        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                                 <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
                                 <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
                                 <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
-
-
                             </ul>
                         </li>
                     </ul>
-
+        
+                    <!-- Profile & Auth Options -->
                     <div class="d-none d-lg-block">
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
-                                <a class="navbar-icon bi-person smoothscroll" onclick="location.href='/profile.html'" class="nav-link dropdown-toggle"
-                                    data-bs-toggle="dropdown" role="button" aria-expanded="true"
-                                    id="navbarLightDropdownMenuLink"> </a>
-                                <ul class="dropdown-menu authcomp dropdown-menu-light"
-                                    aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
-                                            style="cursor: pointer;">Login</a></li>
-
-                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
-                                            style="cursor: pointer;">Sign Up</a></li>
-
+                                <a class="navbar-icon bi-person smoothscroll" onclick="location.href='/profile.html'"
+                                    class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button"
+                                    aria-expanded="true" id="navbarLightDropdownMenuLink"> </a>
+        
+                                <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                    <li class="authcomp"><a class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#loginModal" style="cursor: pointer;">Login</a></li>
+                                    <li class="authcomp"><a class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#signupModal" style="cursor: pointer;">Sign Up</a></li>
+                                    <li id="logoutBtn" style="display: none;"><a class="dropdown-item" href="#">Logout</a></li>
                                 </ul>
                             </li>
                         </ul>
-
-
                     </div>
                 </div>
             </div>
@@ -283,14 +262,13 @@
                 <div class="modal-dialog modal-dialog-centered modal-md">
                     <div class="modal-content glass-effect">
                         <div class="modal-header justify-content-center">
-                            <h2 style="text-align: center; font-size: 1.75rem; font-weight: bold;"> Login</h2>
+                            <h2 style="text-align: center; font-size: 1.75rem; font-weight: bold;">Login</h2>
                         </div>
                         <div class="modal-body">
                             <form id="loginForm" method="post">
                                 <div class="mb-3">
                                     <label for="loginEmail" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="loginEmail" name="email"
-                                        aria-describedby="emailHelp">
+                                    <input type="email" class="form-control" id="loginEmail" name="email" aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3 position-relative">
                                     <label for="loginPassword" class="form-label">Password</label>
@@ -306,18 +284,28 @@
                                     <button type="submit" class="btn btn-primary btn-block">Login</button>
                                 </div>
                                 <div class="mt-3 text-center">
-                                    <p>Don't have an account? <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#signupModal" data-bs-dismiss="modal"
-                                            aria-label="Close">Sign Up</a></p>
+                                    <p>Don't have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" aria-label="Close">Sign Up</a></p>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-
+        
+            <!-- Navbar content -->
+            <ul class="navbar-nav ms-auto">
+                <!-- Login Button (Visible when not logged in) -->
+                <li id="loginButton" class="nav-item" style="display: none;">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                </li>
+        
+                <!-- Logout Button (Visible when logged in) -->
+                <li id="logoutButton" class="nav-item" style="display: none;">
+                    <button class="btn btn-danger" onclick="logout()">Logout</button>
+                </li>
+            </ul>
         </nav>
-
+        
 
         <!-- Home Page -->
 
@@ -1152,7 +1140,40 @@
 <script src="//code.tidio.co/oycrplhalpwded6ku4qvy1oammghcsbq.js" async></script>
     <!-- Toastify JS -->
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const logoutBtn = document.getElementById("logoutBtn");
 
+        // Check if the user is logged in by verifying the presence of an auth token
+        if (localStorage.getItem("authToken")) {
+            console.log("User logged in");
+            
+            // Show Logout button
+            logoutBtn.style.display = "block";
+
+            // Hide authentication components (Login/Signup buttons)
+            const authElements = document.getElementsByClassName("authcomp");
+            Array.from(authElements).forEach(element => {
+                element.style.opacity = 0; // Set opacity to 0 (hidden)
+                element.style.pointerEvents = "none"; // Prevent interaction
+            });
+
+            // Logout event listener
+            logoutBtn.addEventListener("click", function () {
+                // Clear authentication token
+                localStorage.removeItem("authToken");
+                sessionStorage.removeItem("authToken");
+
+                // Redirect to the login or homepage
+                window.location.href = "index.html"; // Change to login page if needed
+            });
+        } else {
+            console.log("User not logged in");
+        }
+    });
+</script>
+  
+  
 </body>
 
 </html>
