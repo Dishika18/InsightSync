@@ -53,7 +53,7 @@ const marketingimages = document.getElementsByClassName("marketingimage")
 const marketinglink = document.getElementsByClassName("marketinglink") 
 axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[1] })
     .then((response) => {
-        console.log(response.data)
+        console.log("marketig",response.data)
         if (response.data.data.length < 3) {
             const maindiv = document.getElementById("marketingmaindiv")
             maindiv.style.display = "none"
@@ -110,9 +110,9 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[2] })
 
             financeParatext[0].innerText = response.data.data[0].content
 
-            fianceimage.src[0] = response.data.data[0].Image
+            fianceimage[0].src = response.data.data[0].Image
 
-            financelink.href[0] = `/topics-detail.html?id=${response.data.data[0]._id}`
+            financelink[0].href = `/topics-detail.html?id=${response.data.data[0]._id}`
             document.getElementById("financenocontent").style.display = "none"
             // console.log(nocontent)
             // nocontent.style.display = "none"
@@ -170,6 +170,7 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[3] })
 
 //for music tag
 const musicheadingtext = document.getElementsByClassName("musicheading")
+console.log("music heading",musicheadingtext)
 const musicParatext = document.getElementsByClassName("musicpara")
 const musicimage = document.getElementsByClassName("musicimage")
 const musiclinks = document.getElementsByClassName("musiclink")
