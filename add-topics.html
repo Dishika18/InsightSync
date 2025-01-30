@@ -16,7 +16,43 @@
     <link href="css/style.css" rel="stylesheet">
     <!--icons cdn link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        /* Notification container */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: none;
+    z-index: 9999;
+}
+
+/* Notification message */
+.notification-message {
+    background-color: #28a745; /* Green for success */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    animation: fadeIn 0.5s ease-out, fadeOut 2s 3s ease-out;
+}
+
+/* Animation for fade-in and fade-out */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+    </style>
 </head>
+
 
 <body>
     <nav class="navbar navbar-expand-lg">
@@ -180,11 +216,11 @@
                         <form id="loginForm" method="post" onsubmit="return validateForm()">
                             <div class="mb-3">
                                 <label for="loginEmail" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
+                                <input type="email" placeholder="Enter Email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3 position-relative">
                                 <label for="loginPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="loginPassword">
+                                <input type="password" placeholder="Enter Password" class="form-control" id="loginPassword">
                                 <span class="eye-icon" onclick="togglePasswordVisibility()">
                                     <i class="bi bi-eye" id="togglePasswordIcon"></i>
                                 </span>
@@ -354,10 +390,14 @@
             </div>
         </div>
         <div class="copyright-box">
-            <p class="copyright-text mt-lg-5 mt-4">Copyright © 2024 InsightSync. All rights reserved.
+            <p class="copyright-text mt-lg-5 mt-4">Copyright © 2025 InsightSync. All rights reserved.
             </p>
         </div>
     </footer>
+<!-- Notification Container -->
+<div id="notificationContainer" class="notification-container">
+    <div id="notificationMessage" class="notification-message"></div>
+</div>
 
     <!-- Scroll to Top Button -->
     <button onclick="topFunction()" id="scrollToTopBtn" title="Go to top"></button>
@@ -373,10 +413,47 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
     <script type="module">
+
+function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.classList.add('notification');
+        notification.textContent = message;
+
+        // Set the background color based on the type of notification
+        if (type === 'success') {
+            notification.style.backgroundColor = '#4CAF50'; // Green for success
+        } else if (type === 'error') {
+            notification.style.backgroundColor = '#f44336'; // Red for error
+        } else {
+            notification.style.backgroundColor = '#2196F3'; // Blue for default info
+        }
+
+        // Style the notification
+        notification.style.color = 'white';
+        notification.style.padding = '10px 20px';
+        notification.style.borderRadius = '5px';
+        notification.style.position = 'fixed';
+        notification.style.top = '10px';
+        notification.style.right = '10px';
+        notification.style.zIndex = '9999';
+        notification.style.fontSize = '16px';
+
+        // Add notification to the body
+        document.body.appendChild(notification);
+
+        // Remove the notification after 3 seconds
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+
+
         // Button event listener
         import { link } from "./Baselink.js"
         console.log(link)
         const btn = document.getElementById("submitBtn");
+
+
         btn.addEventListener("click", async (event) => {
             event.preventDefault(); // Prevent default form submission behavior
 
@@ -388,7 +465,7 @@
 
             // Validate required fields
             if (!title || !content  || !category || !imageFile) {
-                alert("Please fill in all fields and select an image.");
+                showNotification("Please fill in all fields and select an image.", "error");
                 return;
             }
 
@@ -415,11 +492,11 @@
 
                 // Handle successful response
                 console.log("Success:", response.data);
-                alert("Topic submitted successfully!");
+                showNotification("Topic submitted successfully!", "success");
             } catch (error) {
                 // Handle error response
                 console.error("Error:", error);
-                alert("There was an error submitting your topic. Please try again.");
+                showNotification("There was an error submitting your topic. Please try again.", "error");
             }
         });
     </script>

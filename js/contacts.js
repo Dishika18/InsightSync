@@ -24,14 +24,36 @@ function handleContactSubmit(event) {
         .then(response => response.json())
         .then(data => {
             if (data.message) {
-                alert('Form submitted successfully: ' + data.message);
+                showNotification('Form submitted successfully: ' + data.message, 'success');
                 document.querySelector('.custom-form.contact-form').reset(); 
             } else {
-                alert('Failed to submit form: ' + (data.error || 'Unknown error'));
+                showNotification('Failed to submit form: ' + (data.error || 'Unknown error'), 'error');
             }
         })
         .catch(error => {
             console.error('Error:', error);
-            alert('Failed to submit form: An unexpected error occurred.');
+            showNotification('Failed to submit form: An unexpected error occurred.', 'error');
         });
+}
+
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.classList.add('notification', type === 'success' ? 'show' : 'error');
+    notification.innerText = message;
+
+    // Append the notification to the body
+    document.body.appendChild(notification);
+
+    // Add the show class after a delay to trigger the animation
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 100);
+
+    // Remove the notification after 5 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 500);
+    }, 5000);
 }

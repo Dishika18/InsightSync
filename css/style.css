@@ -41,6 +41,24 @@ body {
   background-color: var(--white-color);
   font-family: var(--body-font-family);
 }
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #80D0C7;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #66b2a5;
+}
 
 /*---------------------------------------
   TYPOGRAPHY               
@@ -123,6 +141,20 @@ b,
 strong {
   font-weight: var(--font-weight-bold);
 }
+
+/* toastify-notification */
+
+.toastify-custom {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.toastify-custom::before {
+  content: '';
+}
+
 
 /*---------------------------------------
   SECTION               
@@ -253,7 +285,6 @@ strong {
 .form-control {
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
 }
 
 .eye-icon {
@@ -1077,7 +1108,6 @@ blockquote {
 .custom-form .form-control {
   border-radius: var(--border-radius-large);
   color: var(--p-color);
-  margin-bottom: 24px;
   padding-top: 13px;
   padding-bottom: 13px;
   padding-left: 20px;
