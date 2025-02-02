@@ -127,7 +127,7 @@ const getinsightbytopic = async (req, res) => {
 
     try {
         // Use the `find` method with a filter
-        const insights = await Insight.find({ topic: topic });
+        const insights = await Insight.find({ topic: topic }).sort({"createdAt":-1});
 
         if (!insights || insights.length === 0) {
             return res.status(404).send({ error: "No insights found for the given topic." });
