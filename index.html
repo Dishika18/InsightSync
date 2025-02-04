@@ -30,7 +30,8 @@
     <link href="css/style.css" rel="stylesheet">
     <!--icons cdn link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="IndexPage.js"></script>
     <script>
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('loginPassword');
@@ -305,12 +306,12 @@
                             <form id="loginForm" method="post">
                                 <div class="mb-3">
                                     <label for="loginEmail" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="loginEmail" name="email"
+                                    <input type="email" placeholder="Enter Email" class="form-control" id="loginEmail" name="email"
                                         aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3 position-relative">
                                     <label for="loginPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="loginPassword" name="password">
+                                    <input type="password" placeholder="Enter Password" class="form-control" id="loginPassword" name="password">
                                     <span class="eye-icon" onclick="togglePasswordVisibility()">
                                         <i class="bi bi-eye" id="togglePasswordIcon"></i>
                                     </span>
@@ -491,15 +492,15 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="design-tab-pane" role="tabpanel"
                                 aria-labelledby="design-tab" tabindex="0">
-                                <div class="row">
+                                <div class="row" id="designmaindiv">
                                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="designlink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Web Design</h5>
+                                                        <h5 class="mb-2 designHeading">Web Design</h5>
 
-                                                        <p class="mb-0"> Web design involves creating visually appealing, user-friendly, and responsive websites by combining layout, typography, colors, and functionality to enhance user experience and effectively communicate the site's purpose.
+                                                        <p class="mb-0 designPara"> Web design involves creating visually appealing, user-friendly, and responsive websites by combining layout, typography, colors, and functionality to enhance user experience and effectively communicate the site's purpose.
                                                         </p>
                                                     </div>
 
@@ -507,131 +508,142 @@
                                                 </div>
 
                                                 <img src="images/topics/undraw_Remote_design_team_re_urdx.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid designimage" alt="">
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="designlink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Graphic</h5>
+                                                        <h5 class="mb-2 designHeading">Graphic</h5>
 
-                                                        <p class="mb-0">Transform your brand with captivating graphic design. From logos to marketing materials, we craft visually stunning designs that tell your story, engage your audience, and leave a lasting impression.</p>
+                                                        <p class="mb-0 designPara">Transform your brand with captivating graphic design. From logos to marketing materials, we craft visually stunning designs that tell your story, engage your audience, and leave a lasting impression.</p>
                                                     </div>
 
                                                     <span class="badge bg-design rounded-pill ms-auto">75</span>
                                                 </div>
 
                                                 <img src="images/topics/undraw_Redesign_feedback_re_jvm0.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid designimage" alt="">
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="designlink"  href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Logo Design</h5>
+                                                        <h5 class="mb-2 designHeading">Logo Design</h5>
 
-                                                        <p class="mb-0">Create a lasting impression with a unique logo design that represents your brand’s identity. We craft visually appealing, memorable logos that capture your essence and set you apart in a competitive market.</p>
+                                                        <p class="mb-0 designPara">Create a lasting impression with a unique logo design that represents your brand’s identity. We craft visually appealing, memorable logos that capture your essence and set you apart in a competitive market.</p>
                                                     </div>
 
                                                     <span class="badge bg-design rounded-pill ms-auto">100</span>
                                                 </div>
 
                                                 <img src="images/topics/colleagues-working-cozy-office-medium-shot.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid designimage" alt="">
                                             </a>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div style=" width: 100%; display: flex ; justify-content: center;" id="nocontent" class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                    <h4>
+                                        Not enough topics
+                                    </h4>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade" id="marketing-tab-pane" role="tabpanel"
                                 aria-labelledby="marketing-tab" tabindex="0">
-                                <div class="row">
+                                <div class="row" id="marketingmaindiv">
                                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="marketinglink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Advertising</h5>
+                                                        <h5 class="mb-2 marketingheading">Advertising</h5>
 
-                                                        <p class="mb-0">Boost your brand’s visibility with innovative advertising strategies. We craft compelling campaigns that engage audiences, increase awareness, and drive conversions, ensuring your message reaches the right people at the right time.</p>
+                                                        <p class="mb-0 marketingpara">Boost your brand’s visibility with innovative advertising strategies. We craft compelling campaigns that engage audiences, increase awareness, and drive conversions, ensuring your message reaches the right people at the right time.</p>
                                                     </div>
 
                                                     <span class="badge bg-advertising rounded-pill ms-auto">30</span>
                                                 </div>
 
-                                                <img src="images/topics/undraw_online_ad_re_ol62.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                <img  src="images/topics/undraw_online_ad_re_ol62.png"
+                                                    class="custom-block-image img-fluid marketingimage" alt="">
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="marketinglink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Video Content</h5>
+                                                        <h5 class="mb-2 marketingheading">Video Content</h5>
 
-                                                        <p class="mb-0">Boost your brand's visibility with compelling video content. Engaging visuals and storytelling capture attention, drive traffic, and enhance customer connection, making video marketing a powerful tool for growth and success</p>
+                                                        <p class="mb-0 marketingpara">Boost your brand's visibility with compelling video content. Engaging visuals and storytelling capture attention, drive traffic, and enhance customer connection, making video marketing a powerful tool for growth and success</p>
                                                     </div>
 
                                                     <span class="badge bg-advertising rounded-pill ms-auto">65</span>
                                                 </div>
 
                                                 <img src="images/topics/undraw_Group_video_re_btu7.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid marketingimage" alt="">
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="marketinglink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Viral Tweet</h5>
+                                                        <h5 class="mb-2 marketingheading">Viral Tweet</h5>
 
-                                                        <p class="mb-0">Maximize your brand's reach with viral tweets. Create shareable, engaging content that resonates with your audience, sparks conversations, and amplifies your message, turning your tweet into a powerful marketing tool</p>
+                                                        <p class="mb-0 marketingpara">Maximize your brand's reach with viral tweets. Create shareable, engaging content that resonates with your audience, sparks conversations, and amplifies your message, turning your tweet into a powerful marketing tool</p>
                                                     </div>
 
                                                     <span class="badge bg-advertising rounded-pill ms-auto">50</span>
                                                 </div>
 
                                                 <img src="images/topics/undraw_viral_tweet_gndb.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid marketingimage" alt="">
                                             </a>
                                         </div>
                                     </div>
+                                </div>
+                                <div style=" width: 100%; display: flex ; justify-content: center;" id="marketingnocontent" class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                    <h4>
+                                        Not enough topics
+                                    </h4>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade" id="finance-tab-pane" role="tabpanel"
                                 aria-labelledby="finance-tab" tabindex="0">
-                                <div class="row">
+                                <div class="row" id="financemaindiv">
                                     <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-0">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="financelink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Investment</h5>
+                                                        <h5 class="mb-2 financeheading">Investment</h5>
 
-                                                        <p class="mb-0">Smart investments grow wealth over time, balancing risk and reward. Strategic financial planning helps secure a stable, prosperous future</p>
+                                                        <p class="mb-0 financepara">Smart investments grow wealth over time, balancing risk and reward. Strategic financial planning helps secure a stable, prosperous future</p>
                                                     </div>
 
                                                     <span class="badge bg-finance rounded-pill ms-auto">30</span>
                                                 </div>
 
                                                 <img src="images/topics/undraw_Finance_re_gnv2.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid financeimage" alt="">
                                             </a>
                                         </div>
                                     </div>
@@ -680,100 +692,110 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div style=" width: 100%; display: flex ; justify-content: center;" id="financenocontent" class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                    <h4>
+                                        Not enough topics
+                                    </h4>
+                                </div>
                             </div>
 
                             <div class="tab-pane fade" id="music-tab-pane" role="tabpanel" aria-labelledby="music-tab"
                                 tabindex="0">
-                                <div class="row">
+                                <div class="row" id="musicmaindiv">
                                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="musiclink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Composing Song</h5>
+                                                        <h5 class="mb-2 musicheading">Composing Song</h5>
 
-                                                        <p class="mb-0">Unleash your creativity with our Song Composing section! Learn melody creation, lyric writing, and arrangement techniques to craft captivating songs. Perfect for aspiring musicians and enthusiasts eager to bring their musical ideas to life.</p>
+                                                        <p class="mb-0 musicpara">Unleash your creativity with our Song Composing section! Learn melody creation, lyric writing, and arrangement techniques to craft captivating songs. Perfect for aspiring musicians and enthusiasts eager to bring their musical ideas to life.</p>
                                                     </div>
 
                                                     <span class="badge bg-music rounded-pill ms-auto">45</span>
                                                 </div>
 
                                                 <img src="images/topics/undraw_Compose_music_re_wpiw.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid musicimage" alt="">
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-3">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="musiclink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Online Music</h5>
+                                                        <h5 class="mb-2 musicheading">Online Music</h5>
 
-                                                        <p class="mb-0">Explore the world of online music! Discover unlimited songs, curated playlists, and live streams anytime, anywhere. Enjoy seamless listening with high-quality audio and personalized recommendations to match your unique taste</p>
+                                                        <p class="mb-0 musicpara">Explore the world of online music! Discover unlimited songs, curated playlists, and live streams anytime, anywhere. Enjoy seamless listening with high-quality audio and personalized recommendations to match your unique taste</p>
                                                     </div>
 
                                                     <span class="badge bg-music rounded-pill ms-auto">45</span>
                                                 </div>
 
                                                 <img src="images/topics/undraw_happy_music_g6wc.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid musicimage" alt="">
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="musiclink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Podcast</h5>
+                                                        <h5 class="mb-2 musicheading">Podcast</h5>
 
-                                                        <p class="mb-0">Explore our podcast section, where we bring you insightful discussions, interviews, and music-related content. Stay updated on trends, artist stories, and industry news. Tune in for engaging and informative episodes!</p>
+                                                        <p class="mb-0 musicpara">Explore our podcast section, where we bring you insightful discussions, interviews, and music-related content. Stay updated on trends, artist stories, and industry news. Tune in for engaging and informative episodes!</p>
                                                     </div>
 
                                                     <span class="badge bg-music rounded-pill ms-auto">20</span>
                                                 </div>
 
                                                 <img src="images/topics/undraw_Podcast_audience_re_4i5q.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid musicimage" alt="">
                                             </a>
                                         </div>
                                     </div>
+                                </div>
+                                <div style=" width: 100%; display: flex ; justify-content: center;" id="musicnocontent" class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                    <h4>
+                                        Not enough topics
+                                    </h4>
                                 </div>
                             </div>
 
                             <div class="tab-pane fade" id="education-tab-pane" role="tabpanel"
                                 aria-labelledby="education-tab" tabindex="0">
-                                <div class="row">
+                                <div class="row" id="educationmaindiv">
                                     <div class="col-lg-6 col-md-6 col-12 mb-4 mb-lg-3">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="educationlink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Graduation</h5>
+                                                        <h5 class="mb-2 educationheading">Graduation</h5>
 
-                                                        <p class="mb-0">Celebrate your achievements with our Graduation Courses! Gain industry-relevant skills, hands-on experience, and expert guidance to excel in your chosen field. Enroll today and take the first step toward a successful future!</p>
+                                                        <p class="mb-0 educationpara">Celebrate your achievements with our Graduation Courses! Gain industry-relevant skills, hands-on experience, and expert guidance to excel in your chosen field. Enroll today and take the first step toward a successful future!</p>
                                                     </div>
 
                                                     <span class="badge bg-education rounded-pill ms-auto">80</span>
                                                 </div>
 
                                                 <img src="images/topics/undraw_Graduation_re_gthn.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid educationimage"  alt="">
                                             </a>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <div class="custom-block bg-white shadow-lg">
-                                            <a href="topics-detail.html">
+                                            <a class="educationlink" href="topics-detail.html">
                                                 <div class="d-flex">
                                                     <div>
-                                                        <h5 class="mb-2">Educator</h5>
+                                                        <h5 class="mb-2 educationheading">Educator</h5>
 
-                                                        <p class="mb-0">
+                                                        <p class="mb-0 educationpara">
                                                             Empower your learning journey with expert-led courses designed to unlock your potential. Our dedicated educators bring practical insights and personalized guidance, ensuring you gain valuable skills and knowledge to excel in your chosen field.</p>
                                                     </div>
 
@@ -781,10 +803,15 @@
                                                 </div>
 
                                                 <img src="images/topics/undraw_Educator_re_ju47.png"
-                                                    class="custom-block-image img-fluid" alt="">
+                                                    class="custom-block-image img-fluid educationimage" alt="">
                                             </a>
                                         </div>
                                     </div>
+                                </div>
+                                <div style=" width: 100%; display: flex ; justify-content: center;" id="educationnocontent" class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+                                    <h4>
+                                        Not enough topics
+                                    </h4>
                                 </div>
                             </div>
                         </div>
@@ -1126,7 +1153,7 @@
             </div>
         </div>
         <div class="copyright-box">
-            <p class="copyright-text mt-lg-5 mt-4">Copyright © 2025 InsightSync. All rights reserved.
+            <p class="copyright-text mt-lg-5 mt-4">
             </p>
         </div>
     </footer>
@@ -1163,6 +1190,9 @@
         } else {
             console.log("User not logged in");
         }
+        document.querySelector(
+            ".copyright-text"
+            ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
     </script>
 
 <script src="//code.tidio.co/oycrplhalpwded6ku4qvy1oammghcsbq.js" async></script>

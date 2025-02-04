@@ -216,11 +216,11 @@
                         <form id="loginForm" method="post" onsubmit="return validateForm()">
                             <div class="mb-3">
                                 <label for="loginEmail" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
+                                <input type="email" placeholder="Enter Email" class="form-control" id="loginEmail" aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3 position-relative">
                                 <label for="loginPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="loginPassword">
+                                <input type="password" placeholder="Enter Password" class="form-control" id="loginPassword">
                                 <span class="eye-icon" onclick="togglePasswordVisibility()">
                                     <i class="bi bi-eye" id="togglePasswordIcon"></i>
                                 </span>
@@ -286,11 +286,11 @@
                                 style="font-size: 1.2rem;">Category</label>
                             <select class="form-select" id="topicCategory" name="category" required>
                                 <option value="" disabled selected>Select a category</option>
-                                <option value="Technology">Design</option>
-                                <option value="Science">Marketing</option>
-                                <option value="Health">Finance</option>
+                                <option value="Design">Design</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Finance">Finance</option>
                                 <option value="Education">Education</option>
-                                <option value="Business">Music</option>
+                                <option value="Music">Music</option>
                             </select>
                         </div>
                         <div class="d-flex justify-content-center">
@@ -390,7 +390,7 @@
             </div>
         </div>
         <div class="copyright-box">
-            <p class="copyright-text mt-lg-5 mt-4">Copyright © 2025 InsightSync. All rights reserved.
+            <p class="copyright-text mt-lg-5 mt-4">
             </p>
         </div>
     </footer>
@@ -539,6 +539,9 @@ function showNotification(message, type) {
 
 
     }
+    document.querySelector(
+        ".copyright-text"
+      ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
 </script>
 
 </body>

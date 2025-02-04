@@ -279,12 +279,12 @@
                           <form id="loginForm" method="post">
                               <div class="mb-3">
                                   <label for="loginEmail" class="form-label">Email address</label>
-                                  <input type="email" class="form-control" id="loginEmail" name="email"
+                                  <input type="email" placeholder="Enter Email" class="form-control" id="loginEmail" name="email"
                                       aria-describedby="emailHelp">
                               </div>
                               <div class="mb-3 position-relative">
                                   <label for="loginPassword" class="form-label">Password</label>
-                                  <input type="password" class="form-control" id="loginPassword" name="password">
+                                  <input type="password" placeholder="Enter Password" class="form-control" id="loginPassword" name="password">
                                   <span class="eye-icon" onclick="togglePasswordVisibility()">
                                       <i class="bi bi-eye" id="togglePasswordIcon"></i>
                                   </span>
@@ -360,12 +360,12 @@
                         <i class="fa fa-solid fa-user"></i>
                         Name
                     </label>
-                    <input type="text" id="uname" name="uname" required>
+                    <input type="text" placeholder="Enter Name" id="uname" name="uname" required>
                     <label for="email">
                         <i class="fa fa-solid fa-envelope"></i>
                         Email Address
                     </label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" placeholder="Enter Email Address" id="email" name="email" required>
                     <label>
                     <i class="fa-solid fa-face-smile"></i>
                     How would you rate your overall experience on our website? 
@@ -414,7 +414,7 @@
                         <i class="fa-solid fa-comments" style="margin-right: 3px;"></i>
                         Any suggestions for improving navigation?
                     </label>
-                    <textarea id="msg" name="msg" rows="4" cols="10" required></textarea>
+                    <textarea id="msg" placeholder="Type here......" name="msg" rows="4" cols="10" required></textarea>
                 </form>
             </div>
             <div class="form_2 data_info" style="display: none;">
@@ -626,7 +626,7 @@
         </div>
     </div>
     <div class="copyright-box">
-        <p class="copyright-text mt-lg-5 mt-4">Copyright © 2025 InsightSync. All rights reserved.
+        <p class="copyright-text mt-lg-5 mt-4">
         </p>
     </div>
 </footer>
@@ -663,6 +663,9 @@
     } else {
         console.log("User not logged in");
     }
+    document.querySelector(
+        ".copyright-text"
+      ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
 </script>
 
 <script src="//code.tidio.co/oycrplhalpwded6ku4qvy1oammghcsbq.js" async></script>
