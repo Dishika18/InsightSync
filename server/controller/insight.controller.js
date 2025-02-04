@@ -8,7 +8,7 @@ const addInsight = async (req, res) => {
     const { title, topic, content } = req.body;
     const filebuffer = req.file ? req.file.buffer : null; // Assuming file is available in req.file.buffer
 
-    if (!title || !topic || !content ) {
+    if (!title || !topic || !content) {
         return res.status(400).json({ error: "title, topic, content, or submittedby not provided in req.body" });
     }
 
@@ -18,13 +18,13 @@ const addInsight = async (req, res) => {
 
     const authheader = req.headers.authorization
     if (!authheader) {
-        return res.status(401).send({error:"auth headers not received"})
+        return res.status(401).send({ error: "auth headers not received" })
     }
 
     try {
         // Upload image to Cloudinary
         const upload_image_url = await upload_on_cloudinary(filebuffer);
-        
+
         if (!upload_image_url) {
             return res.status(400).json({ error: "Error while uploading image to Cloudinary" });
         }
@@ -47,7 +47,7 @@ const addInsight = async (req, res) => {
         // Find the authenticated user
         const userId = decoded.id;
         const user = await User.findById(userId)
-        console.log("this is user",user)
+        console.log("this is user", user)
         if (!user) {
             console.error(`User with ID ${userId} not found.`);
             return res.status(404).json({ error: "User not found." });
@@ -58,7 +58,7 @@ const addInsight = async (req, res) => {
             title,
             topic,
             content,
-            submittedby:user._id,
+            submittedby: user._id,
             submittedbyName: user.username,
             Image: upload_image_url, // Assuming upload_on_cloudinary returns the URL directly
         });
@@ -66,8 +66,8 @@ const addInsight = async (req, res) => {
         if (!createdInsight) {
             return res.status(400).json({ error: "Error while creating the Insight model" });
         }
-        
-        user.inSightsCount = (user.inSightsCount || 0) +1
+
+        user.inSightsCount = (user.inSightsCount || 0) + 1
         await user.save()
 
         // Return success response
@@ -97,19 +97,19 @@ const getallInsight = async (req, res) => {
 };
 
 
-const getinsightbyid = async (req,res) => {
-    const {id } = req.body
+const getinsightbyid = async (req, res) => {
+    const { id } = req.body
 
     if (!id) {
-        res.status(400).send({error:"id not found"})
+        res.status(400).send({ error: "id not found" })
     }
 
     try {
-        const fetchinsight = await Insight.findById({_id:id})
+        const fetchinsight = await Insight.findById({ _id: id })
         if (!fetchinsight) {
-            res.status(400).send({error:"error while finding data"})
+            res.status(400).send({ error: "error while finding data" })
         }
-        res.status(200).send({succes:true, data:fetchinsight})
+        res.status(200).send({ succes: true, data: fetchinsight })
 
     } catch (error) {
         console.error("Error fetching insights by id:", error);
@@ -127,7 +127,7 @@ const getinsightbytopic = async (req, res) => {
 
     try {
         // Use the `find` method with a filter
-        const insights = await Insight.find({ topic: topic });
+        const insights = await Insight.find({ topic: topic }).sort({ "createdAt": -1 });
 
         if (!insights || insights.length === 0) {
             return res.status(404).send({ error: "No insights found for the given topic." });
@@ -193,10 +193,10 @@ const getinsightbyUser = async (req, res) => {
     }
 };
 
-const editinsight = async(req,res) =>{
+const editinsight = async (req, res) => {
     console.log("edit insight hit!")
 
-    const {id,title, content,topic} = req.body;
+    const { id, title, content, topic } = req.body;
     const filebuffer = req.file ? req.file.buffer : null; // Assuming file is available in req.file.buffer
     console.log("got the required fields")
     //first get the use id
@@ -204,9 +204,9 @@ const editinsight = async(req,res) =>{
     const token = header.split(' ')[1]
     if (!token) {
         console.log("no token found")
-        return res.status(400).send({error:"unauthorized access, no token found"})
+        return res.status(400).send({ error: "unauthorized access, no token found" })
     }
-    console.log("githeader")  
+    console.log("githeader")
     let decoded
     try {
         decoded = jwt.verify(token, "THIS_IS_A_JWT_SECRET");
@@ -221,13 +221,13 @@ const editinsight = async(req,res) =>{
     const fetchedInsightDetails = await Insight.findById(id)
     if (!fetchedInsightDetails) {
         console.log("no insight found with this id")
-        return res.status(200).send({error:"no insight found with this id"})
+        return res.status(200).send({ error: "no insight found with this id" })
     }
     console.log("got the insights details")
     //chek the author
     if (userId != fetchedInsightDetails.submittedby) {
         console.log("unauthorized access, the user is not the author of the insight")
-        return res.status(401).send({error:"you are not the author of this insight"})
+        return res.status(401).send({ error: "you are not the author of this insight" })
     }
     console.log("got the author")
     //perform the updation as user is validated successfully
@@ -240,7 +240,7 @@ const editinsight = async(req,res) =>{
         try {
             const updatedUploadUrl = await upload_on_cloudinary(filebuffer)
             if (!updatedUploadUrl) {
-                return res.status(400).send({error:"error occured when uploading to cloudinary"})
+                return res.status(400).send({ error: "error occured when uploading to cloudinary" })
             }
             fetchedInsightDetails.Image = updatedUploadUrl
         } catch (error) {
@@ -251,7 +251,7 @@ const editinsight = async(req,res) =>{
     //everyting is updated not saving the updated data
     await fetchedInsightDetails.save()
 
-    return res.status(200).send({succes:"insight is updated success fully", UpdatedInsight:fetchedInsightDetails})
+    return res.status(200).send({ succes: "insight is updated success fully", UpdatedInsight: fetchedInsightDetails })
 
 }
 
@@ -298,6 +298,37 @@ const deleteinsight = async (req, res) => {
     }
 };
 
+const getinsightbytopic_sorted = async (req, res) => {
+    try {
+        // Extract id from request body
+        const { id } = req.body;
+
+        // Validate if id is provided
+        if (!id) {
+            return res.status(400).json({ error: "id not found" });
+        }
+
+        // Fetch the insight by ID
+        const fetchinsight = await Insight.findById(id);
+
+        // Check if the insight exists
+        if (!fetchinsight) {
+            return res.status(404).json({ error: "Insight not found" });
+        }
+
+        // Fetch insights of the same topic and sort by createdAt in descending order
+        const insights = await Insight.find({ topic: fetchinsight.topic })
+            .sort({ createdAt: -1 });
+
+        // Return the insights
+        return res.status(200).json({ success: true, data: insights });
+
+    } catch (error) {
+        console.error("Error fetching insights by topic:", error);
+        return res.status(500).json({ error: "Server error while fetching insights by topic." });
+    }
+};
 
 
-export {addInsight, getallInsight, getinsightbyid, getinsightbytopic, getinsightbyUser, editinsight, deleteinsight}
+
+export { addInsight, getallInsight, getinsightbyid, getinsightbytopic, getinsightbyUser, editinsight, deleteinsight, getinsightbytopic_sorted }
