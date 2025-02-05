@@ -345,6 +345,7 @@ strong {
 }
 
 .sticky-wrapper.is-sticky .navbar {
+  z-index: 9999999999;
   background-color: var(--secondary-color);
 }
 
@@ -1273,10 +1274,14 @@ blockquote {
   .navbar {
     background-color: var(--secondary-color);
   }
+  .navbar-brand, .navbar-brand:hover {
+    font-size: var(--h4-font-size);
+  }
 
   .navbar-nav .dropdown-menu {
     position: relative;
-    left: 10px;
+    right: 0px;
+    left: unset;
     opacity: 1;
     pointer-events: auto;
     max-width: 190px;
@@ -1284,8 +1289,17 @@ blockquote {
     margin-bottom: 15px;
   }
 
-  .navbar-expand-lg .navbar-nav {
-    padding-bottom: 20px;
+  .navbar-nav .dropdown:has(.authcomp):hover .dropdown-menu {
+    opacity: 1;
+  }
+
+  .navbar-nav .dropdown-menu.authcomp {
+    opacity: 0;
+  }
+
+  .navbar .dropdown-menu.authcomp::before {
+    right: 0px;
+    left: unset;
   }
 
   .navbar-expand-lg .navbar-nav .nav-link {
