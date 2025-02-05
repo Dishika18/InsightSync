@@ -63,9 +63,9 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[1] })
             marketingheadingtext[1].innerText = response.data.data[1].title
             marketingheadingtext[2].innerText = response.data.data[2].title
 
-            marketingParatext[0].innerText = response.data.data[0].content
-            marketingParatext[1].innerText = response.data.data[1].content
-            marketingParatext[2].innerText = response.data.data[2].content
+            marketingParatext[0].innerText = truncateText(response.data.data[0].content)
+            marketingParatext[1].innerText = truncateText(response.data.data[1].content)
+            marketingParatext[2].innerText = truncateText(response.data.data[2].content)
 
             marketingimages[0].src = response.data.data[0].Image
             marketingimages[1].src = response.data.data[1].Image
@@ -108,7 +108,7 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[2] })
             financeheadingtext[0].innerText = response.data.data[0].title
 
 
-            financeParatext[0].innerText = response.data.data[0].content
+            financeParatext[0].innerText = truncateText(response.data.data[0].content)
 
             fianceimage[0].src = response.data.data[0].Image
 
@@ -144,8 +144,8 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[3] })
             educationhaedingtext[1].innerText = response.data.data[1].title
             // musicheadingtext[2].innerText = response.data.data[2].title
 
-            educationpara[0].innerText = response.data.data[0].content
-            educationpara[1].innerText = response.data.data[1].content
+            educationpara[0].innerText = truncateText(response.data.data[0].content)
+            educationpara[1].innerText = truncateText(response.data.data[1].content)
             // musicParatext[2].innerText = response.data.data[2].content
 
             educationimages[0].src = response.data.data[0].Image
@@ -186,9 +186,9 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[4] })
             musicheadingtext[1].innerText = response.data.data[1].title
             musicheadingtext[2].innerText = response.data.data[2].title
 
-            musicParatext[0].innerText = response.data.data[0].content
-            musicParatext[1].innerText = response.data.data[1].content
-            musicParatext[2].innerText = response.data.data[2].content
+            musicParatext[0].innerText = truncateText(response.data.data[0].content)
+            musicParatext[1].innerText = truncateText(response.data.data[1].content)
+            musicParatext[2].innerText = truncateText(response.data.data[2].content)
 
             musicimage[0].src = response.data.data[0].Image
             musicimage[1].src = response.data.data[1].Image
@@ -210,3 +210,38 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[4] })
         document.getElementById("musicnocontent").style.display = "inline"
 
     })
+
+
+// Function to truncate text
+const truncateText = (text, maxLength) => {
+    return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
+};
+
+const firstheadingtext = document.getElementsByClassName("firstheading");
+const firstpara = document.getElementsByClassName("firstpara");
+const firstimages = document.getElementsByClassName("firstimage");
+const firsta = document.getElementsByClassName("firsta")
+axios.get(`${link}/api/v1/insight/getallinsight`)
+    .then((resp) => {
+        console.log("all topics", resp.data.data);
+        
+        let randTopc1 = resp.data.data[Math.floor(Math.random() * resp.data.data.length)];
+        let randTopc2 = resp.data.data[Math.floor(Math.random() * resp.data.data.length)];
+        
+        console.log("from var ", randTopc1);
+
+        firstheadingtext[0].innerText = randTopc1.title;
+        firstheadingtext[1].innerText = randTopc2.title;
+
+        firstpara[0].innerText = truncateText(randTopc1.content, 100); // Limit to 100 characters
+        firstpara[1].innerText = truncateText(randTopc2.content, 100);
+
+        firstimages[0].src = randTopc1.Image;
+        firstimages[1].src = randTopc2.Image;
+
+        firsta[0].href = `/topics-detail.html?id=${randTopc1._id}`
+        firsta[1].href = `/topics-detail.html?id=${randTopc2._id}`
+    })
+    .catch((err) => {
+        console.log(err);
+    });
