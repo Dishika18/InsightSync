@@ -33,30 +33,36 @@ Here are some screenshots of the InsightSync platform in action:
 
 1. **Clone the Repository:**  
    Clone the project to your local machine using the following command:
+   
    ```bash
    git clone https://github.com/yourusername/insightsync.git
 2. **Navigate to the Project Directory:**
+
    ```bash
    cd insightsync
 3. **Create a New Branch:**
    Create a new branch for your feature or bug fix. Use a descriptive name:
+
    ```bash
    git checkout -b feature/YourFeatureName
 4. **Perform Your Tasks:**
    Make the necessary changes and implement your feature or fix.
+   
 5. **Commit Your Changes:**
    Add and commit your changes with a meaningful message:
+   
    ```bash
    git add .
    git commit -m "Add a brief description of your changes"
 6. **Push Your Changes:**
    Push your branch to the remote repository:
+
    ```bash
    git push origin feature/YourFeatureName
 7. **Create a Pull Request:**
    Once your changes are pushed, submit a pull request for review.
 
-### Now setting up the backend:
+## Now setting up the backend:
 
 1. Create a `.env` File
 
