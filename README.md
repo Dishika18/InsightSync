@@ -27,9 +27,9 @@ Here are some screenshots of the InsightSync platform in action:
 ![Screenshot 3](images/Screenshot3.png)
 
 
-### Getting Started
+## Getting Started
 
-To get started with InsightSync:
+### To get started with InsightSync:
 
 1. **Clone the Repository:**  
    Clone the project to your local machine using the following command:
@@ -56,24 +56,79 @@ To get started with InsightSync:
 7. **Create a Pull Request:**
    Once your changes are pushed, submit a pull request for review.
 
-Now setting up the backend:
+### Now setting up the backend:
 
-1. **create a `.env` file in the server folder.**
-2. **The format of `.env` will be:**
-   ```bash
-   MONGO_URI="this is your mongodb url"
-3. **Then do a `cd server` or check if you are in `server` folder or not, if not move to `server` folder**
-4. **Then start your server with `nodemon api/index.js` , make sure you are in the server folder**
+1. Create a `.env` File
 
-Now if you want to deploy the backend:
+To store your environment variables securely, navigate to the `server` folder and create a `.env` file. This file will store your MongoDB connection string.
 
-1. **First go to vercel website**
-2. **Then import Insightsync forked repo**
-3. **Then in the root directory option select `server` folder.**
-4. **Also add the env vaiable, the format will be `MONOG_URI="your_url"`**
-5. **Deploy the server** 
+#### Format of `.env` File:
+```bash
+MONGO_URI="your_mongodb_connection_url"
+```
 
-and the server is deployed succesfully!!!
+Make sure to replace `your_mongodb_connection_url` with your actual MongoDB URL. Keep this file private and do not share it publicly.
+
+---
+
+2. Navigate to the `server` Folder
+
+Before running the server, ensure that you are inside the `server` directory. You can check your current directory using:
+```bash
+pwd  # For macOS/Linux
+cd  # For Windows (shows current directory)
+```
+If you are not in the `server` folder, navigate to it using:
+```bash
+cd server
+```
+
+---
+
+3. Start the Server
+
+Once inside the `server` folder, you can start the server using `nodemon`. Run the following command:
+```bash
+nodemon api/index.js
+```
+This will start your backend server, ensuring that any code changes will automatically restart the server.
+
+If `nodemon` is not installed, you can install it globally using:
+```bash
+npm install -g nodemon
+```
+
+---
+
+### If you want to deploy the Backend on Vercel
+
+If you want to deploy your backend to Vercel, follow these steps:
+
+1. Access the Vercel Website
+Go to [Vercel](https://vercel.com/) and log in or sign up if you haven’t already.
+
+2. Import the Repository
+After logging in, import the **Insightsync forked repository** from your GitHub account.
+
+3. Configure Deployment Settings
+- In the **Root Directory** option, select the `server` folder.
+- Add environment variables by clicking on the **Environment Variables** section.
+
+4. Add the Environment Variable
+Inside the Vercel project settings, add the following environment variable:
+```bash
+MONGO_URI="your_mongodb_connection_url"
+```
+Make sure to replace `your_mongodb_connection_url` with your actual MongoDB URL.
+
+5. Deploy the Server
+Click on the **Deploy** button to start the deployment process. After a few moments, your backend server will be deployed successfully!
+
+You can now test your deployed API by checking the provided Vercel URL.
+```
+```
+
+
  
 
 ## Project Contributers: 
