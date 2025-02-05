@@ -56,6 +56,26 @@ To get started with InsightSync:
 7. **Create a Pull Request:**
    Once your changes are pushed, submit a pull request for review.
 
+Now setting up the backend:
+
+1. **create a `.env` file in the server folder.**
+2. **The format of `.env` will be:**
+   ```bash
+   MONGO_URI="this is your mongodb url"
+3. **Then do a `cd server` or check if you are in `server` folder or not, if not move to `server` folder**
+4. **Then start your server with `nodemon api/index.js` , make sure you are in the server folder**
+
+Now if you want to deploy the backend:
+
+1. **First go to vercel website**
+2. **Then import Insightsync forked repo**
+3. **Then in the root directory option select `server` folder.**
+4. **Also add the env vaiable, the format will be `MONOG_URI="your_url"`**
+5. **Deploy the server** 
+
+and the server is deployed succesfully!!!
+ 
+
 ## Project Contributers: 
 <a href="https://github.com/Dishika18/InsightSync/graphs/contributors">
 <img src="https://contributors-img.web.app/image?repo=Dishika18/InsightSync"/>
