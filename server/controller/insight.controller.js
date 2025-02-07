@@ -329,6 +329,80 @@ const getinsightbytopic_sorted = async (req, res) => {
     }
 };
 
+const likeinsight = async (req,res) => {
+    try {
+        const {insightId} = req.params;
+        const authHeader = req.headers.authorization
+
+        if (!authHeader) {
+            return res.status(401).json({error:"No token provided"})
+        }
+
+        const token = authHeader.split(' ')[1]
+
+        if (!token) {
+            console.error("Bearer token is missing.");
+            return res.status(401).json({ error: "Invalid token format." });
+        }
+
+        const decoded = jwt.verify(token, "THIS_IS_A_JWT_SECRET");
+        const user = await User.findById(decoded.id);
+        if (!user) {
+            console.error(`User not found for token with userId: ${decoded.userId}.`);
+            return res.status(404).json({ error: "User not found." });
+        }
+
+        const userId = user._id;
+
+        let liked = false
+
+        const insight = await Insight.findById(insightId)
+
+        if (!insight) {
+            return res.status(404).json({ error: "Insight not found." });
+        }
+
+        const userIndex = insight.likedBy.indexOf(userId)
+
+        if (userIndex === -1) {
+            insight.likedBy.push(userId)
+            liked = true;
+            insight.likes += 1
+        }else{
+            insight.likedBy.splice(userIndex,1);
+            insight.likes -= 1;
+            liked = false
+        }
+
+        await insight.save({validateModifiedOnly: true})
+        
+        const insightIndex = user.likedtopics.indexOf(insight._id)
+
+        if (insightIndex === -1) {
+            user.likedtopics.push(insight._id)
+        }else{
+            user.likedtopics.splice(insightIndex, 1)
+        }
+
+        await user.save();
+
+        return res.status(200).send({message:"Article like status updated.", likes: insight.likes, liked:liked, likedBy: insight.likedBy})
+    } catch (error) {
+        console.error("Error updating like status:", error);
+        return res.status(500).json({ error: "An error occurred while updating like status." });
+    
+    }
+}
 
 
-export { addInsight, getallInsight, getinsightbyid, getinsightbytopic, getinsightbyUser, editinsight, deleteinsight, getinsightbytopic_sorted }
+export {
+    addInsight,
+    getallInsight,
+    getinsightbyid,
+    getinsightbytopic,
+    getinsightbyUser,
+    editinsight,
+    deleteinsight,
+    getinsightbytopic_sorted,
+    likeinsight
+}
