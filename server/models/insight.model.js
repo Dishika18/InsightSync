@@ -19,7 +19,12 @@ const insightSchema = new Schema(
         submittedbyName:{type:String},
         Image:{
             type:String
-        }
+        },
+        likes:{
+            type:Number,
+            default:0
+        },
+        likedBy:[{type: mongoose.Schema.Types.ObjectId , ref:'User'}]
 
     },
     {

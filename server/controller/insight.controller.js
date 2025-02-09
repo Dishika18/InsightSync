@@ -329,6 +329,106 @@ const getinsightbytopic_sorted = async (req, res) => {
     }
 };
 
+const likeinsight = async (req, res) => {
+    try {
+        const { insightId } = req.params;
+        const authHeader = req.headers.authorization;
+
+        // Check if the authorization header exists
+        if (!authHeader) {
+            return res.status(401).json({ error: "No token provided" });
+        }
+
+        const token = authHeader.split(' ')[1];
+
+        // Ensure the token is properly formatted
+        if (!token) {
+            console.error("Bearer token is missing.");
+            return res.status(401).json({ error: "Invalid token format." });
+        }
+
+        let decoded;
+        try {
+            decoded = jwt.verify(token, "THIS_IS_A_JWT_SECRET");
+        } catch (err) {
+            console.error("Invalid token.", err);
+            return res.status(401).json({ error: "Invalid token." });
+        }
+
+        // Fetch the user associated with the token
+        const user = await User.findById(decoded.id);
+        if (!user) {
+            console.error(`User not found for token with userId: ${decoded.id}.`);
+            return res.status(404).json({ error: "User not found." });
+        }
+
+        const userId = user._id;
+        let liked = false;
+
+        // Fetch the insight
+        const insight = await Insight.findById(insightId);
+        if (!insight) {
+            return res.status(404).json({ error: "Insight not found." });
+        }
+
+        // Ensure `likedBy` is an array before proceeding
+        if (!Array.isArray(insight.likedBy)) {
+            insight.likedBy = [];
+        }
+
+        const userIndex = insight.likedBy.indexOf(userId);
+
+        // Toggle like status
+        if (userIndex === -1) {
+            insight.likedBy.push(userId);
+            liked = true;
+            insight.likes = (insight.likes || 0) + 1; // Ensure likes field is always a number
+        } else {
+            insight.likedBy.splice(userIndex, 1);
+            insight.likes = Math.max(0, (insight.likes || 0) - 1); // Prevent negative likes
+            liked = false;
+        }
+
+        await insight.save({ validateModifiedOnly: true });
+
+        // Ensure `likedtopics` is an array before proceeding
+        if (!Array.isArray(user.likedtopics)) {
+            user.likedtopics = [];
+        }
+
+        const insightIndex = user.likedtopics.indexOf(insight._id);
+
+        // Toggle user's liked topics list
+        if (insightIndex === -1) {
+            user.likedtopics.push(insight._id);
+        } else {
+            user.likedtopics.splice(insightIndex, 1);
+        }
+
+        await user.save();
+
+        return res.status(200).send({
+            message: "Insight like status updated.",
+            likes: insight.likes,
+            liked: liked,
+            likedBy: insight.likedBy,
+        });
+    } catch (error) {
+        console.error("Error updating like status:", error);
+        return res.status(500).json({ error: "An error occurred while updating like status." });
+    }
+};
 
 
-export { addInsight, getallInsight, getinsightbyid, getinsightbytopic, getinsightbyUser, editinsight, deleteinsight, getinsightbytopic_sorted }
+
+export {
+    addInsight,
+    getallInsight,
+    getinsightbyid,
+    getinsightbytopic,
+    getinsightbyUser,
+    editinsight,
+    deleteinsight,
+    getinsightbytopic_sorted,
+    likeinsight
+}
