@@ -1,17 +1,17 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
 :root{
     --primary-color: #80d0c7;
-    --secondary-color :#f0f8ff;
+    --secondary-color: #f0f8ff;
     --text-dark: #b9a3a3;
-    --text-light:#94a3b8;
-    --white:#ffffff;
+    --text-light: #94a3b8;
+    --white: #ffffff;
+    --section-bg-color: #80d0c7; /* Added missing variable */
 }
 
 *{
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
 }
 
@@ -23,7 +23,7 @@ body{
 .section_container{
     max-width: 1200px;
     margin: auto;
-    /* padding: 2rem 1rem; */
+    padding: 20px;
     text-align: center;
     animation: fadeIn 1s ease-in-out;
 }
@@ -58,8 +58,8 @@ body{
 
 .section_grid{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
     animation: fadeIn 2.5s ease-in-out;
 }
 
@@ -69,9 +69,9 @@ body{
     overflow: hidden;
     padding: 5rem 2rem 2rem;
     background-color: var(--white);
-    border-radius: 5px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     animation: float 3s ease-in-out infinite;
 }
 
@@ -86,7 +86,7 @@ body{
     border-radius: 100%;
     background-color: var(--secondary-color);
     z-index: -1;
-    transition: all 0.5s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section_card span{
@@ -105,35 +105,45 @@ body{
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--secondary-color);
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .section_card p{
     margin-bottom: 2rem;
     color: var(--text-light);
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .section_card img{
-    margin-bottom: 1rem;
-    max-width: 100px;
-    border-radius: 100%;
+    display: block;
+    margin: 0 auto 1rem;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
     border: 2px solid var(--secondary-color);
-    transition: border-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section_card h5{
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--secondary-color);
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .section_card h6{
     font-size: 1rem;
     font-weight: 400;
     color: var(--text-light);
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effects */
+.section_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .section_card:hover::before{
@@ -142,6 +152,7 @@ body{
 
 .section_card:hover :is(h4, h5){
     color: var(--white);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .section_card:hover :is(p, h6){
@@ -150,6 +161,8 @@ body{
 
 .section_card:hover img{
     border-color: var(--white);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    transform: scale(1.08);
 }
 
 @keyframes fadeIn {
@@ -167,38 +180,7 @@ body{
     50% { transform: translateY(-10px); }
 }
 
-/* General styles */
-.section_container {
-    padding: 20px;
-}
-
-.section_grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.section_card {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.section_card img {
-    display: block;
-    margin: auto;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    object-fit: fill;
-    object-position: center;
-    border: 2px solid var(--secondary-color);
-    transition: border-color 0.3s ease;
-}
-
-/* Mobile and tablet styles */
+/* Responsive Design */
 @media (max-width: 768px) {
     .section_container {
         padding: 10px;
@@ -213,28 +195,7 @@ body{
     }
 
     .section_card img {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
     }
 }
-
-/* Mobile and tablet styles */
-@media (max-width: 768px) {
-    .section_container {
-        padding: 10px;
-    }
-
-    .section_grid {
-        grid-template-columns: 1fr;
-    }
-
-    .section_card {
-        padding: 15px;
-    }
-
-    .section_card img {
-        width:100px;
-        height: 100px;
-    }
-}
-
