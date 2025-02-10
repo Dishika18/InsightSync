@@ -15,7 +15,7 @@
     <meta name="author" content="">
 
     <title>InsightSync Detail Page</title>
-
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
@@ -32,7 +32,46 @@
 
      <!--icons cdn link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
 
+
+        .btn-container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        #editbtn, #likebtn {
+            width: 100%;
+            background-color: rgb(85, 199, 214);
+            padding: 15px;
+            border: 2px solid aquamarine;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            transition: background 0.3s ease, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        #editbtn:hover, #likebtn:hover {
+            background-color: rgb(72, 179, 194);
+            transform: scale(1.05);
+        }
+
+        #likebtn {
+            margin-top: 10px;
+        }
+
+        .liked {
+            color: red;
+        }
+    </style>
     <script>
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('loginPassword');
@@ -408,10 +447,16 @@
 
                     
                 </div>
-                <div style="width: 100%; ">
-
-                    <button style="background-color: rgb(85, 199, 214); margin-left: 50%; padding: 15px; border: 2px solid aquamarine; border-radius: 100px;" id="editbtn">Edit Insight</button>
+                <div style="width: 100%; display: flex ; justify-content: center; "> 
+                    
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; " class="btn-container">
+                        <button id="editbtn">Edit Insight</button>
+                        <button id="likebtn">
+                            <i class="far fa-heart" id="likeIcon"></i> Like
+                        </button>
+                    </div>
                 </div>
+
             </div>
         </section>
 
@@ -580,6 +625,11 @@
                     const contentClass = document.getElementById("topic-content")
                     contentClass.innerHTML = data.data.content
 
+                    if (data.data.likedBy.includes(localStorage.getItem('userid'))) {
+                        console.log("user liked")
+                        likeIcon.classList.remove("far");
+                        likeIcon.classList.add("fas", "liked");
+                    }
                 })
                 .catch((err) => {
                     console.error("Error fetching insight data:", err);
@@ -619,7 +669,40 @@
             window.location.href=`edit-insight.html?id=${params.get('id')}`
         })
     </script>
+
+<script type="module">
+        import { link } from "./Baselink.js"
+        const params2 = new URLSearchParams(window.location.search);
+    const id = params2.get('id');
     
+    const likeBtn = document.getElementById("likebtn");
+    const likeIcon = document.getElementById("likeIcon");
+    let isLiked = false;
+    
+    
+    
+    likeBtn.addEventListener("click", () => {
+    axios.post(`${link}/api/v1/insight/like/${id}`, {}, { // Empty object for request body
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('authToken')}`
+        }
+    })
+    .then((resp) => {
+        console.log(resp.data);
+        if (resp.data.liked) {
+            likeIcon.classList.remove("far");
+            likeIcon.classList.add("fas", "liked");
+        }else{
+            likeIcon.classList.remove("fas", "liked");
+            likeIcon.classList.add("far");
+        }
+    })
+    .catch((error) => {
+        console.error("Error liking the insight:", error);
+    });
+});
+
+</script>
 </body>
 
 </html>

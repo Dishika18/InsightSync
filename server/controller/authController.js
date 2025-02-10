@@ -39,6 +39,7 @@ export const registerUser = async (req, res) => {
     res.status(201).send({
       message: 'User created successfully',
       token,
+      userCreated: user._id
     });
   } catch (error) {
     console.error('Error during user registration:', error);
@@ -72,6 +73,7 @@ export const loginUser = async (req, res) => {
     res.send({
       message: 'Login successful',
       token,
+      loggedInUser:user._id
     });
   } catch (error) {
     console.error('Error during user login:', error);
