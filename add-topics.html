@@ -16,7 +16,30 @@
     <link href="css/style.css" rel="stylesheet">
     <!--icons cdn link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+                .editor-container {
+            margin-bottom: 10px;
+        }
+        .preview {
+            border: 1px solid #ccc;
+            padding: 10px;
+            min-height: 120px;
+            background: #f9f9f9;
+        }
+        textarea {
+            width: 100%;
+            height: 120px;
+            font-size: 12px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
     <style>
         /* Notification container */
 .notification-container {
@@ -291,13 +314,21 @@
                             <label for="topicImage" class="form-label fw-bold" style="font-size: 1.2rem;">Image</label>
                             <input type="file" class="form-control" id="topicImage" name="image" required>
                         </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="topicContent" class="form-label fw-bold"
                                 style="font-size: 1.2rem;">Description</label>
                             <textarea class="form-control" id="topicContent" name="content" rows="5" placeholder="e.g. Web design involves creating the visual elements..."
                             style="font-size: 12px;"
                                 required></textarea>
+                        </div> -->
+
+                        <div class="editor-container">
+                            <label for="topicContent" class="fw-bold" style="font-size: 1.2rem;">Description</label>
+                            <textarea id="topicContent" name="content" placeholder="e.g. Web design involves creating the visual elements..." required></textarea>
+                            <div id="preview" class="preview" style="display: none;"></div>
                         </div>
+                        <button id="toggleBtn">Switch to Preview</button>
+                        
                         <div class="mb-3">
                             <label for="topicCategory" class="form-label fw-bold"
                                 style="font-size: 1.2rem;">Category</label>
@@ -560,7 +591,35 @@ function showNotification(message, type) {
         ".copyright-text"
       ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
 </script>
+<script>
+    const textarea = document.getElementById("topicContent");
+    const preview = document.getElementById("preview");
+    const toggleBtn = document.getElementById("toggleBtn");
+    let isMarkdown = false;
 
+    toggleBtn.addEventListener("click", () => {
+        if (isMarkdown) {
+            // Switch to text editor mode
+            preview.style.display = "none";
+            textarea.style.display = "block";
+            toggleBtn.textContent = "Switch to Preview";
+        } else {
+            // Switch to markdown preview mode
+            preview.innerHTML = marked.parse(textarea.value);
+            preview.style.display = "block";
+            textarea.style.display = "none";
+            toggleBtn.textContent = "Switch to Editor";
+        }
+        isMarkdown = !isMarkdown;
+    });
+</script>
+
+<script>
+    if (!localStorage.getItem('authToken')) {
+        alert("You are not logged in...You will be redirected")
+        window.location.href="/"
+    }
+</script>
 </body>
 
 </html>
