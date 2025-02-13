@@ -34,6 +34,8 @@ function handleLoginSubmit(event) {
         }).showToast();
 
         localStorage.setItem('authToken', data.token);
+        console.log(data.loggedInUser)
+        localStorage.setItem('userid',data.loggedInUser)
         setTimeout(() => {
           window.location.href = '/';
         }, 3000); // Redirect after 3 seconds

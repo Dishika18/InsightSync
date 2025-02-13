@@ -893,11 +893,21 @@ blockquote {
 -----------------------------------------*/
 .faq-section .accordion-item {
   border: 0;
+  transition: all 0.3s ease-in-out;
+  border-radius: var(--border-radius-medium) !important;
 }
+
+.faq-section .accordion-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 
 .faq-section .accordion-button {
   font-size: var(--h6-font-size);
   font-weight: var(--font-weight-semibold);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border-radius: var(--border-radius-medium)!important ; 
 }
 
 .faq-section .accordion-item:first-of-type .accordion-button {
@@ -908,6 +918,14 @@ blockquote {
   border-radius: var(--border-radius-large);
   box-shadow: none;
   color: var(--primary-color);
+  background-color: var(--secondary-color);
+  color: white;
+  transform: scale(1.02);
+}
+
+.faq-section .accordion-button:hover {
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .faq-section .accordion-body {
@@ -1126,6 +1144,12 @@ blockquote {
   transition: all 0.3s ease;
 }
 
+
+.newsletter-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
 /* Header and Description */
 .newsletter h2 {
   font-size: 2rem;
@@ -1235,6 +1259,16 @@ blockquote {
   .newsletter input[type="email"],
   .newsletter button {
     width: 100%;
+  }
+
+  @keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .newsletter-container {
+    animation: floating 3s ease-in-out infinite;
   }
 }
 
