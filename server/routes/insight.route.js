@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addInsight, deleteinsight, editinsight, getallInsight, getinsightbyid, getinsightbytopic, getinsightbyUser, likeinsight  } from "../controller/insight.controller.js";
+import { addInsight, deleteinsight, editinsight, getallInsight, getinsightbyid, getinsightbytopic, getinsightbyUser, getSaveForLater, likeinsight, saveForLater  } from "../controller/insight.controller.js";
 import multer from 'multer'
 import { upload_on_cloudinary } from "../utils/cloudinary.utils.js";
 import { authUser } from "../middleware/auth.middleware.js";
@@ -39,4 +39,8 @@ router.route("/deleteinsight").delete(authUser ,deleteinsight)
 
 //for liking insight
 router.route('/like/:insightId').post(likeinsight)
+
+//for save for later
+router.route('/saveforlater').post(saveForLater)
+router.route('/getsaveforlater').get(getSaveForLater)
 export default router

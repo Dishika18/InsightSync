@@ -329,6 +329,140 @@ const getinsightbytopic_sorted = async (req, res) => {
     }
 };
 
+const saveForLater = async (req, res) => {
+    try {
+        const { t_id,} = req.body;
+        const authHeader = req.headers.authorization;
+
+        // Check if the authorization header exists
+        if (!authHeader) {
+            return res.status(401).json({ error: "No token provided" });
+        }
+
+        const token = authHeader.split(' ')[1];
+
+        // Ensure the token is properly formatted
+        if (!token) {
+            console.error("Bearer token is missing.");
+            return res.status(401).json({ error: "Invalid token format." });
+        }
+
+        let decoded;
+        try {
+            decoded = jwt.verify(token, "THIS_IS_A_JWT_SECRET");
+        } catch (err) {
+            console.error("Invalid token.", err);
+            return res.status(401).json({ error: "Invalid token." });
+        }
+
+        // Validate request body
+        if (!decoded.id) {
+            return res.status(400).json({ error: "User ID is required." });
+        }
+
+        let u_id = decoded.id
+        console.log(u_id)
+
+        // Validate request body
+        if (!t_id || !u_id) {
+            return res.status(400).json({ error: "Topic ID and User ID are required." });
+        }
+
+        // Fetch user safely
+        const fetchedUser = await User.findById(u_id);
+        if (!fetchedUser) {
+            return res.status(404).json({ error: "User not found." });
+        }
+
+        // // Ensure saveforlaterTopics exists
+        // if (!Array.isArray(fetchedUser.saveforlaterTopics)) {
+        //     fetchedUser.saveforlaterTopics = [];
+        // }
+
+        // Check if topic is already saved
+        const index = fetchedUser.saveforlaterTopics.indexOf(t_id);
+        let updationStatus;
+
+        if (index > -1) {
+            // Remove the topic if it's already saved
+            fetchedUser.saveforlaterTopics.splice(index, 1);
+            updationStatus = false;
+        } else {
+            // Add the topic if it's not saved
+            fetchedUser.saveforlaterTopics.push(t_id);
+            updationStatus = true;
+        }
+
+        // Save the updated user
+        await fetchedUser.save();
+
+        return res.status(200).json({
+            message: updationStatus ? "Topic saved for later." : "Topic removed from saved list.",
+            updationStatus,
+            updatedUser: fetchedUser
+        });
+    } catch (error) {
+        console.error("Error in saveForLater:", error);
+        return res.status(500).json({ error: "Internal Server Error", details: error.message });
+    }
+};
+
+
+const getSaveForLater = async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+
+        // Check if the authorization header exists
+        if (!authHeader) {
+            return res.status(401).json({ error: "No token provided" });
+        }
+
+        const token = authHeader.split(' ')[1];
+
+        // Ensure the token is properly formatted
+        if (!token) {
+            console.error("Bearer token is missing.");
+            return res.status(401).json({ error: "Invalid token format." });
+        }
+
+        let decoded;
+        try {
+            decoded = jwt.verify(token, "THIS_IS_A_JWT_SECRET");
+        } catch (err) {
+            console.error("Invalid token.", err);
+            return res.status(401).json({ error: "Invalid token." });
+        }
+
+        // Validate request body
+        if (!decoded.id) {
+            return res.status(400).json({ error: "User ID is required." });
+        }
+
+        let u_id = decoded.id
+
+        // Fetch user safely
+        const fetchedUser = await User.findById(u_id).populate('saveforlaterTopics');
+
+        if (!fetchedUser) {
+            return res.status(404).json({ error: "User not found." });
+        }
+
+        // Ensure saveforlaterTopics exists
+        // if (!Array.isArray(fetchedUser.saveforlaterTopics)) {
+        //     fetchedUser.saveforlaterTopics = [];
+        // }
+
+        return res.status(200).json({
+            message: "Successfully retrieved saved topics.",
+            savedTopics: fetchedUser.saveforlaterTopics
+        });
+    } catch (error) {
+        console.error("Error in getSaveForLater:", error);
+        return res.status(500).json({ error: "Internal Server Error", details: error.message });
+    }
+};
+
+
 const likeinsight = async (req, res) => {
     try {
         const { insightId } = req.params;
@@ -430,5 +564,7 @@ export {
     editinsight,
     deleteinsight,
     getinsightbytopic_sorted,
-    likeinsight
+    likeinsight,
+    saveForLater,
+    getSaveForLater
 }
