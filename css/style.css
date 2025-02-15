@@ -1495,3 +1495,53 @@ blockquote {
 #social-links :hover {
   color: #000000;
 }
+
+@media screen and (max-width: 991px) {
+  .navbar {
+    background-color: var(--secondary-color);
+    flex-direction: column;
+  }
+
+  .navbar-nav {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 10px;
+    display: block;
+    width: 100%;
+  }
+
+  .navbar-toggler {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    z-index: 9999;
+  }
+}
+@media screen and (max-width: 768px) {
+  .navbar {
+    overflow: hidden;
+  }
+
+  .navbar-collapse {
+    display: block;
+    width: 100%;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  .navbar-nav {
+    position: relative;
+    z-index: 1000;
+  }
+
+  .navbar-toggler {
+    z-index: 1001;
+  }
+}
