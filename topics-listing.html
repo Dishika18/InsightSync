@@ -713,6 +713,7 @@
             resp.data.data.forEach((item) => {
                 const colDiv = document.createElement("div");
                 colDiv.classList.add("col-lg-4", "col-md-6", "col-12", "mb-4","smh");
+                colDiv.id = item.updatedAt;
                 
                 const customBlock = document.createElement("div");
                 customBlock.classList.add("custom-block", "bg-white", "shadow-lg");
@@ -789,18 +790,19 @@
       const sortOrder = sortbtn.value; // Get selected sort option
       const parent = document.getElementById("parentCont");
       const cards = Array.from(parent.getElementsByClassName("smh")); // Get all card elements
-
+      
       // Sort the cards array based on the 'id' attribute (createdAt)
       cards.sort((a, b) => {
         const dateA = new Date(a.id || 0); // Convert id to Date object, handle empty id
         const dateB = new Date(b.id || 0);
-
+        
         if (sortOrder === "new") {
           return dateB - dateA; // Recent first
         } else if (sortOrder === "old") {
           return dateA - dateB; // Oldest first
         }
       });
+      console.log(cards)
 
       // Append the sorted cards back to the parent container
       cards.forEach((card) => parent.appendChild(card));
@@ -835,14 +837,14 @@
       console.log(parentsortingElement)
       Array.from(parentsortingElement).forEach((elem)=>{
         elem.style.display="flex"
-        console.log(elem.lastChild.innerText)
+        console.log(elem.lastChild.lastChild.lastChild.innerText)
         console.log(e.target.value)
         // if (elem.lastChild.innerText !== e.target.value) {
         //   console.log("element is",elem)
         //   elem.style.display ="none"
         //   // element.style.pointerEvents = "none"; // Prevent interaction
         // }
-        if (elem.lastChild.innerText != e.target.value) {
+        if (elem.lastChild.lastChild.lastChild.innerText != e.target.value) {
           elem.style.display="none"
         }
       })
