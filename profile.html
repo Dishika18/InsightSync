@@ -334,6 +334,11 @@
         </button>
       </div>
 
+      <div style="margin-top: 20px; margin-bottom: 30px;" id="saveforlatercont">
+        <h2>Saved For Later</h2>
+        <p>loading insights</p>
+      </div>
+
       <div class="insights-container" id="insights-container">
         <h2>User Insights</h2>
         <p>Loading insights...</p>
@@ -371,6 +376,50 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/custom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script type="module">
+      import { link } from "./Baselink.js";
+      const saveforlaterUrl = `${link}/api/v1/insight/getsaveforlater`
+
+      async function fetchesaveforlater() {
+        const reap = await axios.get(saveforlaterUrl,{
+          headers: {
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+              "Content-Type": "application/json",
+            },
+        })
+        console.log("saved",reap.data)
+        displaySaveforlater(reap.data.savedTopics)
+      }
+
+      fetchesaveforlater()
+
+      function displaySaveforlater(insights){
+        const insightsContainer = document.getElementById("saveforlatercont");
+        insightsContainer.innerHTML = `<h2>User Saved Insights</h2>`;
+
+        if (!insights || insights.length === 0) {
+          insightsContainer.innerHTML += `<p>No insights found.</p>`;
+          return;
+        }
+
+        insights.forEach((insight) => {
+          const insightCard = document.createElement("div");
+          insightCard.className = "insight-card";
+          insightCard.innerHTML = `
+                    <h3>${insight.title}</h3>
+                    <p><strong>Topic:</strong> ${insight.topic}</p>
+                    <p>${insight.content}</p>
+                    ${
+                      insight.Image
+                        ? `<img src="${insight.Image}" alt="${insight.title}">`
+                        : ""
+                    }
+                `;
+          insightsContainer.appendChild(insightCard);
+        });
+      }
+
+    </script>
     <script type="module">
       import { link } from "./Baselink.js";
       console.log(localStorage);
@@ -420,7 +469,9 @@
         }
       }
 
+
       function displayProfile(user) {
+        console.log(user)
         const profileInfoDiv = document.getElementById("profile-info");
         const formattedCreatedOn = user.createdOn
           ? new Date(user.createdOn).toLocaleDateString()
@@ -477,6 +528,8 @@
           notification.style.display = "none";
         }, 5000);
       }
+
+
 
       window.onload = fetchProfile;
     </script>
