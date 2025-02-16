@@ -228,11 +228,17 @@
                                     id="navbarLightDropdownMenuLink"> </a>
                                 <ul class="dropdown-menu authcomp dropdown-menu-light"
                                     aria-labelledby="navbarLightDropdownMenuLink">
-                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                    <li id="loginbtn" ><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
                                             style="cursor: pointer;">Login</a></li>
 
-                                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                    <li id="signupbtn"><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
                                             style="cursor: pointer;">Sign Up</a></li>
+                                    
+                                    <li id="signout">
+                                        <button id="logoutbtn2" class="dropdown-item">
+                                            Sign Out
+                                        </button>
+                                    </li>
 
                                 </ul>
                             </li>
@@ -1165,6 +1171,26 @@
 
 
     <!-- JAVASCRIPT FILES -->
+    <script type="module">
+        console.log("modules")
+        const logoutbtn = document.getElementById("signout")
+        const loginbtn = document.getElementById("loginbtn")
+        const signupbtn = document.getElementById("signupbtn")
+        if (localStorage.getItem("authToken")) {
+            loginbtn.style.display = "none"
+            signupbtn.style.display= "none"
+        }else{
+            
+            logoutbtn.style.display = "none"
+        }
+        document.getElementById("logoutbtn2").addEventListener("click",()=>{
+            console.log("clickedbskjkbvsdhvbskdmbvduksvbsdmhcbjh")
+            localStorage.clear()
+            window.location.href="/"
+        })
+    </script>
+
+
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
@@ -1174,7 +1200,7 @@
     <script type="module" src="js/signup.js"></script>
     <script type="module" src="js/login.js"></script>
 
-    <script>
+    <!-- <script>
         // Check if the user is logged in by verifying the presence of an auth token in localStorage
         if (localStorage.getItem("authToken")) {
             console.log("User logged in");
@@ -1193,7 +1219,7 @@
         document.querySelector(
             ".copyright-text"
             ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
-    </script>
+    </script> -->
 
 <script src="//code.tidio.co/oycrplhalpwded6ku4qvy1oammghcsbq.js" async></script>
     <!-- Toastify JS -->

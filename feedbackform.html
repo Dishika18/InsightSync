@@ -26,6 +26,9 @@
 
   <!--icons cdn link-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <script src="//code.tidio.co/oycrplhalpwded6ku4qvy1oammghcsbq.js" async></script>
+    <!-- Toastify JS -->
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script>
       function togglePasswordVisibility() {
           const passwordInput = document.getElementById('loginPassword');
@@ -220,15 +223,21 @@
                             <a class="navbar-icon bi-person smoothscroll" onclick="location.href='/profile.html'" class="nav-link dropdown-toggle"
                                 data-bs-toggle="dropdown" role="button" aria-expanded="true"
                                 id="navbarLightDropdownMenuLink"> </a>
-                            <ul class="dropdown-menu authcomp dropdown-menu-light"
-                                aria-labelledby="navbarLightDropdownMenuLink">
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
-                                        style="cursor: pointer;">Login</a></li>
+                                <ul class="dropdown-menu authcomp dropdown-menu-light"
+                                    aria-labelledby="navbarLightDropdownMenuLink">
+                                    <li id="loginbtn" ><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                            style="cursor: pointer;">Login</a></li>
 
-                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
-                                        style="cursor: pointer;">Sign Up</a></li>
+                                    <li id="signupbtn"><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                            style="cursor: pointer;">Sign Up</a></li>
+                                    
+                                    <li id="signout">
+                                        <button id="logoutbtn2" class="dropdown-item">
+                                            Sign Out
+                                        </button>
+                                    </li>
 
-                            </ul>
+                                </ul>
                         </li>
                     </ul>
 
@@ -672,27 +681,45 @@
 
 <script>
     // Check if the user is logged in by verifying the presence of an auth token in localStorage
-    if (localStorage.getItem("authToken")) {
-        console.log("User logged in");
+    // if (localStorage.getItem("authToken")) {
+    //     console.log("User logged in");
 
-        // Select all elements with the class 'authcomp'
-        const authElements = document.getElementsByClassName("authcomp");
+    //     // Select all elements with the class 'authcomp'
+    //     const authElements = document.getElementsByClassName("authcomp");
 
-        // Loop through the elements and change their opacity
-        Array.from(authElements).forEach(element => {
-            element.style.opacity = 0; // Set opacity to 0 (hidden)
-            element.style.pointerEvents = "none"; // Prevent interaction
-        });
-    } else {
-        console.log("User not logged in");
-    }
+    //     // Loop through the elements and change their opacity
+    //     Array.from(authElements).forEach(element => {
+    //         element.style.opacity = 0; // Set opacity to 0 (hidden)
+    //         element.style.pointerEvents = "none"; // Prevent interaction
+    //     });
+    // } else {
+    //     console.log("User not logged in");
+    // }
     document.querySelector(
         ".copyright-text"
       ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
 </script>
 
 <script src="//code.tidio.co/oycrplhalpwded6ku4qvy1oammghcsbq.js" async></script>
-
+<script type="module">
+    console.log("modules")
+    const logoutbtn = document.getElementById("signout")
+    const loginbtn = document.getElementById("loginbtn")
+    const signupbtn = document.getElementById("signupbtn")
+    if (localStorage.getItem("authToken")) {
+        console.log(signupbtn)
+        loginbtn.style.display = "none"
+        signupbtn.style.display= "none"
+    }else{
+        
+        logoutbtn.style.display = "none"
+    }
+    document.getElementById("logoutbtn2").addEventListener("click",()=>{
+        console.log("clickedbskjkbvsdhvbskdmbvduksvbsdmhcbjh")
+        localStorage.clear()
+        window.location.href="/"
+    })
+</script>
 
 </body>
 
