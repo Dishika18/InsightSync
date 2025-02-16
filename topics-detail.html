@@ -41,7 +41,7 @@
             text-align: center;
         }
 
-        #editbtn, #likebtn {
+        #editbtn, #likebtn, #savebtn {
             width: 100%;
             background-color: rgb(85, 199, 214);
             padding: 15px;
@@ -423,26 +423,6 @@
                         <p id="topic-content">
 
                         </p>
-
-                        <!-- <blockquote>
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        </blockquote> -->
-
-                        <!-- <div class="row my-4">
-                            <div class="col-lg-6 col-md-6 col-12">
-                                <img src="images/businesswoman-using-tablet-analysis.jpg"
-                                    class="topics-detail-block-image img-fluid">
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-12 mt-4 mt-lg-0 mt-md-0">
-                                <img src="images/colleagues-working-cozy-office-medium-shot.jpg"
-                                    class="topics-detail-block-image img-fluid">
-                            </div>
-                        </div> -->
-                        <!-- 
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum totam dolorem adipisci
-                            magni, explicabo, deleniti nobis, repellendus voluptatem saepe vel sunt eum. Minus, id odio!
-                        </p> -->
                     </div>
 
                     
@@ -453,6 +433,9 @@
                         <button id="editbtn">Edit Insight</button>
                         <button id="likebtn">
                             <i class="far fa-heart" id="likeIcon"></i> Like
+                        </button>
+                        <button style="margin-top: 10px;" id="savebtn">
+                            Save for Later
                         </button>
                     </div>
                 </div>
@@ -587,6 +570,73 @@
 
 
     <!-- JAVASCRIPT FILES -->
+
+    <script type="module">
+        import { link } from "./Baselink.js";
+    
+        const params4 = new URLSearchParams(window.location.search);
+        const id4 = params4.get('id');
+        console.log("forsave for later", id4);
+    
+        const savebtn1 = document.getElementById("savebtn");
+        console.log("savebtn element:", savebtn1);
+    
+        if (!savebtn1) {
+            console.error("Button with id 'savebtn' not found");
+        }
+    
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+            console.error("Auth token not found");
+        } else {
+            axios.get(`${link}/api/v1/insight/getsaveforlater`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((resp) => {
+                console.log("fetch save", resp.data.savedTopics);
+                if (resp.data.savedTopics.some(el => el._id === id4)) {
+                    console.log("included");
+                    savebtn1.innerHTML = "Saved";
+                } else {
+                    console.log("not included");
+                    savebtn1.innerText = "Save For Later";
+                }
+            })
+            .catch((err) => {
+                console.error("API error:", err);
+            });
+        }
+    </script>
+    
+
+    <script type="module">
+        import { link } from "./Baselink.js"
+        const params3 = new URLSearchParams(window.location.search);
+        const id3 = params.get('id');
+        const savebtn = document.getElementById("savebtn")
+        savebtn.addEventListener("click",()=>{
+            console.log("clickeed")
+            axios.post(`${link}/api/v1/insight/saveforlater`,{t_id:id3},{
+                headers: {
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+              "Content-Type": "application/json",
+              },
+            })
+            .then((data)=>{
+                console.log(data.data)
+                if (data.data.updationStatus) {
+                    savebtn.innerText="Saved"
+                }else{
+                    savebtn.innerText="Save For Later"
+                }
+            })
+            .catch((err)=>{console.error(err)})
+        })
+    </script>
+    
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/jquery.sticky.js"></script>
