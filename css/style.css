@@ -219,6 +219,35 @@ strong {
   color: var(--primary-color);
 }
 
+.navbar-nav .nav-link {
+  position: relative;
+  display: inline-block;
+  color: #000; /* Adjust color to fit your design */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #007bff; /* Color of the underline */
+  left: 50%;
+  bottom: 0;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff; /* Adjust hover color */
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 90%; /* Expands underline on hover */
+}
+
+
 /*---------------------------------------
   CUSTOM ICON COLOR               
 -----------------------------------------*/
@@ -435,7 +464,7 @@ strong {
 }
 
 .navbar .dropdown-toggle::after {
-  content: "\f282";
+   
   display: inline-block;
   font-family: bootstrap-icons !important;
   font-size: var(--copyright-font-size);
@@ -447,7 +476,7 @@ strong {
   vertical-align: -0.125em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  position: relative;
+   
   border: 0;
 }
 
