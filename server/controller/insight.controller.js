@@ -105,7 +105,7 @@ const getinsightbyid = async (req, res) => {
     }
 
     try {
-        const fetchinsight = await Insight.findById({ _id: id })
+        const fetchinsight = await Insight.findById({ _id: id }).populate("submittedby")
         if (!fetchinsight) {
             res.status(400).send({ error: "error while finding data" })
         }

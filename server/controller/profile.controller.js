@@ -218,5 +218,28 @@ const getinsights = async (req, res) => {
   }
 };
 
+//Get user public profile function
+
+const getPublicProfile = async (req, res) => {
+    try {
+        const { username } = req.params;
+        
+        // Find user by username and exclude sensitive fields like password, email, etc.
+        const user = await User.findOne({username: username})
+        
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        
+        res.status(200).json(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+
+
+
 // Export functions
-export {getProfile, editProfile, deleteProfile, getinsights}
+export {getProfile, editProfile, deleteProfile, getinsights, getPublicProfile}
