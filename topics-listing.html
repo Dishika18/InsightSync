@@ -37,12 +37,12 @@
     /* Container for all cards */
     #parentCont {
       display: flex;
-      flex-direction: column;
+      /* flex-direction: column; */
       /* Stack cards vertically */
-      gap: 20px;
+      /* gap: 20px; */
       /* Space between cards */
-      height: 70vh;
-      overflow-y: scroll;
+      /* height: 70vh; */
+      /* overflow-y: scroll; */
     }
 
     .box {
@@ -104,111 +104,31 @@
     }
 
 
-    /* Individual card */
-    .card {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px;
-      width: 100%;
-      /* Full width of the container */
-      border: none;
-      border-radius: 12px;
-      background-color: #fff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-      cursor: pointer;
-    }
-
-    .card:hover {
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      transform: translateY(-5px);
-    }
-
-    /* Card image container */
-    .card-image-container {
-      flex-shrink: 0;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      overflow: hidden;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Card image */
-    .card-image {
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-
-    /* Card content */
-    .card-body {
-      flex-grow: 1;
-      margin-left: 20px;
-    }
-
-    .card-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 0 0 10px;
-      color: #333;
-    }
-
-    .card-content {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.5;
-      margin: 0 0 15px;
-    }
-
-    .card-topic {
-      display: inline-block;
-      font-size: 12px;
-      color: #fff;
-      background-color: #007bff;
-      padding: 5px 10px;
+    .custom-block-image {
       border-radius: 20px;
+      margin-top: 0;
+      margin-bottom: 30px;
     }
 
-    /* Button style */
-    .card-button {
-      margin-top: 15px;
-      display: inline-block;
-      padding: 8px 16px;
-      font-size: 14px;
-      color: #fff;
-      background-color: #00c4cc;
-      border: none;
-      border-radius: 8px;
-      text-align: center;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
+    .designPara {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+      display: block;
+      overflow: hidden
     }
 
-    .card-button:hover {
-      background-color: #00a2aa;
+    #parentCont .custom-block .designlink .d-flex > div {
+      width:100%;
+    }
+    .badge {
+      border-radius: 30px !important;
+      padding: 6px 16px;
+      line-height: 1.4;
+      margin-top: 14px;
     }
 
-    /* Badge style */
-    .card-badge {
-      flex-shrink: 0;
-      background-color: #007bff;
-      color: #fff;
-      font-size: 12px;
-      font-weight: bold;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      /* display: flex; */
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
+
     
   </style>
 
@@ -646,7 +566,7 @@
 
           </div>
 
-          <div class="col-lg-8 col-12 mt-3 mx-auto padding-45">
+          <div class="col-lg-12 col-12 mt-3 mx-auto padding-45">
             <div id="parentCont" class=""></div>
           </div>
         </div>
@@ -767,74 +687,83 @@
     import { link } from "./Baselink.js";
 
     window.onload = async () => {
+      /*
+      <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+        <div class="custom-block bg-white shadow-lg">
+            <a class="designlink" href="topics-detail.html">
+                <div class="d-flex">
+                    <div>
+                        <h5 class="mb-2 designHeading">Web Design</h5>
+
+                        <p class="mb-0 designPara"> Web design involves creating visually appealing, user-friendly, and responsive websites by combining layout, typography, colors, and functionality to enhance user experience and effectively communicate the site's purpose.
+                        </p>
+                    </div>
+
+                    <span class="badge bg-design rounded-pill ms-auto">14</span>
+                </div>
+
+                <img src="images/topics/undraw_Remote_design_team_re_urdx.png"
+                    class="custom-block-image img-fluid designimage" alt="">
+            </a>
+        </div>
+    </div>
+      */
       axios
         .get(`${link}/api/v1/insight/getallinsight`)
         .then((resp) => {
           console.log(resp.data.data);
+          // const parent = document.getElementById("parentCont");
           const parent = document.getElementById("parentCont");
-          resp.data.data.forEach((item) => {
-            const cardDiv = document.createElement("div");
-            cardDiv.classList.add("card");
-
-            // Make card clickable
-            cardDiv.onclick = () => {
-              window.location.href = `topics-detail.html?id=${item._id}`;
-            };
-
-            cardDiv.setAttribute(
-              "id",
-              `${item.createdAt ? item.createdAt : ""}`
-            );
-
-            // Image container
-            const imageContainer = document.createElement("div");
-            imageContainer.classList.add("card-image-container");
-            const cardImage = document.createElement("img");
-            cardImage.classList.add("card-image");
-            cardImage.src = item.Image || "default-image.png"; // Default image if none provided
-            cardImage.alt = item.title;
-            imageContainer.appendChild(cardImage);
-
-            // Card body
-            const cardBody = document.createElement("div");
-            cardBody.classList.add("card-body");
-
-            const cardTitle = document.createElement("h2");
-            cardTitle.classList.add("card-title");
-            cardTitle.textContent = item.title;
-            cardBody.appendChild(cardTitle);
-
-            const cardContent = document.createElement("p");
-            cardContent.classList.add("card-content");
-            cardContent.textContent =
-              item.content.length > 100
-                ? `${item.content.substring(0, 100)}...`
-                : item.content;
-            cardBody.appendChild(cardContent);
-
-            const cardButton = document.createElement("a");
-            cardButton.href = `topics-detail.html?id=${item._id}`;
-            cardButton.classList.add("card-button");
-            cardButton.textContent = "Learn More";
-            cardBody.appendChild(cardButton);
-
-            // Badge
-            const badge = document.createElement("div");
-            badge.classList.add("card-badge");
-            badge.textContent = "14"; // Replace with dynamic value if needed
-
-            //card topic
-            const topic = document.createElement("div");
-            topic.classList.add("card-topic"); // Add this line
-            topic.textContent = item.topic;
-
-
-            // Append elements
-            cardDiv.appendChild(imageContainer);
-            cardDiv.appendChild(cardBody);
-            cardDiv.appendChild(badge);
-            cardDiv.appendChild(topic)
-            parent.appendChild(cardDiv);
+          parent.classList.add('row','flex-wrap')
+            
+            resp.data.data.forEach((item) => {
+                const colDiv = document.createElement("div");
+                colDiv.classList.add("col-lg-4", "col-md-6", "col-12", "mb-4","smh");
+                colDiv.id = item.updatedAt;
+                
+                const customBlock = document.createElement("div");
+                customBlock.classList.add("custom-block", "bg-white", "shadow-lg");
+                
+                const linkElement = document.createElement("a");
+                linkElement.classList.add("designlink");
+                linkElement.href = `topics-detail.html?id=${item._id}`;
+                
+                const flexDiv = document.createElement("div");
+                flexDiv.classList.add("d-flex");
+                
+                const textDiv = document.createElement("div");
+                
+                const heading = document.createElement("h5");
+                heading.classList.add("mb-2", "designHeading");
+                heading.textContent = item.title;
+                
+                const paragraph = document.createElement("p");
+                paragraph.classList.add("mb-0", "designPara");
+                paragraph.textContent = item.content;
+                
+                textDiv.appendChild(heading);
+                textDiv.appendChild(paragraph);
+                
+                const badge = document.createElement("span");
+                badge.classList.add("badge", "bg-design", "ms-auto");
+                badge.textContent = item.topic;
+                
+                flexDiv.appendChild(textDiv);
+                // flexDiv.appendChild(badge);
+                
+                const image = document.createElement("img");
+                image.classList.add("custom-block-image", "img-fluid", "designimage");
+                image.src = item.Image || "default-image.png";
+                image.alt = item.title;
+                
+                linkElement.appendChild(image);
+                linkElement.appendChild(flexDiv);
+                linkElement.appendChild(badge);
+                
+                customBlock.appendChild(linkElement);
+                colDiv.appendChild(customBlock);
+                
+                parent.appendChild(colDiv);
           });
         })
         .catch((err) => console.log(err));
@@ -846,7 +775,7 @@
     const searchinput = document.getElementById("searchinput");
 
     searchbtn.addEventListener("click", () => {
-      const elements = document.getElementsByClassName("card");
+      const elements = document.getElementsByClassName("smh");
       const searchtext = searchinput.value.toLowerCase().trim(); // Normalize the search text for case-insensitive comparison
 
       Array.from(elements).forEach((element) => {
@@ -866,19 +795,20 @@
     sortbtn.addEventListener("change", () => {
       const sortOrder = sortbtn.value; // Get selected sort option
       const parent = document.getElementById("parentCont");
-      const cards = Array.from(parent.getElementsByClassName("card")); // Get all card elements
-
+      const cards = Array.from(parent.getElementsByClassName("smh")); // Get all card elements
+      
       // Sort the cards array based on the 'id' attribute (createdAt)
       cards.sort((a, b) => {
         const dateA = new Date(a.id || 0); // Convert id to Date object, handle empty id
         const dateB = new Date(b.id || 0);
-
+        
         if (sortOrder === "new") {
           return dateB - dateA; // Recent first
         } else if (sortOrder === "old") {
           return dateA - dateB; // Oldest first
         }
       });
+      console.log(cards)
 
       // Append the sorted cards back to the parent container
       cards.forEach((card) => parent.appendChild(card));
@@ -909,18 +839,18 @@
     const sortbytopicbtn = document.getElementById("sortbytopicbtn")
 
     sortbytopicbtn.addEventListener("change", (e) => {
-      const parentsortingElement =document.getElementsByClassName("card");
+      const parentsortingElement =document.getElementsByClassName("smh");
       console.log(parentsortingElement)
       Array.from(parentsortingElement).forEach((elem)=>{
         elem.style.display="flex"
-        console.log(elem.lastChild.innerText)
+        console.log(elem.lastChild.lastChild.lastChild.innerText)
         console.log(e.target.value)
         // if (elem.lastChild.innerText !== e.target.value) {
         //   console.log("element is",elem)
         //   elem.style.display ="none"
         //   // element.style.pointerEvents = "none"; // Prevent interaction
         // }
-        if (elem.lastChild.innerText != e.target.value) {
+        if (elem.lastChild.lastChild.lastChild.innerText != e.target.value) {
           elem.style.display="none"
         }
       })
