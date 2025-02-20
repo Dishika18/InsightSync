@@ -399,6 +399,12 @@
                         </nav>
 
                         <h2 class="topic-header text-white"></h2>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <img id="userimg" src="" alt="User Image" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;">
+                            <h5 id="username" style="margin: 0; font-size: 14px; font-weight: 600; color: black;">Title User</h5>
+                        </div>
+                        
+                        
 
                         <div class="d-flex align-items-center mt-5">
                             <a href="#topics-detail" class="btn custom-btn custom-border-btn smoothscroll me-4">Read
@@ -577,6 +583,7 @@
 
     <!-- JAVASCRIPT FILES -->
 
+
     <script type="module">
         import { link } from "./Baselink.js";
     
@@ -652,6 +659,8 @@
     <script type="module">
         import { link } from "./Baselink.js"
         console.log(link)
+        const usernamecont = document.getElementById("username")
+        const userimg = document.getElementById("userimg")
         window.onload = async () => {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
@@ -686,6 +695,9 @@
                         likeIcon.classList.remove("far");
                         likeIcon.classList.add("fas", "liked");
                     }
+
+                    userimg.innerText = data.data.submittedby.username
+                    userimg.src = data.data.submittedby.image
                 })
                 .catch((err) => {
                     console.error("Error fetching insight data:", err);
