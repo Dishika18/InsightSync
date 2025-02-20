@@ -464,7 +464,7 @@ strong {
 }
 
 .navbar .dropdown-toggle::after {
-   
+  /* content: "\f282"; */
   display: inline-block;
   font-family: bootstrap-icons !important;
   font-size: var(--copyright-font-size);
