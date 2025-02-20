@@ -1057,8 +1057,35 @@ blockquote {
   border-color: transparent;
 }
 
-.site-footer-links {
+/* .site-footer-links {
   padding-left: 0;
+} */
+.site-footer-links .site-footer-link {
+  position: relative;
+  display: inline-block;
+  color:   #00bfff; /* Adjust to match your footer theme */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.site-footer-links .site-footer-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #21c6b0; /* Color of the underline */
+  left: 50%;
+  bottom: 0;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.site-footer-links .site-footer-link:hover {
+  color: #2298a8; /* Adjust hover color */
+}
+
+.site-footer-links .site-footer-link:hover::after {
+  width: 100%; /* Expands underline on hover */
 }
 
 .site-footer-link-item {
