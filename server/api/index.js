@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 import { dbConnect } from './dbconnect.js';
 import { app } from './app.js';
+import express from 'express';
+import feedbackRoutes from '../routes/feedback.route.js';
 
 // Load environment variables
 dotenv.config();
@@ -18,3 +20,7 @@ dbConnect()
   .catch((err) => {
     console.error('Database connection failed:', err);
   });
+
+const router = express.Router();
+router.use('/feedback', feedbackRoutes);
+export default router;

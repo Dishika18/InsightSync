@@ -356,6 +356,12 @@
                       </nav>
 
                       <h2 class="text-white">Feedback Form</h2>
+                      <form id="feedbackForm">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required />
+                        <input type="email" id="email" name="email" placeholder="Your Email" required />
+                        <textarea id="feedback" name="feedback" placeholder="Your Feedback" required></textarea>
+                        <button type="submit">Submit</button>
+                      </form>
                   </div>
 
               </div>
@@ -698,6 +704,30 @@
     document.querySelector(
         ".copyright-text"
       ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
+</script>
+<script>
+    document.getElementById("feedbackForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+  
+      const formData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        feedback: document.getElementById("feedback").value,
+      };
+  
+      try {
+        const response = await fetch("/api/v1/feedback/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        });
+  
+        const data = await response.json();
+        alert(data.message);
+      } catch (error) {
+        alert("Error submitting feedback.");
+      }
+    });
 </script>
 
 <script src="//code.tidio.co/oycrplhalpwded6ku4qvy1oammghcsbq.js" async></script>
