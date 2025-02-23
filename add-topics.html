@@ -14,6 +14,8 @@
         rel="stylesheet">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/Scroll.css" rel="stylesheet">
+
     <!--icons cdn link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -457,8 +459,15 @@
     <div id="notificationMessage" class="notification-message"></div>
 </div>
 
-    <!-- Scroll to Top Button -->
-    <button onclick="topFunction()" id="scrollToTopBtn" title="Go to top"></button>
+    <!-- Top scroll button -->
+    <div id="scrollButton" class="hidden">
+        <div class="outer-circle">
+            <div class="inner-circle">
+                <div class="arrow"><i class="fa-solid fa-arrow-up"></i></div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- JAVASCRIPT FILES -->
     <script src="js/jquery.min.js"></script>
@@ -467,6 +476,7 @@
     <script src="js/custom.js"></script>
     <script type="module" src="js/signup.js"></script>
     <script type="module" src="js/login.js"></script>
+    <script src="js/click-scroll.js"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.1/axios.min.js"></script>
