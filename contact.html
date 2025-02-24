@@ -24,6 +24,7 @@
     <link href="css/bootstrap-icons.css" rel="stylesheet">
 
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/Scroll.css" rel="stylesheet">
 
     <!--icons cdn link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -572,8 +573,15 @@
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
-    <button onclick="topFunction()" id="scrollToTopBtn" title="Go to top"></button>
+    <!-- Top scroll button -->
+    <div id="scrollButton" class="hidden">
+        <div class="outer-circle">
+            <div class="inner-circle">
+                <div class="arrow"><i class="fa-solid fa-arrow-up"></i></div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- JAVASCRIPT FILES -->
@@ -584,6 +592,7 @@
     <script src="js/signup.js"></script>
     <script src="js/login.js"></script>
     <script src="js/contacts.js"></script>
+    <script src="js/click-scroll.js"></script>
     <!-- Toastify JS -->
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script>
