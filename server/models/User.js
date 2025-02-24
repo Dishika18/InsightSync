@@ -76,7 +76,8 @@ const userSchema = new mongoose.Schema({
     type:String
   },
   likedtopics:[{type: mongoose.Schema.Types.ObjectId, ref:'insightmodel'}],
-  saveforlaterTopics:[{type: mongoose.Schema.Types.ObjectId , ref:'insightmodel'}]
+  saveforlaterTopics:[{type: mongoose.Schema.Types.ObjectId , ref:'insightmodel'}],
+  comments:[{type: mongoose.Schema.Types.ObjectId , ref:'Comment'}]
 }, {timestamps: true});
 
 // Hash password before saving
