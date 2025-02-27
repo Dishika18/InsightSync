@@ -6,7 +6,7 @@ import authRoutes from '../routes/authRoutes.js';
 import insightRouter from '../routes/insight.route.js';
 import { profileRouter } from '../routes/profile.routes.js';
 import contactRoutes from '../routes/contact.route.js'; 
-
+import { commentRouter } from '../routes/comment.router.js';
 
 const app = express();
 
@@ -34,7 +34,7 @@ app.use('/api/v1/auth', authRoutes);       // Authentication routes
 app.use('/api/v1/insight', insightRouter); // Insight routes
 app.use("/api/v1/profile",profileRouter);
 app.use("/api/v1/contact", contactRoutes);//contactform route
-
+app.use("/api/v1/comment",commentRouter);
 
 
 export { app };
