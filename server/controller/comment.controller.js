@@ -104,6 +104,27 @@ const getComments = async (req, res) => {
     }
 }
 
+const getCommentsByInsight = async (req, res) => {
+    console.log("gethit")
+    const { id } = req.params;
+    let i_id = id;
+    if (!i_id) {
+        return res.status(400).json({ message: 'Insight ID is required' });
+    }
+
+    try {
+        const fetchedInsight = await Insight.findById(i_id).populate({ path: 'comments', populate: { path: 'userId' } });
+        if (!fetchedInsight) {
+            return res.status(400).json({ message: 'Insight not found' });
+        }
+
+        return res.status(200).json({ message: 'Comments fetched successfully', comments: fetchedInsight.comments });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+}
+
 const deleteComment = async (req, res) => {
     const { c_id } = req.body;
     if (!c_id) {
@@ -122,4 +143,4 @@ const deleteComment = async (req, res) => {
     }
 }
 
-export { addComment, getComments, deleteComment };
+export { addComment, getComments, deleteComment, getCommentsByInsight };

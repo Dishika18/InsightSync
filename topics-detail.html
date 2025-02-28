@@ -32,6 +32,144 @@
 
      <!--icons cdn link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+
+
+
+h2 {
+    text-align: center;
+}
+
+.comments-section {
+    margin-top: 20px;
+}
+
+.comment-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-content {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.comment-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.comment-content small {
+    display: block;
+    color: #666;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+    </style>
+
+    <!-- add comment -->
+     <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+.comments-container {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.comment-form button {
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    background: #0056b3;
+}
+
+/* Comments List */
+#comments-container {
+    margin-top: 15px;
+}
+
+.comment-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-content {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.comment-content p {
+    margin: 0;
+}
+
+.comment-content small {
+    display: block;
+    color: #666;
+    margin-top: 5px;
+}
+
+     </style>
+
     <style>
 
 
@@ -72,6 +210,8 @@
             color: red;
         }
     </style>
+    <script type="module" src="./fetchcomment.js"></script>
+    <script type="module" src="./addcomment.js"></script>
     <script>
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('loginPassword');
@@ -425,6 +565,21 @@
             </div>
         </header>
 
+        <div class="container" style="margin-top: 10px;">
+            <h2>Comments</h2>
+            <div id="comments-container" class="comments-section">
+                <p>Loading comments...</p>
+            </div>
+        </div>
+
+        <div class="comments-container">
+    
+            <!-- Comment Form -->
+            <form id="comment-form" class="comment-form">
+                <textarea id="comment-text" placeholder="Write your comment..." required></textarea>
+                <button type="submit">Post Comment</button>
+            </form>
+        </div>
 
         <section class="topics-detail-section section-padding" id="topics-detail">
             <div class="container">
@@ -589,10 +744,10 @@
     
         const params4 = new URLSearchParams(window.location.search);
         const id4 = params4.get('id');
-        console.log("forsave for later", id4);
+        // console.log("forsave for later", id4);
     
         const savebtn1 = document.getElementById("savebtn");
-        console.log("savebtn element:", savebtn1);
+        // console.log("savebtn element:", savebtn1);
     
         if (!savebtn1) {
             console.error("Button with id 'savebtn' not found");
@@ -609,12 +764,12 @@
                 },
             })
             .then((resp) => {
-                console.log("fetch save", resp.data.savedTopics);
+                // console.log("fetch save", resp.data.savedTopics);
                 if (resp.data.savedTopics.some(el => el._id === id4)) {
-                    console.log("included");
+                    // console.log("included");
                     savebtn1.innerHTML = "Saved";
                 } else {
-                    console.log("not included");
+                    // console.log("not included");
                     savebtn1.innerText = "Save For Later";
                 }
             })
@@ -631,7 +786,7 @@
         const id3 = params.get('id');
         const savebtn = document.getElementById("savebtn")
         savebtn.addEventListener("click",()=>{
-            console.log("clickeed")
+            // console.log("clickeed")
             axios.post(`${link}/api/v1/insight/saveforlater`,{t_id:id3},{
                 headers: {
               Authorization: `Bearer ${localStorage.getItem("authToken")}`,
@@ -639,7 +794,7 @@
               },
             })
             .then((data)=>{
-                console.log(data.data)
+                // console.log(data.data)
                 if (data.data.updationStatus) {
                     savebtn.innerText="Saved"
                 }else{
@@ -658,20 +813,20 @@
 
     <script type="module">
         import { link } from "./Baselink.js"
-        console.log(link)
+        // console.log(link)
         const usernamecont = document.getElementById("username")
         const userimg = document.getElementById("userimg")
         window.onload = async () => {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
-            console.log("Insight ID:", id);
+            // console.log("Insight ID:", id);
 
             // Fetch data for the specific ID or perform any other logic
             axios.post(`${link}/api/v1/insight/getinsightbyid`, {
                 id
             })
                 .then(({ data }) => {
-                    console.log(data);
+                    // console.log(data);
 
                     // Set image source
                     const img = document.getElementById("topic-image-id");
@@ -732,12 +887,11 @@
     <script>
         const editbtn = document.getElementById("editbtn")
         const params = new URLSearchParams(window.location.search);
-        console.log(params.get('id'))
+        // console.log(params.get('id'))
         editbtn.addEventListener("click",()=>{
             window.location.href=`edit-insight.html?id=${params.get('id')}`
         })
     </script>
-
 <script type="module">
         import { link } from "./Baselink.js"
         const params2 = new URLSearchParams(window.location.search);
@@ -756,7 +910,7 @@
         }
     })
     .then((resp) => {
-        console.log(resp.data);
+        // console.log(resp.data);
         if (resp.data.liked) {
             likeIcon.classList.remove("far");
             likeIcon.classList.add("fas", "liked");
@@ -772,7 +926,7 @@
 
 </script>
 <script type="module">
-    console.log("modules")
+    // console.log("modules")
     const logoutbtn = document.getElementById("signout")
     const loginbtn = document.getElementById("loginbtn")
     const signupbtn = document.getElementById("signupbtn")
@@ -783,7 +937,7 @@
         logoutbtn.style.display = "none"
     }
     document.getElementById("logoutbtn2").addEventListener("click",()=>{
-        console.log("clickedbskjkbvsdhvbskdmbvduksvbsdmhcbjh")
+        // console.log("clickedbskjkbvsdhvbskdmbvduksvbsdmhcbjh")
         localStorage.clear()
         window.location.href="/"
     })
