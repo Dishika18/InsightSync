@@ -541,7 +541,9 @@ h2 {
                         <h2 class="topic-header text-white"></h2>
                         <div style="display: flex; align-items: center; gap: 8px;">
                             <img id="userimg" src="" alt="User Image" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;">
-                            <h5 id="username" style="margin: 0; font-size: 14px; font-weight: 600; color: black;">Title User</h5>
+                            <a id="profilelink" href="./puplicprofile.html">
+                                <h5 id="username" style="margin: 0; font-size: 14px; font-weight: 600; color: black;">Title User</h5>
+                            </a>
                         </div>
                         
                         
@@ -813,6 +815,11 @@ h2 {
 
     <script type="module">
         import { link } from "./Baselink.js"
+        // const username = "exampleUser"; // Replace this with the actual username
+        const profileLink = document.getElementById("profilelink");
+        console.log(profileLink)
+
+
         // console.log(link)
         const usernamecont = document.getElementById("username")
         const userimg = document.getElementById("userimg")
@@ -826,7 +833,7 @@ h2 {
                 id
             })
                 .then(({ data }) => {
-                    // console.log(data);
+                    console.log(data);
 
                     // Set image source
                     const img = document.getElementById("topic-image-id");
@@ -853,6 +860,8 @@ h2 {
 
                     userimg.innerText = data.data.submittedby.username
                     userimg.src = data.data.submittedby.image
+                    profileLink.href = `./puplicprofile.html?username=${data.data.submittedby._id}`;
+
                 })
                 .catch((err) => {
                     console.error("Error fetching insight data:", err);

@@ -9,6 +9,6 @@ profileRouter.route('/getprofile').get(getProfile)
 profileRouter.route('/editprofile').post( upload.single('image') ,editProfile)
 profileRouter.route('/deleteprofile').delete(deleteProfile)
 profileRouter.route('/getinsights').get(getinsights)
-profileRouter.route('/getpublicprofile').get(getPublicProfile)
+profileRouter.route('/getpublicprofile/:username').get(getPublicProfile)
 
 export {profileRouter}

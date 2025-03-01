@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Page</title>
+
+    <!-- Fonts and Icons -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: linear-gradient(
+          to bottom right,
+          rgb(101, 169, 171),
+          rgb(200, 230, 231)
+        );
+        margin: 0;
+        padding: 0;
+      }
+
+      .profile-container {
+        max-width: 900px;
+        margin: 50px auto;
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .profile-container:hover {
+        transform: scale(1.03);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .profile-title {
+        font-size: 28px;
+        color: rgb(101, 169, 171);
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .profile-item {
+        margin: 15px 0;
+        font-size: 18px;
+        color: #333;
+      }
+
+      .profile-item span {
+        font-weight: bold;
+        color: rgb(101, 169, 171);
+      }
+
+      .insights-container {
+        margin-top: 30px;
+        height: 100vh;
+        overflow-y: auto;
+      }
+
+      .insight-card {
+        background: linear-gradient(
+          to right,
+          rgb(240, 248, 255),
+          rgb(200, 230, 231)
+        );
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px auto;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        overflow: auto;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .insight-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .insight-card h3 {
+        font-size: 22px;
+        color: rgb(101, 169, 171);
+        margin-bottom: 10px;
+      }
+
+      .insight-card p {
+        font-size: 16px;
+        color: #555;
+      }
+
+      .insight-card img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-top: 10px;
+        transition: transform 0.3s ease;
+      }
+
+      .insight-card img:hover {
+        transform: scale(1.05);
+      }
+
+      nav {
+        background: rgb(101, 169, 171);
+      }
+
+      .navbar-brand span {
+        color: white;
+        font-weight: bold;
+      }
+
+      .nav-link {
+        color: white;
+        margin-right: 15px;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .navbar-toggler-icon {
+        background-color: white;
+      }
+
+      .profile-image {
+        height: 200px;
+        transition: transform 0.3s ease;
+      }
+
+      .profile-image img {
+        object-fit: contain;
+        height: 200px;
+        width: 190px;
+        border: 2px solid rgb(101, 169, 171);
+        border-radius: 1000px;
+        transition: transform 0.3s ease;
+      }
+
+      .profile-image img:hover {
+        transform: scale(1.1);
+      }
+
+      #notification-container {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        width: 300px;
+        z-index: 1000;
+      }
+
+      .notification {
+        background: rgb(101, 169, 171);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 10px;
+        font-size: 16px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .notification.success {
+        background: #28a745;
+      }
+
+      .notification.error {
+        background: #dc3545;
+      }
+
+      .notification.info {
+        background: #007bff;
+      }
+
+      .notification.fade-out {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+
+      #notification {
+        font-family: Arial, sans-serif;
+        animation: slideIn 0.5s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+        }
+        to {
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+        <!-- Nav Bar -->
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+              <a class="navbar-brand" href="index.html">
+                  <i class="bi-back"></i>
+                  <span>InsightSync</span>
+              </a>
+
+              <div class="d-lg-none ms-auto me-4">
+                  <ul class="navbar-nav">
+                      <li class="nav-item dropdown position-relative">
+                          <a class="navbar-icon bi-person smoothscroll"> </a>
+                          <ul class="dropdown-menu position-absolute authcomp dropdown-menu-light"
+                              aria-labelledby="navbarLightDropdownMenuLink">
+                              <li><a class="dropdown-item" data-bs-toggle="modal" onclick="location.href='/profile.html'" data-bs-target="#loginModal"
+                                      style="cursor: pointer;">Profile</a></li>
+                                      
+                              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                      style="cursor: pointer;">Login</a></li>
+
+                              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                      style="cursor: pointer;">Sign Up</a></li>
+
+                          </ul>
+                      </li>
+                  </ul>
+              </div>
+
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                      <li class="nav-item">
+                          <a class="nav-link click-scroll" href="index.html#section_1">Home</a>
+                      </li>
+
+                      <li class="nav-item">
+                          <a class="nav-link click-scroll" href="index.html#section_2">Browse Topics</a>
+                      </li>
+
+                      <li class="nav-item">
+                          <a class="nav-link click-scroll" href="index.html#section_3">How it works</a>
+                      </li>
+
+                      <li class="nav-item">
+                          <a class="nav-link click-scroll" href="index.html#section_4">FAQs</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link click-scroll" href="index.html#section_5">Testimonials</a>
+                      </li>
+
+                      <li class="nav-item">
+                          <a class="nav-link click-scroll" href="index.html#section_6">Contact</a>
+                      </li>
+                      
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button"
+                              data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+
+                          <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                              <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
+                              <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
+                              <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
+
+
+                          </ul>
+                      </li>
+                  </ul>
+
+                  <!-- <div class="d-none d-lg-block">
+                      <ul class="navbar-nav">
+                          <li class="nav-item dropdown">
+                              <a class="navbar-icon bi-person smoothscroll" onclick="location.href='/profile.html'" class="nav-link dropdown-toggle"
+                                  data-bs-toggle="dropdown" role="button" aria-expanded="true"
+                                  id="navbarLightDropdownMenuLink"> </a>
+                                  <ul class="dropdown-menu authcomp dropdown-menu-light"
+                                  aria-labelledby="navbarLightDropdownMenuLink">
+                                  <li id="loginbtn" ><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                          style="cursor: pointer;">Login</a></li>
+
+                                  <li id="signupbtn"><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                          style="cursor: pointer;">Sign Up</a></li>
+                                  
+                                  <li id="signout">
+                                      <button id="logoutbtn2" class="dropdown-item">
+                                          Sign Out
+                                      </button>
+                                  </li>
+
+                              </ul>
+                          </li>
+                      </ul>
+
+
+                  </div> -->
+              </div>
+          </div>
+      </nav>
+      
+      <!-- Signup Modal -->
+      <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-md">
+              <div class="modal-content glass-effect">
+                  <div class="modal-header justify-content-center">
+                      <img
+                          src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000" />
+                  </div>
+                  <div class="modal-body">
+                      <form id="signupForm" method="post" onsubmit="return validateSignupForm()">
+                          <div class="mb-3">
+                              <label for="signupUsername" class="form-label">Username</label>
+                              <input type="text" class="form-control" id="signupUsername" name="username"
+                                  placeholder="Enter username" required>
+                          </div>
+                          <div class="mb-3">
+                              <label for="signupEmail" class="form-label">Email address</label>
+                              <input type="email" class="form-control" id="signupEmail" name="email"
+                                  placeholder="Enter email" required>
+                          </div>
+                          <div class="mb-3 position-relative">
+                              <label for="signupPassword" class="form-label">Password</label>
+                              <input type="password" class="form-control" id="signupPassword" name="password"
+                                  placeholder="Enter password" required>
+                              <span class="eye-icon" onclick="toggleSignupPasswordVisibility()">
+                                  <i class="bi bi-eye" id="toggleSignupPasswordIcon"></i>
+                              </span>
+                          </div>
+                          <div class="mb-3 position-relative">
+                              <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                              <input type="password" class="form-control" id="signupConfirmPassword"
+                                  name="confirmPassword" placeholder="Confirm password" required>
+                              <span class="eye-icon" onclick="toggleSignupConfirmPasswordVisibility()">
+                                  <i class="bi bi-eye" id="toggleSignupConfirmPasswordIcon"></i>
+                              </span>
+                          </div>
+                          <div class="d-flex justify-content-center">
+                              <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                          </div>
+                          <div class="mt-3 text-center">
+                              <p>Already have an account? <a href="#" data-bs-toggle="modal"
+                                      data-bs-target="#loginModal" data-bs-dismiss="modal"
+                                      aria-label="Close">Login</a></p>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+      <!-- Login Page -->
+      <nav>
+          <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-md">
+                  <div class="modal-content glass-effect">
+                      <div class="modal-header justify-content-center">
+                          <img
+                              src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Login☺️;&color=000000" />
+                      </div>
+                      <div class="modal-body">
+                          <form id="loginForm" method="post">
+                              <div class="mb-3">
+                                  <label for="loginEmail" class="form-label">Email address</label>
+                                  <input type="email" placeholder="Enter Email" class="form-control" id="loginEmail" name="email"
+                                      aria-describedby="emailHelp">
+                              </div>
+                              <div class="mb-3 position-relative">
+                                  <label for="loginPassword" class="form-label">Password</label>
+                                  <input type="password" placeholder="Enter Password" class="form-control" id="loginPassword" name="password">
+                                  <span class="eye-icon" onclick="togglePasswordVisibility()">
+                                      <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                                  </span>
+                              </div>
+                              <div class="mb-3 text-end">
+                                  <a href="#" class="link-primary">Forgot Password?</a>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                  <button type="submit" class="btn btn-primary btn-block">Login</button>
+                              </div>
+                              <div class="mt-3 text-center">
+                                  <p>Don't have an account? <a href="#" data-bs-toggle="modal"
+                                          data-bs-target="#signupModal" data-bs-dismiss="modal"
+                                          aria-label="Close">Sign Up</a></p>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </nav>
+    </main>
+
+    <div class="profile-container">
+      <h1 class="profile-title">Profile Information</h1>
+      <div id="profile-info">
+        <p>Loading profile details...</p>
+      </div>
+
+
+
+
+
+      <!-- <div class="insights-container" id="insights-container">
+        <h2>User Insights</h2>
+        <p>Loading insights...</p>
+      </div> -->
+    </div>
+
+    <!-- for the notification -->
+    <div
+      id="notification"
+      style="
+        display: none;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: red;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+      "
+    >
+      <span id="notification-message"></span>
+    </div>
+
+    <!-- JavaScript Files -->
+    <!-- <script>
+      const editbtn = document.getElementById("editbtn");
+      editbtn.addEventListener(
+        "click",
+        () => (window.location.href = "/edit-profile.html")
+      );
+    </script> -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+    <!-- <script type="module">
+      import { link } from "./Baselink.js";
+      console.log(localStorage);
+
+      async function fetchProfile() {
+        const profileUrl = `${link}/api/v1/profile/getprofile`;
+        const publicProfile = `${link}/api/v1/profile/getpublicprofile/:username`;
+        const insightsUrl = `${link}/api/v1/insight/getinsightbyuser`;
+        const authToken = localStorage.getItem("authToken");
+
+        // Check if authToken exists, if not, show specific notification and redirect
+        if (!authToken) {
+          showNotification(
+            "You need to log in to access this page. Redirecting..."
+          );
+          setTimeout(() => {
+            window.location.href = "/index.html";
+          }, 5000);
+          return; // Stop further execution
+        }
+
+        try {
+          // Fetch profile details
+          const profileResponse = await axios.get(profileUrl, {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+              "Content-Type": "application/json",
+            },
+          });
+          displayProfile(profileResponse.data.user);
+
+          // Fetch insights
+          const insightsResponse = await axios.get(insightsUrl, {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+              "Content-Type": "application/json",
+            },
+          });
+          displayInsights(insightsResponse.data.insights);
+        } catch (error) {
+          // Handle specific errors
+          if (error.response && error.response.status === 401) {
+            showNotification("Unauthorized access. Please log in.");
+            setTimeout(() => {
+              window.location.href = "/index.html";
+            }, 5000);
+          }
+        }
+      }
+
+
+      function displayProfile(user) {
+        console.log(user)
+        const profileInfoDiv = document.getElementById("profile-info");
+        const formattedCreatedOn = user.createdOn
+          ? new Date(user.createdOn).toLocaleDateString()
+          : "N/A";
+        console.log(user);
+        profileInfoDiv.innerHTML = `
+                <div class="profile-image" >
+                    <img src=${user.image} alt="profile image">
+                </div>
+                <p class="profile-item"><span>Username:</span> ${user.username}</p>
+                <p class="profile-item"><span>Email:</span> ${user.email}</p>
+                <p class="profile-item"><span>Insights Count:</span> ${user.inSightsCount}</p>
+                <p class="profile-item"><span>Account Created On:</span> ${formattedCreatedOn}</p>
+            `;
+      }
+
+      function displayInsights(insights) {
+        const insightsContainer = document.getElementById("insights-container");
+        insightsContainer.innerHTML = `<h2>User Insights</h2>`;
+
+        if (!insights || insights.length === 0) {
+          insightsContainer.innerHTML += `<p>No insights found.</p>`;
+          return;
+        }
+
+        insights.forEach((insight) => {
+          const insightCard = document.createElement("div");
+          insightCard.className = "insight-card";
+          insightCard.innerHTML = `
+                    <h3>${insight.title}</h3>
+                    <p><strong>Topic:</strong> ${insight.topic}</p>
+                    <p>${insight.content}</p>
+                    ${
+                      insight.Image
+                        ? `<img src="${insight.Image}" alt="${insight.title}">`
+                        : ""
+                    }
+                `;
+          insightsContainer.appendChild(insightCard);
+        });
+      }
+
+      function showNotification(message) {
+        const notification = document.getElementById("notification");
+        const notificationMessage = document.getElementById(
+          "notification-message"
+        );
+
+        notificationMessage.textContent = message;
+        notification.style.display = "block";
+
+        // Automatically hide and redirect after 5 seconds
+        setTimeout(() => {
+          notification.style.display = "none";
+        }, 5000);
+      }
+
+
+
+      window.onload = fetchProfile;
+    </script> -->
+    <script type="module">
+      import { link } from "./Baselink.js";
+    
+      async function fetchPublicProfile() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const username = urlParams.get("username");
+        if (!username) {
+          showNotification("Username not provided in URL.");
+          return;
+        }
+    
+        const publicProfileUrl = `${link}/api/v1/profile/getpublicprofile/${username}`;
+    
+        try {
+          const response = await fetch(publicProfileUrl, {
+            headers: { "Content-Type": "application/json" },
+          });
+          const data = await response.json();
+          displayProfile(data);
+        } catch (error) {
+          showNotification("Error fetching profile.");
+          console.error(error);
+        }
+      }
+    
+      function displayProfile(user) {
+        const profileInfoDiv = document.getElementById("profile-info");
+        profileInfoDiv.innerHTML = `
+          <div class="profile-container">
+            <div class="profile-image">
+              <img src="${user.image}" alt="Profile image">
+            </div>
+            <p class="profile-item"><span>Username:</span> ${user.username}</p>
+            <p class="profile-item"><span>Insights Count:</span> ${user.inSightsCount}</p>
+          </div>
+        `;
+      }
+    
+      function showNotification(message) {
+        const notification = document.getElementById("notification");
+        notification.textContent = message;
+        notification.style.display = "block";
+        setTimeout(() => {
+          notification.style.display = "none";
+        }, 5000);
+      }
+    
+      window.onload = fetchPublicProfile;
+    </script>
+    <script type="module">
+      // console.log("modules")
+      const logoutbtn = document.getElementById("signout")
+      const loginbtn = document.getElementById("loginbtn")
+      const signupbtn = document.getElementById("signupbtn")
+      if (localStorage.getItem("authToken")) {
+          loginbtn.style.display = "none"
+          signupbtn.style.display= "none"
+      }else{
+          logoutbtn.style.display = "none"
+      }
+      document.getElementById("logoutbtn2").addEventListener("click",()=>{
+          // console.log("clickedbskjkbvsdhvbskdmbvduksvbsdmhcbjh")
+          localStorage.clear()
+          window.location.href="/"
+      })
+  </script>
+  </body>
+</html>
