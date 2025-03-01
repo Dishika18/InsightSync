@@ -225,7 +225,7 @@ const getPublicProfile = async (req, res) => {
         const { username } = req.params;
         
         // Find user by username and exclude sensitive fields like password, email, etc.
-        const user = await User.findOne({username: username})
+        const user = await User.findOne({_id: username})
         
         if (!user) {
             return res.status(404).json({ message: "User not found" });
