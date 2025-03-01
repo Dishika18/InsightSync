@@ -549,8 +549,9 @@
           <div style="display: flex; flex-direction: row; justify-content: center;">
             <div class="selectbtn">
               <select name="" id="sortbtn">
-                <option value="new">Sort by recent</option>
-                <option value="old">Sort by oldest</option>
+                <option value="new">Sort by Recent</option>
+                <option value="old">Sort by Oldest</option>
+                <option value="liked">Sort by Most Liked</option>
               </select>
             </div>
             <div class="selectbtn">
@@ -751,11 +752,23 @@
                 
                 textDiv.appendChild(heading);
                 textDiv.appendChild(paragraph);
-                
+
                 const badge = document.createElement("span");
-                badge.classList.add("badge", "bg-design", "ms-auto");
+                badge.classList.add("badge", "bg-design");
                 badge.textContent = item.topic;
+
+                const like = document.createElement("span");
+                like.classList.add("badge", "bg-design");
+                like.textContent = item.likes;
+                colDiv.setAttribute("data-liked", item.likes);
                 
+                const topicLikeDiv = document.createElement("div");
+                topicLikeDiv.style.display = "flex";
+                topicLikeDiv.style.justifyContent = "space-between";
+                topicLikeDiv.classList.add("ms-auto");
+                topicLikeDiv.appendChild(badge);
+                topicLikeDiv.appendChild(like);
+
                 flexDiv.appendChild(textDiv);
                 // flexDiv.appendChild(badge);
                 
@@ -766,7 +779,7 @@
                 
                 linkElement.appendChild(image);
                 linkElement.appendChild(flexDiv);
-                linkElement.appendChild(badge);
+                linkElement.appendChild(topicLikeDiv);
                 
                 customBlock.appendChild(linkElement);
                 colDiv.appendChild(customBlock);
@@ -807,13 +820,20 @@
       
       // Sort the cards array based on the 'id' attribute (createdAt)
       cards.sort((a, b) => {
-        const dateA = new Date(a.id || 0); // Convert id to Date object, handle empty id
-        const dateB = new Date(b.id || 0);
-        
-        if (sortOrder === "new") {
-          return dateB - dateA; // Recent first
-        } else if (sortOrder === "old") {
-          return dateA - dateB; // Oldest first
+        if (sortOrder === "new" || sortOrder === "old") {
+          const dateA = new Date(a.id || 0); // Convert id to Date object, handle empty id
+          const dateB = new Date(b.id || 0);
+          
+          if (sortOrder === "new") {
+            return dateB - dateA; // Recent first
+          } else if (sortOrder === "old") {
+            return dateA - dateB; // Oldest first
+          }
+        } else if (sortOrder === "liked") {
+          const likeA = a.dataset.liked;
+          const likeB = b.dataset.liked;
+
+          return likeB - likeA;
         }
       });
       console.log(cards)
