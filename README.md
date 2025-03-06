@@ -1,33 +1,41 @@
 # InsightSync - Exploring Ideas, Expanding Horizons
 
-Welcome to InsightSync! This platform is dedicated to exploring ideas and discovering insights all over the world. Our mission is to connect curious minds with valuable information and foster a community of learners.
+InsightSync is a platform designed to bring ideas to life through meaningful discussions. It connects curious minds, allowing users to share perspectives, explore diverse topics, and gain valuable insights. Whether you want to contribute your thoughts or learn from others, InsightSync makes knowledge-sharing effortless and engaging.  
 
-### About
+## 🌟 Open Source Recognition 
 
-InsightSync aims to harmonize knowledge and curiosity by providing a user-friendly platform for users to explore various topics. We believe in the power of sharing insights and learning from one another to broaden perspectives.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/cc5ea58f-fa49-4560-be8f-7769260039cb" alt="SWoC 2024" width="300">
+</p>
 
-### Features
+<p align="center">
+   <strong>InsightSync</strong> was part of <strong>SWoC Season 5</strong>, providing a space for contributors to <br>  
+   <strong>collaborate, learn, and grow</strong> while building meaningful solutions together.  
+</p>
+
+### ✨ Features
 
 - **Curated Content:** Access a wide range of articles and resources on diverse topics.
 - **User-Friendly Interface:** Easy navigation and an engaging design enhance the user experience.
 - **Community Discussions:** Connect with other users, share insights, and participate in discussions.
 - **Free Access:** All features and content are available for free, promoting inclusive learning.
 
-### Screenshots
+### 📸 Screenshots  
 
 Here are some screenshots of the InsightSync platform in action:
 
 *Home Page*
-![Screenshot 1](images/Screenshot1.png)
+![image](https://github.com/user-attachments/assets/6e2918a0-0502-454a-974a-a18d81eabe2a)
 
-*Browse Topics*
-![Screenshot 2](images/Screenshot2.png)
+
+*Add Insights*
+![image](https://github.com/user-attachments/assets/6105d357-01d0-409d-9527-806fa57f616f)
+
 
 *Contact*
 ![Screenshot 3](images/Screenshot3.png)
 
-
-## Getting Started
+## 🛠 Getting Started 
 
 ### To get started with InsightSync:
 
@@ -62,7 +70,7 @@ Here are some screenshots of the InsightSync platform in action:
 7. **Create a Pull Request:**
    Once your changes are pushed, submit a pull request for review.
 
-## Now setting up the backend:
+## ⚙️ Setting Up the Backend 
 
 1. Create a `.env` File
 
@@ -109,7 +117,7 @@ Now if you want to deploy the backend check [Deployment.md](./server/deplyment.m
 ---
 
 
-## Project Contributers: 
+## 🎉 Meet the Contributors 
 <a href="https://github.com/Dishika18/InsightSync/graphs/contributors">
 <img src="https://contributors-img.web.app/image?repo=Dishika18/InsightSync"/>
 
