@@ -2,16 +2,18 @@
 
 InsightSync is a platform designed to bring ideas to life through meaningful discussions. It connects curious minds, allowing users to share perspectives, explore diverse topics, and gain valuable insights. Whether you want to contribute your thoughts or learn from others, InsightSync makes knowledge-sharing effortless and engaging.  
 
-## 🌟 Open Source Recognition 
+## 🌟 Open Source Recognition  
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/cc5ea58f-fa49-4560-be8f-7769260039cb" alt="SWoC 2024" width="300">
-</p>
+InsightSync has been a part of **various open-source programs**, providing contributors a platform to **collaborate, learn, and build impactful solutions** together.  
 
-<p align="center">
-   <strong>InsightSync</strong> was part of <strong>SWoC Season 5</strong>, providing a space for contributors to <br>  
-   <strong>collaborate, learn, and grow</strong> while building meaningful solutions together.  
-</p>
+### 🚀 Programs We Participated In  
+
+| Program       | Description | Logo |
+|--------------|------------|------|
+| **SWoC Season 5** | InsightSync was part of SWoC Season 5, providing a space for contributors to collaborate, learn, and grow while building meaningful solutions together. | <img src="https://github.com/user-attachments/assets/cc5ea58f-fa49-4560-be8f-7769260039cb" width="200"> |
+| **Aperture 2.0**  | InsightSync is currently part of Aperture 2.0, bringing developers together to build, innovate, and make an impact in the open-source community. | <img src="https://github.com/user-attachments/assets/cbe924f7-0c4c-40ec-a1de-674921d289f8" width="300"> |
+
+---
 
 ### ✨ Features
 
@@ -123,6 +125,4 @@ Now if you want to deploy the backend check [Deployment.md](./server/deplyment.m
 
 ---
 
-### Thank You!
-
-Thank you for your interest in contributing to InsightSync! Your efforts to explore ideas and share insights make a significant impact on our community. Together, we can foster curiosity, expand horizons, and create a platform that empowers learners everywhere. We look forward to your contributions and insights!
+### 🔥 We're always open to more contributions! Join us and be a part of our journey. 🚀  
