@@ -29,7 +29,7 @@ Happy coding! 💻✨
 - **Community Discussions:** Connect with other users, share insights, and participate in discussions.
 - **Free Access:** All features and content are available for free, promoting inclusive learning.
 
-### 📸 Screenshots  
+<!-- ### 📸 Screenshots  
 
 Here are some screenshots of the InsightSync platform in action:
 
@@ -43,6 +43,8 @@ Here are some screenshots of the InsightSync platform in action:
 
 *Contact*
 ![Screenshot 3](images/Screenshot3.png)
+
+-->
 
 ## 🛠 Getting Started 
 
