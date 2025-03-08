@@ -1,8 +1,6 @@
 ## PULL REQUEST 
 <!-- Please make sure issue number is mention in Pull Request else PR will not be merged. -->
-Title :
-
-Closes #<issue_no>
+#### Closes #<issue_no>
 <!-- Example Close #244  -->
 <!-- Replace `issue_no` with the issue number which is fixed in this PR -->
 
