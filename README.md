@@ -13,6 +13,13 @@ InsightSync has been a part of **various open-source programs**, providing contr
 | **SWoC Season 5** | InsightSync was part of SWoC Season 5, providing a space for contributors to collaborate, learn, and grow while building meaningful solutions together. | <img src="https://github.com/user-attachments/assets/cc5ea58f-fa49-4560-be8f-7769260039cb" width="200"> |
 | **Aperture 2.0**  | InsightSync is currently part of Aperture 2.0, bringing developers together to build, innovate, and make an impact in the open-source community. | <img src="https://github.com/user-attachments/assets/cbe924f7-0c4c-40ec-a1de-674921d289f8" width="300"> |
 
+
+### 🚀 Want to Contribute?  
+
+We welcome contributions! If you're interested in contributing, please check out the [`Contributors.md`](./Contributors.md) file for guidelines on how to get started.  
+
+Happy coding! 💻✨  
+
 ---
 
 ### ✨ Features
