@@ -1063,7 +1063,7 @@
         <div class="newsletter-container">
             <h2>Subscribe to Our Newsletter</h2>
             <p>Stay updated with our latest news and offers. Enter your email below to subscribe.</p>
-            <form onsubmit="handleSubscribe(event)" action="#" method="POST">
+            <form onsubmit="handleSubscribe(event)" action="#" method="POST" >
                 <input type="email" placeholder="Enter your email" id="email" required>
                 <button type="submit">Subscribe</button>
             </form>
@@ -1243,6 +1243,8 @@
             ".copyright-text"
             ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
 
+        
+        <!--onclicking subscribe toast appear on the screen-->
         function handleSubscribe(event){
             event.preventDefault();
             const email = document.getElementById("email").value;
