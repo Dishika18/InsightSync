@@ -4,6 +4,68 @@ console.log(link)
 
 const topics = ['Design', 'Marketing', 'Finance', 'Education', 'Music'];
 
+// Search By User
+const searchBtn = document.querySelector(".user-search-btn");
+const searchInput = document.querySelector(".search-input");
+const resultsContainer = document.getElementById("results");
+
+const debounce = (func, delay) => {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => func(...args), delay);
+    };
+};
+
+const fetchResults = async (query) => {
+    if (!query.trim()) {
+        resultsContainer.innerHTML = "";
+        return;
+    }
+
+    try {
+        const modifiedValue = query.charAt(0).toUpperCase() + query.slice(1).toLowerCase();
+        const { data } = await axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: modifiedValue });
+
+        if (data.data.length >= 3) {
+            displayResults(data.data);
+        } else {
+            resultsContainer.innerHTML = `<p class="text-warning">No results found for "${query}"</p>`;
+        }
+    } catch (error) {
+        console.error(error);
+        resultsContainer.innerHTML = `<p class="text-white">Failed to fetch results. Please try again.</p>`;
+    }
+};
+
+const displayResults = (results) => {
+    resultsContainer.innerHTML = results
+        .map(item => `
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="${item.Image}" class="card-img-top" alt="${item.title}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.title}</h5>
+                        <p class="card-text">${item.content}</p>
+                        <p class="text-muted">By ${item.submittedbyName}</p>
+                    </div>
+                </div>
+            </div>
+        `)
+        .join('');
+};
+
+searchInput.addEventListener("input", debounce((e) => {
+    const value = e.target.value;
+    fetchResults(value);
+}, 500));
+
+searchBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    fetchResults(searchInput.value);
+});
+
+
 //for design topics
 const headingtext = document.getElementsByClassName("designHeading")
 const paratext = document.getElementsByClassName("designPara")
@@ -29,7 +91,7 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[0] })
             designimages[0].src = response.data.data[0].Image
             designimages[1].src = response.data.data[1].Image
             designimages[2].src = response.data.data[2].Image
-            
+
             designlink[0].href = `/topics-detail.html?id=${response.data.data[0]._id}`
             designlink[1].href = `/topics-detail.html?id=${response.data.data[1]._id}`
             designlink[2].href = `/topics-detail.html?id=${response.data.data[2]._id}`
@@ -50,10 +112,10 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[0] })
 const marketingheadingtext = document.getElementsByClassName("marketingheading")
 const marketingParatext = document.getElementsByClassName("marketingpara")
 const marketingimages = document.getElementsByClassName("marketingimage")
-const marketinglink = document.getElementsByClassName("marketinglink") 
+const marketinglink = document.getElementsByClassName("marketinglink")
 axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[1] })
     .then((response) => {
-        console.log("marketig",response.data)
+        console.log("marketig", response.data)
         if (response.data.data.length < 3) {
             const maindiv = document.getElementById("marketingmaindiv")
             maindiv.style.display = "none"
@@ -130,10 +192,10 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[2] })
 const educationhaedingtext = document.getElementsByClassName("educationheading")
 const educationpara = document.getElementsByClassName("educationpara")
 const educationimages = document.getElementsByClassName("educationimage")
-const educationlink  = document.getElementsByClassName("educationlink")
+const educationlink = document.getElementsByClassName("educationlink")
 console.log("education images", educationimages)
 axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[3] })
-    .then((response)=>{
+    .then((response) => {
         console.log(response.data)
         if (response.data.data.length < 2) {
             const maindiv = document.getElementById("educationmaindiv")
@@ -160,7 +222,7 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[3] })
             // nocontent.style.display = "none"
         }
     })
-    .catch((err)=>{
+    .catch((err) => {
         console.log(err)
         const maindiv = document.getElementById("educationmaindiv")
         maindiv.style.display = "none"
@@ -170,13 +232,13 @@ axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[3] })
 
 //for music tag
 const musicheadingtext = document.getElementsByClassName("musicheading")
-console.log("music heading",musicheadingtext)
+console.log("music heading", musicheadingtext)
 const musicParatext = document.getElementsByClassName("musicpara")
 const musicimage = document.getElementsByClassName("musicimage")
 const musiclinks = document.getElementsByClassName("musiclink")
 axios.post(`${link}/api/v1/insight/getinsightbytopic`, { topic: topics[4] })
     .then((response) => {
-        console.log("music",response.data)
+        console.log("music", response.data)
         if (response.data.data.length < 3) {
             const maindiv = document.getElementById("musicmaindiv")
             maindiv.style.display = "none"
@@ -224,10 +286,10 @@ const firsta = document.getElementsByClassName("firsta")
 axios.get(`${link}/api/v1/insight/getallinsight`)
     .then((resp) => {
         console.log("all topics", resp.data.data);
-        
+
         let randTopc1 = resp.data.data[Math.floor(Math.random() * resp.data.data.length)];
         let randTopc2 = resp.data.data[Math.floor(Math.random() * resp.data.data.length)];
-        
+
         console.log("from var ", randTopc1);
 
         firstheadingtext[0].innerText = randTopc1.title;
