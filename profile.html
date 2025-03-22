@@ -31,27 +31,53 @@
       }
 
       .profile-container {
-        max-width: 900px;
+        display: grid;
+        grid-template-columns: 2fr;
+        max-width: 100%;
         margin: 50px auto;
-        background: white;
+        background: rgb(101, 169, 171);
         border-radius: 10px;
         padding: 30px;
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         text-align: center;
         transition: transform 0.3s ease-in-out;
+        overflow: visible;
       }
 
       .profile-container:hover {
-        transform: scale(1.03);
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
       }
 
+      .profile-left-subcontainer {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 21%;
+        left: 3%;
+        max-width: 30%;
+        max-height: fit-content;
+        background-color: white;
+        padding: 20px;
+        border-radius: 30px;
+      }
+
+      .profile-right-subcontainer{
+        position: relative;
+        left: 31%;
+        max-width: 70%;
+        background-color: white;
+        border-radius: 30px;
+      }
       .profile-title {
         font-size: 28px;
         color: rgb(101, 169, 171);
         margin-bottom: 20px;
         text-transform: uppercase;
         font-weight: 700;
+      }
+
+      .profile-title:hover{
+        color: black;
       }
 
       .profile-item {
@@ -78,7 +104,7 @@
           rgb(200, 230, 231)
         );
         border-radius: 8px;
-        padding: 15px;
+        padding: 20px;
         margin: 10px auto;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
         text-align: left;
@@ -111,7 +137,7 @@
       }
 
       .insight-card img:hover {
-        transform: scale(1.05);
+        transform: scale(1.01);
       }
 
       nav {
@@ -140,7 +166,7 @@
 
       .profile-image {
         height: 200px;
-        transition: transform 0.3s ease;
+        transition: transform 0.2s ease-in-out;
       }
 
       .profile-image img {
@@ -149,11 +175,13 @@
         width: 190px;
         border: 2px solid rgb(101, 169, 171);
         border-radius: 1000px;
-        transition: transform 0.3s ease;
+        transition: transform 0.2s ease-in-out;
       }
 
       .profile-image img:hover {
-        transform: scale(1.1);
+        transform: scale(1.07);
+        transform: rotate(10deg);
+        border: 2px solid rgb(101, 169, 171);
       }
 
       #notification-container {
@@ -195,6 +223,55 @@
       #notification {
         font-family: Arial, sans-serif;
         animation: slideIn 0.5s ease-out;
+      }
+
+      @media screen and (max-width: 992px) {
+        .profile-container {
+          flex-direction: column;
+          max-width: 100%;
+        }
+
+        .profile-left-subcontainer {
+          max-width: 100%;
+          position: static;
+          margin-bottom: 40px;
+        }
+
+        .profile-right-subcontainer {
+          margin-top: 20px;
+          position: static;
+          min-width: 100%;
+        }
+
+        .profile-image {
+          height: 250px;
+        }
+
+        .profile-image img {
+          height: 250px;
+          width: 240px;
+        }
+
+        .profile-item {
+          font-size: 20px;
+        }
+
+        .insight-card {
+          padding: 20px;
+        }
+
+        .insight-card h3 {
+          font-size: 24px;
+        }
+
+        .insight-card p {
+          font-size: 18px;
+        }
+
+        .insight-card img {
+          margin-top: 15px;
+        }
+
       }
 
       @keyframes slideIn {
@@ -316,32 +393,35 @@
     </main>
 
     <div class="profile-container">
-      <h1 class="profile-title">Profile Information</h1>
-      <div id="profile-info">
-        <p>Loading profile details...</p>
-      </div>
+      <div class="profile-left-subcontainer">
+        <h1 class="profile-title">Profile Information</h1>
+        <div id="profile-info">
+          <p>Loading profile details...</p>
+        </div>
 
-      <div>
-        <button
-          id="editbtn"
-          style="
-            background-color: rgb(101, 169, 171);
-            padding: 10px;
-            border-radius: 20px;
-          "
-        >
-          Edit profile
-        </button>
+        <div>
+          <button
+            id="editbtn"
+            style="
+              background-color: rgb(101, 169, 171);
+              padding: 10px;
+              border-radius: 20px;
+            "
+          >
+            Edit profile
+          </button>
+        </div>
       </div>
-
-      <div style="margin-top: 20px; margin-bottom: 30px;" id="saveforlatercont">
-        <h2>Saved For Later</h2>
-        <p>loading insights</p>
-      </div>
-
-      <div class="insights-container" id="insights-container">
-        <h2>User Insights</h2>
-        <p>Loading insights...</p>
+      <div class="profile-right-subcontainer">
+        <div style="margin-top: 20px; margin-bottom: 30px;" id="saveforlatercont">
+          <h2>Saved For Later</h2>
+          <p>Loading insights...</p>
+        </div>
+  
+        <div class="insights-container" id="insights-container">
+          <h2>User Insights</h2>
+          <p>Loading insights...</p>
+        </div>
       </div>
     </div>
 
