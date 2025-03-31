@@ -338,15 +338,11 @@ strong {
   NAVIGATION              
 -----------------------------------------*/
 .sticky-wrapper {
-  position: absolute;
+  position: fixed; /* Change from absolute to fixed */
   top: 0;
   right: 0;
   left: 0;
-}
-
-.sticky-wrapper.is-sticky .navbar {
-  z-index: 9999999999;
-  background-color: var(--secondary-color);
+  z-index: 9999; /* Ensure it stays on top */
 }
 
 .navbar {
@@ -355,6 +351,7 @@ strong {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  background-color: var(--secondary-color); /* Ensure background color is visible */
   transition: all 0.3s ease;
 }
 
