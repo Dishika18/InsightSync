@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- last script is the main script for connecting with backend
+
+ after deploying in vercel change the axios.get url to your deployed URLSearchParams
+ 
+ 
+ -->
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>InsightSync Listing Page</title>
+
+  <!-- CSS FILES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
+    rel="stylesheet" />
+
+  <link href="../css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../css/bootstrap-icons.css" rel="stylesheet" />
+  <link href="../css/style.css" rel="stylesheet" />
+  <link href="../css/Scroll.css" rel="stylesheet">
+
+
+  <!--icons cdn link-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+  <style>
+    /* Container for all cards */
+    #parentCont {
+      display: flex;
+      /* flex-direction: column; */
+      /* Stack cards vertically */
+      /* gap: 20px; */
+      /* Space between cards */
+      /* height: 70vh; */
+      /* overflow-y: scroll; */
+    }
+
+    .box {
+      background-color: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 75px;
+      width: 80vw;
+      border-radius: 50px;
+      margin: 0 auto;
+    }
+
+    .box input {
+      width: 80%;
+      height: 90%;
+      outline: none;
+      border: none;
+      background-color: #f0f0f0;
+      font-size: 25px;
+      border-radius: 50px;
+      padding-left: 20px;
+      font-weight: 600;
+    }
+
+    .box button {
+      height: 80%;
+      outline: none;
+      border: none;
+      background-color: #80D0C7;
+      width: 150px;
+      border-radius: 40px;
+      color: white;
+      font-weight: 700;
+    }
+
+    select {
+      width: min-content;
+      padding: 8px;
+      background-color: #f0f0f0;
+      border-radius: 50px;
+      outline: none;
+      border: none;
+      font-size: 15px;
+      color: rgb(90, 90, 90);
+
+    }
+
+    .selectbtn {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      padding: 10px;
+      padding-right: 50px;
+    }
+
+    .box button:hover {
+      background-color: #13547A;
+    }
+
+
+    .custom-block-image {
+      border-radius: 20px;
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+
+    .designPara {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      width: 100%;
+      display: block;
+      overflow: hidden
+    }
+
+    #parentCont .custom-block .designlink .d-flex > div {
+      width:100%;
+    }
+    .badge {
+      border-radius: 30px !important;
+      padding: 6px 16px;
+      line-height: 1.4;
+      margin-top: 14px;
+    }
+
+
+    
+  </style>
+
+  <!-- this is script part -->
+  <script>
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById("loginPassword");
+      const togglePasswordIcon =
+        document.getElementById("togglePasswordIcon");
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        togglePasswordIcon.classList.remove("bi-eye");
+        togglePasswordIcon.classList.add("bi-eye-slash");
+      } else {
+        passwordInput.type = "password";
+        togglePasswordIcon.classList.remove("bi-eye-slash");
+        togglePasswordIcon.classList.add("bi-eye");
+      }
+    }
+
+    function validateForm() {
+      const email = document.getElementById("loginEmail");
+      const password = document.getElementById("loginPassword");
+      let valid = true;
+
+      if (!email.value) {
+        email.classList.add("is-invalid");
+        valid = false;
+      } else {
+        email.classList.remove("is-invalid");
+      }
+
+      if (!password.value) {
+        password.classList.add("is-invalid");
+        valid = false;
+      } else {
+        password.classList.remove("is-invalid");
+      }
+
+      return valid;
+    }
+    function validateSignupForm() {
+      const username = document.getElementById("signupUsername");
+      const email = document.getElementById("signupEmail");
+      const password = document.getElementById("signupPassword");
+      const confirmPassword = document.getElementById(
+        "signupConfirmPassword"
+      );
+      let valid = true;
+
+      // Username validation (must be at least 3 characters)
+      if (username.value.length < 3) {
+        username.classList.add("is-invalid");
+        valid = false;
+      } else {
+        username.classList.remove("is-invalid");
+      }
+
+      // Email validation (checks format)
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!emailPattern.test(email.value)) {
+        email.classList.add("is-invalid");
+        valid = false;
+      } else {
+        email.classList.remove("is-invalid");
+      }
+
+      // Password validation (at least 6 characters and includes a number)
+      const passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/;
+      if (!passwordPattern.test(password.value)) {
+        password.classList.add("is-invalid");
+        valid = false;
+      } else {
+        password.classList.remove("is-invalid");
+      }
+
+      // Confirm password validation (must match the password)
+      if (password.value !== confirmPassword.value) {
+        confirmPassword.classList.add("is-invalid");
+        valid = false;
+      } else {
+        confirmPassword.classList.remove("is-invalid");
+      }
+
+      return valid;
+    }
+
+    function toggleSignupPasswordVisibility() {
+      const passwordInput = document.getElementById("signupPassword");
+      const togglePasswordIcon = document.getElementById(
+        "toggleSignupPasswordIcon"
+      );
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        togglePasswordIcon.classList.remove("bi-eye");
+        togglePasswordIcon.classList.add("bi-eye-slash");
+      } else {
+        passwordInput.type = "password";
+        togglePasswordIcon.classList.remove("bi-eye-slash");
+        togglePasswordIcon.classList.add("bi-eye");
+      }
+    }
+
+    function toggleSignupConfirmPasswordVisibility() {
+      const confirmPasswordInput = document.getElementById(
+        "signupConfirmPassword"
+      );
+      const toggleConfirmPasswordIcon = document.getElementById(
+        "toggleSignupConfirmPasswordIcon"
+      );
+      if (confirmPasswordInput.type === "password") {
+        confirmPasswordInput.type = "text";
+        toggleConfirmPasswordIcon.classList.remove("bi-eye");
+        toggleConfirmPasswordIcon.classList.add("bi-eye-slash");
+      } else {
+        confirmPasswordInput.type = "password";
+        toggleConfirmPasswordIcon.classList.remove("bi-eye-slash");
+        toggleConfirmPasswordIcon.classList.add("bi-eye");
+      }
+    }
+  </script>
+</head>
+
+  <body class="topics-listing-page" id="top">
+    <main>
+      <!-- Nav Bar -->
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="./index.html">
+                <i class="bi-back"></i>
+                <span>InsightSync</span>
+            </a>
+
+            <div class="d-lg-none ms-auto me-4">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown position-relative">
+                        <a class="navbar-icon bi-person smoothscroll"> </a>
+                        <ul class="dropdown-menu position-absolute authcomp dropdown-menu-light"
+                            aria-labelledby="navbarLightDropdownMenuLink">
+                            <li><a class="dropdown-item" data-bs-toggle="modal" onclick="location.href='/profile.html'" data-bs-target="#loginModal"
+                                    style="cursor: pointer;">Profile</a></li>
+                                    
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                    style="cursor: pointer;">Login</a></li>
+
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                    style="cursor: pointer;">Sign Up</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="./index.html#section_1">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="./index.html#section_2">Browse Topics</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="./index.html#section_3">How it works</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="./index.html#section_4">FAQs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="./index.html#section_5">Testimonials</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="./index.html#section_6">Contact</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+
+                        <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                            <li><a class="dropdown-item" href="./topics-listing.html">Topics Listing</a></li>
+                            <li><a class="dropdown-item" href="./add-topics.html">Add Topic Details</a></li>
+                            <li><a class="dropdown-item" href="./contact.html">Contact Form</a></li>
+
+
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-none d-lg-block">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="navbar-icon bi-person smoothscroll" onclick="location.href='/profile.html'" class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown" role="button" aria-expanded="true"
+                                id="navbarLightDropdownMenuLink"> </a>
+                                <ul class="dropdown-menu authcomp dropdown-menu-light"
+                                    aria-labelledby="navbarLightDropdownMenuLink">
+                                    <li id="loginbtn" ><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                            style="cursor: pointer;">Login</a></li>
+
+                                    <li id="signupbtn"><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                            style="cursor: pointer;">Sign Up</a></li>
+                                    
+                                    <li id="signout">
+                                        <button id="logoutbtn2" class="dropdown-item">
+                                            Sign Out
+                                        </button>
+                                    </li>
+
+                                </ul>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+      <!-- Signup Modal -->
+      <div
+        class="modal fade"
+        id="signupModal"
+        tabindex="-1"
+        aria-labelledby="signupModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-md">
+          <div class="modal-content glass-effect">
+            <div class="modal-header justify-content-center">
+              <img
+                src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000"
+              />
+            </div>
+            <div class="modal-body">
+              <form
+                id="signupForm"
+                method="post"
+                onsubmit="return validateSignupForm()"
+              >
+                <div class="mb-3">
+                  <label for="signupUsername" class="form-label"
+                    >Username</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="signupUsername"
+                    name="username"
+                    placeholder="Enter username"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="signupEmail" class="form-label"
+                    >Email address</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="signupEmail"
+                    name="email"
+                    placeholder="Enter email"
+                    required
+                  />
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="signupPassword" class="form-label"
+                    >Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="signupPassword"
+                    name="password"
+                    placeholder="Enter password"
+                    required
+                  />
+                  <span
+                    class="eye-icon"
+                    onclick="toggleSignupPasswordVisibility()"
+                  >
+                    <i class="bi bi-eye" id="toggleSignupPasswordIcon"></i>
+                  </span>
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="signupConfirmPassword" class="form-label"
+                    >Confirm Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="signupConfirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                    required
+                  />
+                  <span
+                    class="eye-icon"
+                    onclick="toggleSignupConfirmPasswordVisibility()"
+                  >
+                    <i
+                      class="bi bi-eye"
+                      id="toggleSignupConfirmPasswordIcon"
+                    ></i>
+                  </span>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary btn-block">
+                    Sign Up
+                  </button>
+                </div>
+                <div class="mt-3 text-center">
+                  <p>
+                    Already have an account?
+                    <a
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#loginModal"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                      >Login</a
+                    >
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Login Page -->
+    <nav>
+      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+          <div class="modal-content glass-effect">
+            <div class="modal-header justify-content-center">
+              <img
+                src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Login☺️;&color=000000" />
+            </div>
+            <div class="modal-body">
+              <form id="loginForm" method="post">
+                <div class="mb-3">
+                  <label for="loginEmail" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="loginEmail" name="email" placeholder="Enter Email"
+                    aria-describedby="emailHelp" />
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="loginPassword" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="loginPassword" name="password"
+                    placeholder="Enter Password" />
+                  <span class="eye-icon" onclick="togglePasswordVisibility()">
+                    <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                  </span>
+                </div>
+                <div class="mb-3 text-end">
+                  <a href="#" class="link-primary">Forgot Password?</a>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary btn-block">
+                    Login
+                  </button>
+                </div>
+                <div class="mt-3 text-center">
+                  <p>
+                    Don't have an account?
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal"
+                      aria-label="Close">Sign Up</a>
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <header class="site-header d-flex flex-column justify-content-center align-items-center">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-5 col-12">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="./index.html">Homepage</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Topics Listing
+                </li>
+              </ol>
+            </nav>
+
+            <h2 class="text-white">Topics Listing</h2>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section-padding">
+      <div class="container">
+        <div class="row">
+          <div>
+            <h3 class="mb-4">All Topics</h3>
+          </div>
+
+          <div class="box">
+            <input type="text" name="search" id="searchinput" placeholder="Search">
+            <button id="searchbutton">Search</button>
+          </div>
+          <div style="display: flex; flex-direction: row; justify-content: center;">
+            <div class="selectbtn">
+              <select name="" id="sortbtn">
+                <option value="new">Sort by Recent</option>
+                <option value="old">Sort by Oldest</option>
+                <option value="liked">Sort by Most Liked</option>
+              </select>
+            </div>
+            <div class="selectbtn">
+              <select name="" id="sortbytopicbtn">
+                <option value="Design">Design</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Education">Education</option>
+                <option value="Finance">Finance</option>
+                <option value="Music">Music</option>
+
+              </select>
+            </div>
+
+          </div>
+
+          <div class="col-lg-12 col-12 mt-3 mx-auto padding-45">
+            <div id="parentCont" class=""></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-12 mb-4 pb-2">
+          <a class="navbar-brand mb-2" href="./index.html">
+            <i class="bi-back"></i>
+            <span>InsightSync</span>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-6">
+          <h6 class="site-footer-title mb-3">Resources</h6>
+
+          <ul class="site-footer-links">
+            <li class="site-footer-link-item">
+              <a href="./index.html#section_1" class="site-footer-link">Home</a>
+            </li>
+
+            <li class="site-footer-link-item">
+              <a href="./index.html#section_2" class="site-footer-link">Browse Topics</a>
+            </li>
+
+            <li class="site-footer-link-item">
+              <a href="./index.html#section_3" class="site-footer-link">How it works</a>
+            </li>
+
+            <li class="site-footer-link-item">
+              <a href="./index.html#section_4" class="site-footer-link">FAQs</a>
+            </li>
+
+            <li class="site-footer-link-item">
+              <a href="./index.html#section_5" class="site-footer-link">Testimonials</a>
+            </li>
+
+            <li class="site-footer-link-item">
+              <a href="./index.html#section_6" class="site-footer-link">Contact</a>
+            </li>
+
+            <li class="site-footer-link-item">
+              <a href="./feedbackform.html" class="site-footer-link">Give Us Your Feedback</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+          <h6 class="site-footer-title mb-3">Information</h6>
+
+          <p class="text-white d-flex mb-1">
+            <a href="tel: 305-240-9671" class="site-footer-link">
+              305-240-9671
+            </a>
+          </p>
+
+          <p class="text-white d-flex">
+            <a href="mailto:info@company.com" class="site-footer-link">
+              info@company.com
+            </a>
+          </p>
+          <p class="socialmedia_links">
+            <a href="https://www.instagram.com/" id="social-links"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://x.com/i/flow/login?lang=en" id="social-links"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://api.linkedin.com/login" id="social-links"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/login" id="social-links"><i class="fa-brands fa-github"></i></a>
+            <a href="https://canary.discord.com/login" id="social-links"><i class="fa-brands fa-discord"></i></a>
+          </p>
+        </div>
+
+        <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              English
+            </button>
+
+            <ul class="dropdown-menu">
+              <li>
+                <button class="dropdown-item" type="button">Thai</button>
+              </li>
+
+              <li>
+                <button class="dropdown-item" type="button">Myanmar</button>
+              </li>
+
+              <li>
+                <button class="dropdown-item" type="button">Arabic</button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copyright-box">
+      <p class="copyright-text mt-lg-5 mt-4">
+      </p>
+    </div>
+  </footer>
+  <!-- Top scroll button -->
+    <div id="scrollButton" class="hidden">
+        <div class="outer-circle">
+            <div class="inner-circle">
+                <div class="arrow"><i class="fa-solid fa-arrow-up"></i></div>
+            </div>
+        </div>
+    </div>
+
+
+  <!-- JAVASCRIPT FILES -->
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/jquery.sticky.js"></script>
+  <script src="../js/custom.js"></script>
+  <script src="../https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  <script src="../js/signup.js"></script>
+  <script src="../js/login.js"></script>
+  <script src="../js/click-scroll.js"></script>
+  <!-- script for fetching the insights from db -->
+
+  <script type="module">
+    import { link } from "./Baselink.js";
+
+    window.onload = async () => {
+      /*
+      <div class="col-lg-4 col-md-6 col-12 mb-4 mb-lg-0">
+        <div class="custom-block bg-white shadow-lg">
+            <a class="designlink" href="topics-detail.html">
+                <div class="d-flex">
+                    <div>
+                        <h5 class="mb-2 designHeading">Web Design</h5>
+
+                        <p class="mb-0 designPara"> Web design involves creating visually appealing, user-friendly, and responsive websites by combining layout, typography, colors, and functionality to enhance user experience and effectively communicate the site's purpose.
+                        </p>
+                    </div>
+
+                    <span class="badge bg-design rounded-pill ms-auto">14</span>
+                </div>
+
+                <img src="images/topics/undraw_Remote_design_team_re_urdx.png"
+                    class="custom-block-image img-fluid designimage" alt="">
+            </a>
+        </div>
+    </div>
+      */
+      axios
+        .get(`${link}/api/v1/insight/getallinsight`)
+        .then((resp) => {
+          console.log(resp.data.data);
+          // const parent = document.getElementById("parentCont");
+          const parent = document.getElementById("parentCont");
+          parent.classList.add('row','flex-wrap')
+            
+            resp.data.data.forEach((item) => {
+                const colDiv = document.createElement("div");
+                colDiv.classList.add("col-lg-4", "col-md-6", "col-12", "mb-4","smh");
+                colDiv.id = item.updatedAt;
+                
+                const customBlock = document.createElement("div");
+                customBlock.classList.add("custom-block", "bg-white", "shadow-lg");
+                
+                const linkElement = document.createElement("a");
+                linkElement.classList.add("designlink");
+                linkElement.href = `topics-detail.html?id=${item._id}`;
+                
+                const flexDiv = document.createElement("div");
+                flexDiv.classList.add("d-flex");
+                
+                const textDiv = document.createElement("div");
+                
+                const heading = document.createElement("h5");
+                heading.classList.add("mb-2", "designHeading");
+                heading.textContent = item.title;
+                
+                const paragraph = document.createElement("p");
+                paragraph.classList.add("mb-0", "designPara");
+                paragraph.textContent = item.content;
+                
+                textDiv.appendChild(heading);
+                textDiv.appendChild(paragraph);
+
+                const badge = document.createElement("span");
+                badge.classList.add("badge", "bg-design");
+                badge.textContent = item.topic;
+
+                const like = document.createElement("span");
+                like.classList.add("badge", "bg-design");
+                like.textContent = item.likes;
+                colDiv.setAttribute("data-liked", item.likes);
+                
+                const topicLikeDiv = document.createElement("div");
+                topicLikeDiv.style.display = "flex";
+                topicLikeDiv.style.justifyContent = "space-between";
+                topicLikeDiv.classList.add("ms-auto");
+                topicLikeDiv.appendChild(badge);
+                topicLikeDiv.appendChild(like);
+
+                flexDiv.appendChild(textDiv);
+                // flexDiv.appendChild(badge);
+                
+                const image = document.createElement("img");
+                image.classList.add("custom-block-image", "img-fluid", "designimage");
+                image.src = item.Image || "default-image.png";
+                image.alt = item.title;
+                
+                linkElement.appendChild(image);
+                linkElement.appendChild(flexDiv);
+                linkElement.appendChild(topicLikeDiv);
+                
+                customBlock.appendChild(linkElement);
+                colDiv.appendChild(customBlock);
+                
+                parent.appendChild(colDiv);
+          });
+        })
+        .catch((err) => console.log(err));
+    };
+  </script>
+
+  <script>
+    const searchbtn = document.getElementById("searchbutton");
+    const searchinput = document.getElementById("searchinput");
+
+    searchbtn.addEventListener("click", () => {
+      const elements = document.getElementsByClassName("smh");
+      const searchtext = searchinput.value.toLowerCase().trim(); // Normalize the search text for case-insensitive comparison
+
+      Array.from(elements).forEach((element) => {
+        const cardText = element.textContent.toLowerCase(); // Normalize card content for comparison
+        if (cardText.includes(searchtext)) {
+          element.style.display = "block"; // Show matching cards
+        } else {
+          element.style.display = "none"; // Hide non-matching cards
+        }
+      });
+    });
+  </script>
+
+  <script>
+    const sortbtn = document.getElementById("sortbtn");
+
+    sortbtn.addEventListener("change", () => {
+      const sortOrder = sortbtn.value; // Get selected sort option
+      const parent = document.getElementById("parentCont");
+      const cards = Array.from(parent.getElementsByClassName("smh")); // Get all card elements
+      
+      // Sort the cards array based on the 'id' attribute (createdAt)
+      cards.sort((a, b) => {
+        if (sortOrder === "new" || sortOrder === "old") {
+          const dateA = new Date(a.id || 0); // Convert id to Date object, handle empty id
+          const dateB = new Date(b.id || 0);
+          
+          if (sortOrder === "new") {
+            return dateB - dateA; // Recent first
+          } else if (sortOrder === "old") {
+            return dateA - dateB; // Oldest first
+          }
+        } else if (sortOrder === "liked") {
+          const likeA = a.dataset.liked;
+          const likeB = b.dataset.liked;
+
+          return likeB - likeA;
+        }
+      });
+      console.log(cards)
+
+      // Append the sorted cards back to the parent container
+      cards.forEach((card) => parent.appendChild(card));
+    });
+  </script>
+
+  <script>
+    // // Check if the user is logged in by verifying the presence of an auth token in localStorage
+    // if (localStorage.getItem("authToken")) {
+    //   console.log("User logged in");
+
+    //   // Select all elements with the class 'authcomp'
+    //   const authElements = document.getElementsByClassName("authcomp");
+
+    //   // Loop through the elements and change their opacity
+    //   Array.from(authElements).forEach((element) => {
+    //     element.style.opacity = 0; // Set opacity to 0 (hidden)
+    //     element.style.pointerEvents = "none"; // Prevent interaction
+    //   });
+    // } else {
+    //   console.log("User not logged in");
+    // }
+    document.querySelector(
+      ".copyright-text"
+    ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
+  </script>
+  <script>
+    const sortbytopicbtn = document.getElementById("sortbytopicbtn")
+
+    sortbytopicbtn.addEventListener("change", (e) => {
+      const parentsortingElement =document.getElementsByClassName("smh");
+      console.log(parentsortingElement)
+      Array.from(parentsortingElement).forEach((elem)=>{
+        elem.style.display="flex"
+        console.log(elem.lastChild.lastChild.lastChild.innerText)
+        console.log(e.target.value)
+        // if (elem.lastChild.innerText !== e.target.value) {
+        //   console.log("element is",elem)
+        //   elem.style.display ="none"
+        //   // element.style.pointerEvents = "none"; // Prevent interaction
+        // }
+        if (elem.lastChild.lastChild.lastChild.innerText != e.target.value) {
+          elem.style.display="none"
+        }
+      })
+      console.log(e.target.value)
+    })
+  </script>
+      <script type="module">
+        console.log("modules")
+        const logoutbtn = document.getElementById("signout")
+        const loginbtn = document.getElementById("loginbtn")
+        const signupbtn = document.getElementById("signupbtn")
+        if (localStorage.getItem("authToken")) {
+            loginbtn.style.display = "none"
+            signupbtn.style.display= "none"
+        }else{
+            
+            logoutbtn.style.display = "none"
+        }
+        document.getElementById("logoutbtn2").addEventListener("click",()=>{
+            console.log("clickedbskjkbvsdhvbskdmbvduksvbsdmhcbjh")
+            localStorage.clear()
+            window.location.href="/"
+        })
+    </script>
+</body>
+
+</html>

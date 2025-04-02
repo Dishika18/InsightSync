@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="en">
+<!-- last script is the main script for connecting with backend
+
+ after deploying in vercel change the axios.post url to your deployed URLSearchParams
+ 
+ 
+ -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>InsightSync Detail Page</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-icons.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+     <!--icons cdn link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+
+
+
+h2 {
+    text-align: center;
+}
+
+.comments-section {
+    margin-top: 20px;
+}
+
+.comment-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-content {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.comment-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.comment-content small {
+    display: block;
+    color: #666;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+    </style>
+
+    <!-- add comment -->
+     <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+.comments-container {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+
+.comment-form button {
+    background: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.comment-form button:hover {
+    background: #0056b3;
+}
+
+/* Comments List */
+#comments-container {
+    margin-top: 15px;
+}
+
+.comment-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-content {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.comment-content p {
+    margin: 0;
+}
+
+.comment-content small {
+    display: block;
+    color: #666;
+    margin-top: 5px;
+}
+#summary-btn {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+#summary-btn:hover {
+    background-color: #0056b3;
+}
+
+#summary-btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+     </style>
+
+    <style>
+
+
+        .btn-container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        #editbtn, #likebtn, #savebtn {
+            width: 100%;
+            background-color: rgb(85, 199, 214);
+            padding: 15px;
+            border: 2px solid aquamarine;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            transition: background 0.3s ease, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        #editbtn:hover, #likebtn:hover {
+            background-color: rgb(72, 179, 194);
+            transform: scale(1.05);
+        }
+
+        #likebtn {
+            margin-top: 10px;
+        }
+
+        .liked {
+            color: red;
+        }
+    </style>
+    <script type="module" src="../js/fetchcomment.js"></script>
+    <script type="module" src="../js/addcomment.js"></script>
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('loginPassword');
+            const togglePasswordIcon = document.getElementById('togglePasswordIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePasswordIcon.classList.remove('bi-eye');
+                togglePasswordIcon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                togglePasswordIcon.classList.remove('bi-eye-slash');
+                togglePasswordIcon.classList.add('bi-eye');
+            }
+        }
+
+        function validateForm() {
+            const email = document.getElementById('loginEmail');
+            const password = document.getElementById('loginPassword');
+            let valid = true;
+
+            if (!email.value) {
+                email.classList.add('is-invalid');
+                valid = false;
+            } else {
+                email.classList.remove('is-invalid');
+            }
+
+            if (!password.value) {
+                password.classList.add('is-invalid');
+                valid = false;
+            } else {
+                password.classList.remove('is-invalid');
+            }
+
+            return valid;
+        }
+        function validateSignupForm() {
+            const username = document.getElementById('signupUsername');
+            const email = document.getElementById('signupEmail');
+            const password = document.getElementById('signupPassword');
+            const confirmPassword = document.getElementById('signupConfirmPassword');
+            let valid = true;
+
+            // Username validation (must be at least 3 characters)
+            if (username.value.length < 3) {
+                username.classList.add('is-invalid');
+                valid = false;
+            } else {
+                username.classList.remove('is-invalid');
+            }
+
+            // Email validation (checks format)
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email.value)) {
+                email.classList.add('is-invalid');
+                valid = false;
+            } else {
+                email.classList.remove('is-invalid');
+            }
+
+            // Password validation (at least 6 characters and includes a number)
+            const passwordPattern = /^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/;
+            if (!passwordPattern.test(password.value)) {
+                password.classList.add('is-invalid');
+                valid = false;
+            } else {
+                password.classList.remove('is-invalid');
+            }
+
+            // Confirm password validation (must match the password)
+            if (password.value !== confirmPassword.value) {
+                confirmPassword.classList.add('is-invalid');
+                valid = false;
+            } else {
+                confirmPassword.classList.remove('is-invalid');
+            }
+
+            return valid;
+        }
+
+        function toggleSignupPasswordVisibility() {
+            const passwordInput = document.getElementById('signupPassword');
+            const togglePasswordIcon = document.getElementById('toggleSignupPasswordIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePasswordIcon.classList.remove('bi-eye');
+                togglePasswordIcon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                togglePasswordIcon.classList.remove('bi-eye-slash');
+                togglePasswordIcon.classList.add('bi-eye');
+            }
+        }
+
+        function toggleSignupConfirmPasswordVisibility() {
+            const confirmPasswordInput = document.getElementById('signupConfirmPassword');
+            const toggleConfirmPasswordIcon = document.getElementById('toggleSignupConfirmPasswordIcon');
+            if (confirmPasswordInput.type === 'password') {
+                confirmPasswordInput.type = 'text';
+                toggleConfirmPasswordIcon.classList.remove('bi-eye');
+                toggleConfirmPasswordIcon.classList.add('bi-eye-slash');
+            } else {
+                confirmPasswordInput.type = 'password';
+                toggleConfirmPasswordIcon.classList.remove('bi-eye-slash');
+                toggleConfirmPasswordIcon.classList.add('bi-eye');
+            }
+        }
+
+    </script>
+
+</head>
+
+<body id="top">
+
+    <main>
+
+        <!-- Nav Bar -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="./index.html">
+                    <i class="bi-back"></i>
+                    <span>InsightSync</span>
+                </a>
+
+                <div class="d-lg-none ms-auto me-4">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown position-relative">
+                            <a class="navbar-icon bi-person smoothscroll"> </a>
+                            <ul class="dropdown-menu position-absolute authcomp dropdown-menu-light"
+                                aria-labelledby="navbarLightDropdownMenuLink">
+                                <li><a class="dropdown-item" data-bs-toggle="modal" onclick="location.href='/profile.html'" data-bs-target="#loginModal"
+                                        style="cursor: pointer;">Profile</a></li>
+                                        
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                        style="cursor: pointer;">Login</a></li>
+
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                        style="cursor: pointer;">Sign Up</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="./index.html#section_1">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="./index.html#section_2">Browse Topics</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="./index.html#section_3">How it works</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="./index.html#section_4">FAQs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="./index.html#section_5">Testimonials</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="./index.html#section_6">Contact</a>
+                        </li>
+                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+
+                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                                <li><a class="dropdown-item" href="./topics-listing.html">Topics Listing</a></li>
+                                <li><a class="dropdown-item" href="./add-topics.html">Add Topic Details</a></li>
+                                <li><a class="dropdown-item" href="./contact.html">Contact Form</a></li>
+
+
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="d-none d-lg-block">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="navbar-icon bi-person smoothscroll" onclick="location.href='/profile.html'" class="nav-link dropdown-toggle"
+                                    data-bs-toggle="dropdown" role="button" aria-expanded="true"
+                                    id="navbarLightDropdownMenuLink"> </a>
+                                    <ul class="dropdown-menu authcomp dropdown-menu-light"
+                                    aria-labelledby="navbarLightDropdownMenuLink">
+                                    <li id="loginbtn" ><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#loginModal"
+                                            style="cursor: pointer;">Login</a></li>
+
+                                    <li id="signupbtn"><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#signupModal"
+                                            style="cursor: pointer;">Sign Up</a></li>
+                                    
+                                    <li id="signout">
+                                        <button id="logoutbtn2" class="dropdown-item">
+                                            Sign Out
+                                        </button>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Signup Modal -->
+        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+                <div class="modal-content glass-effect">
+                    <div class="modal-header justify-content-center">
+                        <img
+                            src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Sign+Up☺️;&color=000000" />
+                    </div>
+                    <div class="modal-body">
+                        <form id="signupForm" method="post" onsubmit="return validateSignupForm()">
+                            <div class="mb-3">
+                                <label for="signupUsername" class="form-label">Username</label>
+                                <input type="text" class="form-control" id="signupUsername" name="username"
+                                    placeholder="Enter username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="signupEmail" name="email"
+                                    placeholder="Enter email" required>
+                            </div>
+                            <div class="mb-3 position-relative">
+                                <label for="signupPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="signupPassword" name="password"
+                                    placeholder="Enter password" required>
+                                <span class="eye-icon" onclick="toggleSignupPasswordVisibility()">
+                                    <i class="bi bi-eye" id="toggleSignupPasswordIcon"></i>
+                                </span>
+                            </div>
+                            <div class="mb-3 position-relative">
+                                <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="signupConfirmPassword"
+                                    name="confirmPassword" placeholder="Confirm password" required>
+                                <span class="eye-icon" onclick="toggleSignupConfirmPasswordVisibility()">
+                                    <i class="bi bi-eye" id="toggleSignupConfirmPasswordIcon"></i>
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+                            </div>
+                            <div class="mt-3 text-center">
+                                <p>Already have an account? <a href="#" data-bs-toggle="modal"
+                                        data-bs-target="#loginModal" data-bs-dismiss="modal"
+                                        aria-label="Close">Login</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Login Page -->
+        <nav>
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-md">
+                    <div class="modal-content glass-effect">
+                        <div class="modal-header justify-content-center">
+                            <img
+                                src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=490&height=60&duration=3800&lines=Login☺️;&color=000000" />
+                        </div>
+                        <div class="modal-body">
+                            <form id="loginForm" method="post">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">Email address</label>
+                                    <input type="email" placeholder="Enter Email" class="form-control" id="loginEmail" name="email"
+                                        aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-3 position-relative">
+                                    <label for="loginPassword" class="form-label">Password</label>
+                                    <input type="password" placeholder="Enter Password" class="form-control" id="loginPassword" name="password">
+                                    <span class="eye-icon" onclick="togglePasswordVisibility()">
+                                        <i class="bi bi-eye" id="togglePasswordIcon"></i>
+                                    </span>
+                                </div>
+                                <div class="mb-3 text-end">
+                                    <a href="#" class="link-primary">Forgot Password?</a>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                </div>
+                                <div class="mt-3 text-center">
+                                    <p>Don't have an account? <a href="#" data-bs-toggle="modal"
+                                            data-bs-target="#signupModal" data-bs-dismiss="modal"
+                                            aria-label="Close">Sign Up</a></p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+
+
+
+        <header class="site-header d-flex flex-column justify-content-center align-items-center">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+
+                    <div class="col-lg-5 col-12 mb-5">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="./index.html">Homepage</a></li>
+
+                                <li class="breadcrumb-item active" aria-current="page">Web Design</li>
+                            </ol>
+                        </nav>
+
+                        <h2 class="topic-header text-white"></h2>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <img id="userimg" src="" alt="User Image" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;">
+                            <a id="profilelink" href="./puplicprofile.html">
+                                <h5 id="username" style="margin: 0; font-size: 14px; font-weight: 600; color: black;">Title User</h5>
+                            </a>
+                        </div>
+                        
+                        
+
+                        <div class="d-flex align-items-center mt-5">
+                            <a href="#topics-detail" class="btn custom-btn custom-border-btn smoothscroll me-4">Read
+                                More</a>
+
+                            <a href="#top" class="custom-icon bi-bookmark smoothscroll"></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-12">
+                        <div class="topics-detail-block bg-white shadow-lg">
+                            <img src="../assets/images/topics/undraw_Remote_design_team_re_urdx.png" id="topic-image-id"
+                                class="topics-detail-block-image img-fluid">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+       
+        
+        <div class="center-container">
+            <button id="summary-btn" onclick="summarizeArticle()">Generate AI Summary</button>
+        
+            <div class="article-container">
+                <!-- AI Summary Section -->
+                <div class="ai-summary">
+                    <p id="summary-text">Generating summary...</p>
+                </div>
+            </div>
+        </div>
+        
+        
+        <section class="topics-detail-section section-padding" id="topics-detail">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-12 m-auto">
+                        <h3 class="topic-header mb-4">Introduction to Web Design</h3>
+                        <p id="topic-content"> 
+                            <!-- Article text will be dynamically inserted here -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+      
+        
+        <div class="container" style="margin-top: 10px;">
+            <h2>Comments</h2>
+            <div id="comments-container" class="comments-section">
+                <p>Loading comments...</p>
+            </div>
+        </div>
+
+        <div class="comments-container">
+    
+            <!-- Comment Form -->
+            <form id="comment-form" class="comment-form">
+                <textarea id="comment-text" placeholder="Write your comment..." required></textarea>
+                <button type="submit">Post Comment</button>
+            </form>
+        </div>
+
+        <section class="topics-detail-section section-padding" id="topics-detail">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-8 col-12 m-auto">
+                        <h3 class="topic-header mb-4">Introduction to Web Design</h3>
+                        <p id="topic-content">
+
+                        </p>
+                    </div>
+
+                    
+                </div>
+                <div style="width: 100%; display: flex ; justify-content: center; "> 
+                    
+                    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; " class="btn-container">
+                        <button id="editbtn">Edit Insight</button>
+                        <button id="likebtn">
+                            <i class="far fa-heart" id="likeIcon"></i> Like
+                        </button>
+                        <button style="margin-top: 10px;" id="savebtn">
+                            Save for Later
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+     
+
+        <section class="section-padding section-bg">
+            <div class="container">
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-5 col-12">
+                        <img src="../assets/images/rear-view-young-college-student.jpg" class="newsletter-image img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-5 col-12 subscribe-form-wrap d-flex justify-content-center align-items-center">
+                        <form class="custom-form subscribe-form" action="#" method="post" role="form">
+                            <h4 class="mb-4 pb-2">Get Newsletter</h4>
+
+                            <input type="email" name="subscribe-email" id="subscribe-email" pattern="[^ @]*@[^ @]*"
+                                class="form-control" placeholder="Email Address" required="">
+
+                            <div class="col-lg-12 col-12">
+                                <button type="submit" class="form-control">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer section-padding">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-3 col-12 mb-4 pb-2">
+                    <a class="navbar-brand mb-2" href="./index.html">
+                        <i class="bi-back"></i>
+                        <span>InsightSync</span>
+                    </a>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-6">
+                    <h6 class="site-footer-title mb-3">Resources</h6>
+
+                    <ul class="site-footer-links">
+                        <li class="site-footer-link-item">
+                            <a href="./index.html#section_1" class="site-footer-link">Home</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="./index.html#section_2" class="site-footer-link">Browse Topics</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="./index.html#section_3" class="site-footer-link">How it works</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="./index.html#section_4" class="site-footer-link">FAQs</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="./index.html#section_5" class="site-footer-link">Testimonials</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="./index.html#section_6" class="site-footer-link">Contact</a>
+                        </li>
+                        <li class="site-footer-link-item">
+                            <a href="./feedbackform.html" class="site-footer-link">Give Us Your Feedback</a>
+                        </li>
+                    </ul>
+                </div>
+               
+                <div class="col-lg-3 col-md-4 col-6 mb-4 mb-lg-0">
+                    <h6 class="site-footer-title mb-3">Information</h6>
+
+                    <p class="text-white d-flex mb-1">
+                        <a href="tel: 305-240-9671" class="site-footer-link">
+                            305-240-9671
+                        </a>
+                    </p>
+
+                    <p class="text-white d-flex">
+                        <a href="mailto:info@company.com" class="site-footer-link">
+                            info@company.com
+                        </a>
+                    </p>
+                    <p class="socialmedia_links">
+            
+                        <a href="https://www.instagram.com/" id="social-links"><i class="fa-brands fa-instagram" ></i></a>
+                        <a href="https://x.com/i/flow/login?lang=en" id="social-links"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="https://api.linkedin.com/login" id="social-links"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://github.com/login" id="social-links"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://canary.discord.com/login" id="social-links"><i  class="fa-brands fa-discord"></i></a>
+                        
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-12 mt-4 mt-lg-0 ms-auto">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            English</button>
+
+                        <ul class="dropdown-menu">
+                            <li><button class="dropdown-item" type="button">Thai</button></li>
+
+                            <li><button class="dropdown-item" type="button">Myanmar</button></li>
+
+                            <li><button class="dropdown-item" type="button">Arabic</button></li>
+                        </ul>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+        
+    </footer>
+    <!-- Scroll to Top Button -->
+    <button onclick="topFunction()" id="scrollToTopBtn" title="Go to top"></button>
+
+
+    <!-- JAVASCRIPT FILES -->
+
+
+    <script type="module">
+        import { link } from "./Baselink.js";
+    
+        const params4 = new URLSearchParams(window.location.search);
+        const id4 = params4.get('id');
+        // console.log("forsave for later", id4);
+    
+        const savebtn1 = document.getElementById("savebtn");
+        // console.log("savebtn element:", savebtn1);
+    
+        if (!savebtn1) {
+            console.error("Button with id 'savebtn' not found");
+        }
+    
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+            console.error("Auth token not found");
+        } else {
+            axios.get(`${link}/api/v1/insight/getsaveforlater`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((resp) => {
+                // console.log("fetch save", resp.data.savedTopics);
+                if (resp.data.savedTopics.some(el => el._id === id4)) {
+                    // console.log("included");
+                    savebtn1.innerHTML = "Saved";
+                } else {
+                    // console.log("not included");
+                    savebtn1.innerText = "Save For Later";
+                }
+            })
+            .catch((err) => {
+                console.error("API error:", err);
+            });
+        }
+    </script>
+    
+
+    <script type="module">
+        import { link } from "./Baselink.js"
+        const params3 = new URLSearchParams(window.location.search);
+        const id3 = params.get('id');
+        const savebtn = document.getElementById("savebtn")
+        savebtn.addEventListener("click",()=>{
+            // console.log("clickeed")
+            axios.post(`${link}/api/v1/insight/saveforlater`,{t_id:id3},{
+                headers: {
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+              "Content-Type": "application/json",
+              },
+            })
+            .then((data)=>{
+                // console.log(data.data)
+                if (data.data.updationStatus) {
+                    savebtn.innerText="Saved"
+                }else{
+                    savebtn.innerText="Save For Later"
+                }
+            })
+            .catch((err)=>{console.error(err)})
+        })
+    </script>
+    
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.sticky.js"></script>
+    <script src="../js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+    <script type="module">
+        import { link } from "./Baselink.js"
+        // const username = "exampleUser"; // Replace this with the actual username
+        const profileLink = document.getElementById("profilelink");
+        console.log(profileLink)
+
+
+        // console.log(link)
+        const usernamecont = document.getElementById("username")
+        const userimg = document.getElementById("userimg")
+        window.onload = async () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            // console.log("Insight ID:", id);
+
+            // Fetch data for the specific ID or perform any other logic
+            axios.post(`${link}/api/v1/insight/getinsightbyid`, {
+                id
+            })
+                .then(({ data }) => {
+                    console.log(data);
+
+                    // Set image source
+                    const img = document.getElementById("topic-image-id");
+                    if (img) {
+                        img.src = data.data.Image;
+                    }
+
+                    // Set heading text
+                    const headings = document.querySelectorAll(".topic-header");
+                    console.log(headings)
+                    headings.forEach(heading => {
+                        heading.innerHTML = data.data.title
+                    });
+
+                    // Set topic content
+                    const contentClass = document.getElementById("topic-content")
+                    contentClass.innerHTML = data.data.content
+
+                    if (data.data.likedBy.includes(localStorage.getItem('userid'))) {
+                        console.log("user liked")
+                        likeIcon.classList.remove("far");
+                        likeIcon.classList.add("fas", "liked");
+                    }
+
+                    userimg.innerText = data.data.submittedby.username
+                    userimg.src = data.data.submittedby.image
+                    profileLink.href = `./puplicprofile.html?username=${data.data.submittedby._id}`;
+
+                })
+                .catch((err) => {
+                    console.error("Error fetching insight data:", err);
+                });
+        };
+
+    </script>
+    <script src="../js/signup.js"></script>
+    <script src="../js/login.js"></script>
+
+    <script>
+        // Check if the user is logged in by verifying the presence of an auth token in localStorage
+        // if (localStorage.getItem("authToken")) {
+        //     console.log("User logged in");
+    
+        //     // Select all elements with the class 'authcomp'
+        //     const authElements = document.getElementsByClassName("authcomp");
+    
+        //     // Loop through the elements and change their opacity
+        //     Array.from(authElements).forEach(element => {
+        //         element.style.opacity = 0; // Set opacity to 0 (hidden)
+        //         element.style.pointerEvents = "none"; // Prevent interaction
+        //     });
+        // } else {
+        //     console.log("User not logged in");
+        // }
+        document.querySelector(
+        ".copyright-text"
+      ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
+    </script>
+
+    <script>
+        const editbtn = document.getElementById("editbtn")
+        const params = new URLSearchParams(window.location.search);
+        // console.log(params.get('id'))
+        editbtn.addEventListener("click",()=>{
+            window.location.href=`edit-insight.html?id=${params.get('id')}`
+        })
+    </script>
+<script type="module">
+        import { link } from "./Baselink.js"
+        const params2 = new URLSearchParams(window.location.search);
+    const id = params2.get('id');
+    
+    const likeBtn = document.getElementById("likebtn");
+    const likeIcon = document.getElementById("likeIcon");
+    let isLiked = false;
+    
+    
+    
+    likeBtn.addEventListener("click", () => {
+    axios.post(`${link}/api/v1/insight/like/${id}`, {}, { // Empty object for request body
+        headers: {
+            'authorization': `Bearer ${localStorage.getItem('authToken')}`
+        }
+    })
+    .then((resp) => {
+        // console.log(resp.data);
+        if (resp.data.liked) {
+            likeIcon.classList.remove("far");
+            likeIcon.classList.add("fas", "liked");
+        }else{
+            likeIcon.classList.remove("fas", "liked");
+            likeIcon.classList.add("far");
+        }
+    })
+    .catch((error) => {
+        console.error("Error liking the insight:", error);
+    });
+});
+
+</script>
+<script type="module">
+    // console.log("modules")
+    const logoutbtn = document.getElementById("signout")
+    const loginbtn = document.getElementById("loginbtn")
+    const signupbtn = document.getElementById("signupbtn")
+    if (localStorage.getItem("authToken")) {
+        loginbtn.style.display = "none"
+        signupbtn.style.display= "none"
+    }else{
+        logoutbtn.style.display = "none"
+    }
+    document.getElementById("logoutbtn2").addEventListener("click",()=>{
+        // console.log("clickedbskjkbvsdhvbskdmbvduksvbsdmhcbjh")
+        localStorage.clear()
+        window.location.href="/"
+    })
+</script>
+<script src="../js/summary.js"></script>
+</body>
+
+</html>
