@@ -14,9 +14,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
       rel="stylesheet"
     />
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/bootstrap-icons.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bootstrap-icons.css" rel="stylesheet" />
+    <link href="../css/style.css" rel="stylesheet" />
 
     <style>
       body {
@@ -289,7 +289,7 @@
     <main>
       <nav class="navbar navbar-expand-lg">
         <div class="container">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="./index.html">
             <i class="bi-back"></i>
             <span>InsightSync</span>
           </a>
@@ -309,36 +309,36 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-lg-5 me-lg-auto">
               <li class="nav-item">
-                <a class="nav-link click-scroll" href="index.html#section_1"
+                <a class="nav-link click-scroll" href="./index.html#section_1"
                   >Home</a
                 >
               </li>
 
               <li class="nav-item">
-                <a class="nav-link click-scroll" href="index.html#section_2"
+                <a class="nav-link click-scroll" href="./index.html#section_2"
                   >Browse Topics</a
                 >
               </li>
 
               <li class="nav-item">
-                <a class="nav-link click-scroll" href="index.html#section_3"
+                <a class="nav-link click-scroll" href="./index.html#section_3"
                   >How it works</a
                 >
               </li>
 
               <li class="nav-item">
-                <a class="nav-link click-scroll" href="index.html#section_4"
+                <a class="nav-link click-scroll" href="./index.html#section_4"
                   >FAQs</a
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link click-scroll" href="index.html#section_5"
+                <a class="nav-link click-scroll" href="./index.html#section_5"
                   >Testimonials</a
                 >
               </li>
 
               <li class="nav-item">
-                <a class="nav-link click-scroll" href="index.html#section_6"
+                <a class="nav-link click-scroll" href="./index.html#section_6"
                   >Contact</a
                 >
               </li>
@@ -359,17 +359,17 @@
                   aria-labelledby="navbarLightDropdownMenuLink"
                 >
                   <li>
-                    <a class="dropdown-item" href="topics-listing.html"
+                    <a class="dropdown-item" href="./topics-listing.html"
                       >Topics Listing</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="add-topics.html"
+                    <a class="dropdown-item" href="./add-topics.html"
                       >Add Topic Details</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="contact.html"
+                    <a class="dropdown-item" href="./contact.html"
                       >Contact Form</a
                     >
                   </li>
@@ -381,7 +381,7 @@
               <li class="nav-item dropdown">
                 <a
                   class="navbar-icon bi-person"
-                  onclick="location.href='/profile.html'"
+                  onclick="location.href='./profile.html'"
                   class="nav-link dropdown-toggle"
                   role="button"
                 ></a>
@@ -452,10 +452,11 @@
         () => (window.location.href = "/edit-profile.html")
       );
     </script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/custom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script type="module" src="../js/Baselink.js"></script>
     <script type="module">
       import { link } from "./Baselink.js";
       const saveforlaterUrl = `${link}/api/v1/insight/getsaveforlater`

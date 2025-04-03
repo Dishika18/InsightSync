@@ -1,4 +1,4 @@
-<!-- Scroll to Top Button -->
+// <!-- Scroll to Top Button -->
 
 const scrollButton = document.getElementById('scrollButton');
 const outerCircle = document.querySelector('.outer-circle');

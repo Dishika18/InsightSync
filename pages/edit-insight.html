@@ -9,9 +9,9 @@
     <!-- Fonts and Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-icons.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-icons.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 
     <style>
         body {
@@ -74,7 +74,7 @@
     <main>
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="./index.html">
                     <i class="bi-back"></i>
                     <span>InsightSync</span>
                 </a>
@@ -87,26 +87,26 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-lg-5 me-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_1">Home</a>
+                            <a class="nav-link click-scroll" href="./index.html#section_1">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_2">Browse Topics</a>
+                            <a class="nav-link click-scroll" href="./index.html#section_2">Browse Topics</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_3">How it works</a>
+                            <a class="nav-link click-scroll" href="./index.html#section_3">How it works</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_4">FAQs</a>
+                            <a class="nav-link click-scroll" href="./index.html#section_4">FAQs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_5">Testimonials</a>
+                            <a class="nav-link click-scroll" href="./index.html#section_5">Testimonials</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link click-scroll" href="index.html#section_6">Contact</a>
+                            <a class="nav-link click-scroll" href="./index.html#section_6">Contact</a>
                         </li>
                         
                         <li class="nav-item dropdown">
@@ -114,9 +114,9 @@
                                 data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
 
                             <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                                <li><a class="dropdown-item" href="topics-listing.html">Topics Listing</a></li>
-                                <li><a class="dropdown-item" href="add-topics.html">Add Topic Details</a></li>
-                                <li><a class="dropdown-item" href="contact.html">Contact Form</a></li>
+                                <li><a class="dropdown-item" href="./topics-listing.html">Topics Listing</a></li>
+                                <li><a class="dropdown-item" href="./add-topics.html">Add Topic Details</a></li>
+                                <li><a class="dropdown-item" href="./contact.html">Contact Form</a></li>
 
 
                             </ul>
@@ -159,19 +159,20 @@
     </main>
 
     <!-- JavaScript Files -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script type="module" src="../js/Baselink.js"></script>
 
     <script type="module">
-        import { link } from "./Baselink.js";
+        import { link } from "../js/Baselink.js";
 
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
 
         if (!id) {
             alert("No topic ID provided in the URL.");
-            window.location.href = 'index.html';
+            window.location.href = './index.html';
         }
 
         const titleElement = document.getElementById("topic-title");
@@ -192,7 +193,7 @@
                     contentElement.value = data.data.content || "";
                 } else {
                     alert("Topic not found. Redirecting to home page.");
-                    window.location.href = 'index.html';
+                    window.location.href = './index.html';
                 }
             })
             .catch((err) => {
@@ -238,7 +239,7 @@
     <script>
         if (localStorage.getItem("authToken") == null) {
             alert("you are not logged in")
-            window.location.href="index.html"
+            window.location.href="./index.html"
         }
     </script>
 </body>
