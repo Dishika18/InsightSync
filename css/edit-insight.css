@@ -1,0 +1,53 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(to bottom right, rgb(101, 169, 171), rgb(200, 230, 231));
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.topics-detail-section {
+    padding: 50px 0;
+}
+
+.topic-header {
+    text-align: center;
+    font-weight: 600;
+}
+
+.topic-image {
+    display: block;
+    margin: 20px auto;
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+}
+
+.content-area {
+    margin-top: 20px;
+    text-align: center;
+}
+
+button#submitbtn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button#submitbtn:hover {
+    background-color: #0056b3;
+}
+
+.title-input {
+    margin-bottom: 20px;
+    text-align: center;
+}
