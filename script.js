@@ -1,63 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const contactForm = document.querySelector('.custom-form.contact-form'); // Select the contact form
-    if (contactForm) {
-        contactForm.addEventListener('submit', handleContactSubmit);
-    }
-});
-
-function handleContactSubmit(event) {
-    event.preventDefault(); // Prevent the default form submission
-
-    // Get form field values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const subject = document.getElementById('subject').value;
-    const message = document.getElementById('message').value;
-
-    const formData = { name, email, subject, message };
-
-    fetch('https://insight-sync-u1bq.vercel.app', { // Update the URL to match your backend route
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                showNotification('Form submitted successfully: ' + data.message, 'success');
-                document.querySelector('.custom-form.contact-form').reset(); 
-            } else {
-                showNotification('Failed to submit form: ' + (data.error || 'Unknown error'), 'error');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            showNotification('Failed to submit form: An unexpected error occurred.', 'error');
-        });
-}
-
-function showNotification(message, type) {
-    const notification = document.createElement('div');
-    notification.classList.add('notification', type === 'success' ? 'show' : 'error');
-    notification.innerText = message;
-
-    // Append the notification to the body
-    document.body.appendChild(notification);
-
-    // Add the show class after a delay to trigger the animation
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 100);
-
-    // Remove the notification after 5 seconds
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => {
-            notification.remove();
-        }, 500);
-    }, 5000);
-}
-
 function togglePasswordVisibility() {
     const passwordInput = document.getElementById('loginPassword');
     const togglePasswordIcon = document.getElementById('togglePasswordIcon');
@@ -93,6 +33,7 @@ function validateForm() {
 
     return valid;
 }
+
 function validateSignupForm() {
     const username = document.getElementById('signupUsername');
     const email = document.getElementById('signupEmail');
@@ -165,38 +106,58 @@ function toggleSignupConfirmPasswordVisibility() {
     }
 }
 
-console.log("modules")
-    const logoutbtn = document.getElementById("signout")
-    const loginbtn = document.getElementById("loginbtn")
-    const signupbtn = document.getElementById("signupbtn")
-    if (localStorage.getItem("authToken")) {
-        loginbtn.style.display = "none"
-        signupbtn.style.display= "none"
-    }else{
-        
-        logoutbtn.style.display = "none"
-    }
-    document.getElementById("logoutbtn2").addEventListener("click",()=>{
-        console.log("clickedbskjkbvsdhvbskdmbvduksvbsdmhcbjh")
-        localStorage.clear()
-        window.location.href="/"
-    })
+ // Check if the user is logged in by verifying the presence of an auth token in localStorage
+ if (localStorage.getItem("authToken")) {
+    console.log("User logged in");
 
-    // // Check if the user is logged in by verifying the presence of an auth token in localStorage
-        // if (localStorage.getItem("authToken")) {
-        //     console.log("User logged in");
-    
-        //     // Select all elements with the class 'authcomp'
-        //     const authElements = document.getElementsByClassName("authcomp");
-    
-        //     // Loop through the elements and change their opacity
-        //     Array.from(authElements).forEach(element => {
-        //         element.style.opacity = 0; // Set opacity to 0 (hidden)
-        //         element.style.pointerEvents = "none"; // Prevent interaction
-        //     });
-        // } else {
-        //     console.log("User not logged in");
-        // }
-        document.querySelector(
-            ".copyright-text"
-          ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
+    // Select all elements with the class 'authcomp'
+    const authElements = document.getElementsByClassName("authcomp");
+
+    // Loop through the elements and change their opacity
+    Array.from(authElements).forEach(element => {
+        element.style.opacity = 0; // Set opacity to 0 (hidden)
+        element.style.pointerEvents = "none"; // Prevent interaction
+    });
+} else {
+    console.log("User not logged in");
+}
+document.querySelector(
+    ".copyright-text"
+    ).textContent = `Copyright © ${new Date().getFullYear()} InsightSync. All rights reserved.`;
+
+
+document.getElementById("subscribe-form").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+
+    window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top smoothly
+
+    setTimeout(() => this.submit(), 100);
+    event.preventDefault();
+    const email = document.getElementById("email").value;
+    Toastify({
+            text: "SUCCESSFULLY SUBSCRIBED",
+            duration: 200000,
+            close: true,
+            gravity: "top",
+            position: 'right',
+            background : "green",
+            stopOnFocus: true, 
+    }).showToast();
+});
+
+console.log("modules")
+        const logoutbtn = document.getElementById("signout")
+        const loginbtn = document.getElementById("loginbtn")
+        const signupbtn = document.getElementById("signupbtn")
+        if (localStorage.getItem("authToken")) {
+            loginbtn.style.display = "none"
+            signupbtn.style.display= "none"
+        }else{
+            
+            logoutbtn.style.display = "none"
+        }
+        document.getElementById("logoutbtn2").addEventListener("click",()=>{
+            console.log("clickedbskjkbvsdhvbskdmbvduksvbsdmhcbjh")
+            localStorage.clear()
+            window.location.href="/"
+        })

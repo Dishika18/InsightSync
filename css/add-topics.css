@@ -1,0 +1,53 @@
+.editor-container {
+    margin-bottom: 10px;
+}
+.preview {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 120px;
+    background: #f9f9f9;
+}
+textarea {
+    width: 100%;
+    height: 120px;
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+ /* Notification container */
+ .notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: none;
+    z-index: 9999;
+}
+
+/* Notification message */
+.notification-message {
+    background-color: #28a745; /* Green for success */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    animation: fadeIn 0.5s ease-out, fadeOut 2s 3s ease-out;
+}
+
+/* Animation for fade-in and fade-out */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
